@@ -30,7 +30,7 @@ define('ACTION_POSTFIX', 'Action');
 define('ROUTER_PATH', '../app/Router/Router.php');
 
 // Path to script witch contains all routes.
-define('ROUTES_PATH', '../app/routers/main_routes.php');
+define('ROUTES_PATH', '../app/routes/main_routes.php');
 
 /**
  * Include Smarty configuration.
