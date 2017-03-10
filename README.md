@@ -106,7 +106,7 @@ class NewsController
 .........<b>/Template</b>           <i>store Template information</i>
 .........<b>/controllers</b>        <i>store all controllers</i>
 .........<b>/models</b>	            <i>store all models</i>
-.........<b>/routes</b> 	    <i>store all routes</i>
+.........<b>/routes</b> 	      <i>store all routes</i>
 .............main_routes.php <i>store default routes array</i>
 .........<b>/view</b> 	            <i>store all views</i>
 ....<b>/config</b>                  <i>store all configurations</i>
