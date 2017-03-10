@@ -101,7 +101,7 @@ class NewsController
 <h3>Framework folders structure</h3>
 <pre><code>		
 <b>/root</b>
-....<b>/app</b>                     <i>all your code (controllers, models, views) stored here</i>
+....<b>/app</b>                     <i>all your code (controllers, models, views) store here</i>
 .........<b>/Router</b>	            <i>store Router (analize client request and)</i>
 .........<b>/Template</b>           <i>store Template information</i>
 .........<b>/controllers</b>        <i>store all controllers</i>
