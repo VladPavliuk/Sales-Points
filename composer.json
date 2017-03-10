@@ -1,0 +1,15 @@
+{
+    "name": "vlad/odious",
+    "description": "Simple PHP framework",
+    "type": "framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vlad Pavliuk",
+            "email": "pavliuk.vlad@gmail.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "~3.1"
+    }
+}
