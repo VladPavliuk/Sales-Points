@@ -108,7 +108,7 @@ class NewsController
 .........<b>/models</b>	     <i>stored all models</i>
 .........<b>/view</b> 	     <i>stored all views</i>
 ....<b>/config</b>           <i>store all configurations</i>
-......../config.php 	     <i>store all main configuration<s/i>
+......../config.php 	     <i>store all main configuration</i>
 ......../dbconfig.php 	     <i>store all connection to data base configuration</i>
 ......../smarty_config.php   <i>store template configurations</i>
 ....<b>/public</b> 	     <i>web space folder, here stored index.php and images, scripts, styles</i>
