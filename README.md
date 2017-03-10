@@ -100,18 +100,18 @@ class NewsController
 </ol>
 <h3>Framework folders structure</h3>
 <pre><code>		
-/root
-..../app <i>all your code (controllers, models, views) stored here</i>
-........./Router <i>store Router (analize client request and)</i>
-........./Template <i>store Template information</i>
-........./controllers <i>stored all controllers</i>
-........./models <i>stored all models</i>
-........./views <i>stored all views</i>
-..../config
-......../config.php <i>store all main configuration</i>
-......../dbconfig.php <i>store all connection to data base info</i>
-......../smarty_config.php <i>store template configuration</i>
-..../public <i>web space folder, here stored index.php and images, scripts, styles</i>
-..../vendor <i>composer folder</i>
-..../composer.json <i>store all composer dependencies</i>
+<b>/root</b>
+....<b>/app</b>				 <i>all your code (controllers, models, views) stored here</i>
+.........<b>/Router</b>		 <i>store Router (analize client request and)</i>
+.........<b>/Template</b>	 <i>store Template information</i>
+.........<b>/controllers</b> <i>stored all controllers</i>
+.........<b>/models</b>		 <i>stored all models</i>
+.........<b>/view</b> 		 <i>stored all views</i>
+....<b>/config</b>
+......../config.php 		 <i>store all main configuration</i>
+......../dbconfig.php 		 <i>store all connection to data base info</i>
+......../smarty_config.php 	 <i>store template configuration</i>
+....<b>/public</b> 			 <i>web space folder, here stored index.php and images, scripts, styles</i>
+....<b>/vendor</b> 			 <i>composer folder</i>
+..../composer.json			 <i>store all composer dependencies</i>
 </pre></code>
