@@ -98,3 +98,20 @@ class NewsController
 		</p>
     </li>
 </ol>
+<h3>Framework folders structure</h3>
+<pre><code>		
+/root
+..../app <i>all your code (controllers, models, views) stored here</i>
+........./Router <i>store Router (analize client request and)</i>
+........./Template <i>store Template information</i>
+........./controllers <i>stored all controllers</i>
+........./models <i>stored all models</i>
+........./views <i>stored all views</i>
+..../config
+......../config.php <i>store all main configuration</i>
+......../dbconfig.php <i>store all connection to data base info</i>
+......../smarty_config.php <i>store template configuration</i>
+..../public <i>web space folder, here stored index.php and images, scripts, styles</i>
+..../vendor <i>composer folder</i>
+..../composer.json <i>store all composer dependencies</i>
+</pre></code>
