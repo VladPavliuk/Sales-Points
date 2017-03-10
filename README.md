@@ -113,5 +113,5 @@ class NewsController
 ......../smarty_config.php   <i>store template configurations</i>
 ....<b>/public</b>                  <i>web space folder, here stored index.php and images, scripts, styles</i>
 ....<b>/vendor</b>                  <i>composer folder</i>
-..../composer.json               <i>store all composer dependencies</i>
+..../composer.json           <i>store all composer dependencies</i>
 </pre></code>
