@@ -2,24 +2,36 @@
 
 class MainController
 {
-    public function indexAction()
+    private $smarty = false;
+
+    public function __construct()
     {
         // Smarty initialization
-        $smarty = SmartyRun::connect();
-
-        $parentCategoriesList = $this->getParentCategories();
-
-        $smarty->assign('parentCategoriesList', $parentCategoriesList);
-
-        $smarty->display("contents/welcome.tpl");
+        $this->smarty = SmartyRun::connect();
     }
 
-    private function getParentCategories()
+    public function indexAction()
+    {
+        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree());
+        $this->smarty->assign('lastAddedProducts', $this->getLastAddedProducts());
+
+        $this->smarty->display("contents/welcome.tpl");
+    }
+
+    private function getCategoriesTree()
     {
         $category = new Category();
-        $parentCategoriesList = $category->getParentCategories();
+        $parentCategoriesList = $category->getCategoriesTree();
 
         return $parentCategoriesList;
+    }
+
+    private function getLastAddedProducts()
+    {
+        $product = new Product();
+        $lastAddedProducts = $product->getLastAddedProducts(2);
+
+        return $lastAddedProducts;
     }
 
     private function getAllItems()
