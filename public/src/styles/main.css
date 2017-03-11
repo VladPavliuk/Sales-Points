@@ -1,0 +1,91 @@
+body {
+  font-family: 'Myriad Pro' 13px; }
+
+.header-top {
+  padding: 10px 0 20px 0; }
+
+.logo {
+  padding-top: 20px; }
+  .logo img {
+    float: left;
+    margin-right: 6px; }
+  .logo p {
+    font-size: 30px;
+    color: #121212;
+    margin-bottom: 0; }
+    .logo p span {
+      color: #2db6e9; }
+
+.right-menu p {
+  display: inline;
+  font-size: 13px;
+  color: #9a9a9a;
+  margin-right: 10px;
+  line-height: 38px; }
+  .right-menu p span {
+    color: #121212;
+    font-weight: 600; }
+
+.right-menu button, .right-menu p {
+  float: right; }
+
+.right-menu .btn-info {
+  background-image: linear-gradient(#65d4f6, #27b1ee); }
+
+.right-menu .nav-pills {
+  background: linear-gradient(#5d6b6e, #303739);
+  margin-right: 15px; }
+  .right-menu .nav-pills span {
+    float: left;
+    margin-right: 10px;
+    color: #fff;
+    line-height: 25px; }
+  .right-menu .nav-pills li {
+    padding: 10px; }
+    .right-menu .nav-pills li:first-child {
+      padding-left: 50px; }
+    .right-menu .nav-pills li .form-control {
+      padding: 0 10px;
+      height: 25px;
+      width: 100px;
+      margin: 0; }
+
+.navbar-collapse {
+  background-image: linear-gradient(#fff, #f3f3f3);
+  border: 1px solid #d9d9d9;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding-left: 0; }
+
+.navbar {
+  background: none;
+  border: none; }
+
+.navbar-nav li {
+  padding: 8px 0; }
+  .navbar-nav li:active {
+    color: #2db6e9; }
+  .navbar-nav li a {
+    border-right: 1px solid #e6e6e6;
+    padding: 10px 35px;
+    font-size: 14px;
+    color: #2f3638; }
+    .navbar-nav li a:hover {
+      padding: 10px 35px;
+      color: #2db6e9; }
+
+.navbar-form {
+  padding: 16px 0;
+  margin: 0; }
+  .navbar-form .form-control {
+    height: 25px;
+    width: 200px; }
+  .navbar-form .btn {
+    padding: 0;
+    width: 30px;
+    height: 25px; }
+  .navbar-form .btn-info {
+    background-image: linear-gradient(#65d4f6, #27b1ee);
+    border: none; }
+
+

@@ -2,7 +2,7 @@
 
 return [
 
-    'GET:' => 'main/index:main',
+    'GET:' => 'main/index:main,category',
 
 
 ];
