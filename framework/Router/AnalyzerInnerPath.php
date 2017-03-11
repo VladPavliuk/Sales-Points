@@ -20,6 +20,7 @@ trait AnalyzerInnerPath
 
     //> List of error messages
     private $controllerFileError = "Файлу із контролером не знайдено";
+    private $controllerCoreClassError = "Головний Клас контролер не знайдено";
     private $controllerClassError = "Клас контролер не знайдено";
     private $actionMethodError = "Метод в контролері не знайдено";
     //<
@@ -45,6 +46,7 @@ trait AnalyzerInnerPath
         $controllerClass = ucfirst($controllerClass);
         $controllerClass = $controllerClass . CONTROLLER_POSTFIX;
 
+        $this->getCoreController();
         $this->includeControllerFile($controllerClass);
         $this->getControllerObj($controllerClass);
     }
@@ -64,6 +66,24 @@ trait AnalyzerInnerPath
         } else {
             // Some went wrong!
             Router::showErrorPage($this->controllerFileError);
+        }
+    }
+
+    /**
+     * Include file with parent class
+     * which will extends to every controller class
+     *
+     */
+    private function getCoreController()
+    {
+        // Define full path
+        $coreControllerFile = $this->controllersFolderPath . 'Controller.php';
+
+        if (file_exists($coreControllerFile)) {
+            require_once($coreControllerFile);
+        } else {
+            // Some went wrong!
+            Router::showErrorPage($this->controllerCoreClassError);
         }
     }
 

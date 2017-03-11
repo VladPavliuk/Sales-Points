@@ -24,7 +24,7 @@
         <h3>Last added Products</h3>
         <ul>
         {foreach $lastAddedProducts as $product}
-            <li>{$product["title"]}</li>
+            <li><a href="{$product["id"]}">{$product["title"]}</a></li>
         {/foreach}
         </ul>
     </div>
