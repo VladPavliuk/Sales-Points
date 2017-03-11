@@ -8,13 +8,13 @@
  * Include file with configuration.
  *
  */
-require_once('../config/config.php');
+require_once('../configs/config.php');
 
 /**
  * Include Router class.
  *
  */
-require_once('../app/Router/Router.php');
+require_once(ROUTER_PATH);
 
 /**
  * Connecting to file which connect and start Template engine.

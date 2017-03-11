@@ -60,7 +60,7 @@ trait AnalyzerURI
             }
         }
         // Route did not find
-        self::showErrorPage($this->routeError);
+        Router::showErrorPage($this->routeError);
     }
 
     /**
@@ -94,13 +94,11 @@ trait AnalyzerURI
      */
     private function getRoutesArray()
     {
-        $routesPath = $this->routesPath;
-
-        if (file_exists($routesPath)) {
-            $this->routesArray = include($routesPath);
+        if (file_exists($this->routesPath)) {
+            $this->routesArray = include($this->routesPath);
         } else {
             // Some went wrong!
-            self::showErrorPage($this->routesArrayError);
+            Router::showErrorPage($this->routesArrayError);
         }
     }
 }
