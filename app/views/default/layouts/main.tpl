@@ -25,8 +25,8 @@
           crossorigin="anonymous">
 
     <!-- CUSTOM STYLES -->
-    <link href="src/styles/main.css" rel="stylesheet">
-    <link href="src/styles/media.css" rel="stylesheet">
+    <link href="/src/styles/main.css" rel="stylesheet">
+    <link href="/src/styles/media.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -57,6 +57,6 @@
         crossorigin="anonymous"></script>
 
 <!-- CUSTOM SCRIPTS -->
-    <script src="src/scripts/app.js"></script>
+    <script src="/src/scripts/app.js"></script>
 </body>
 </html>

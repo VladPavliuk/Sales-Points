@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="logo col-lg-3 col-md-5 col-sm-4 col-xs-5">
-                    <a href="#"><img src="src/images/logo.png" alt="logo"></a>
+                    <a href="#"><img src="/src/images/logo.png" alt="logo"></a>
                     <p>Sales<span>Point</span></p>
                     <span>The Best Store Online</span>
                 </div>

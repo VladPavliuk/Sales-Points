@@ -12,16 +12,16 @@ class MainController extends Controller
 
     private function getCategoriesTree()
     {
-        $category = new Category();
-        $parentCategoriesList = $category->getCategoriesTree();
+        $categoryModelObject = new Category();
+        $parentCategoriesList = $categoryModelObject->getCategoriesTree();
 
         return $parentCategoriesList;
     }
 
     private function getLastAddedProducts()
     {
-        $product = new Product();
-        $lastAddedProducts = $product->getLastAddedProducts(2);
+        $productModelObject = new Product();
+        $lastAddedProducts = $productModelObject->getLastAddedProducts(2);
 
         return $lastAddedProducts;
     }
