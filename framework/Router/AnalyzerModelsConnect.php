@@ -47,7 +47,7 @@ trait AnalyzerModelsConnect
             require_once($modelFile);
         } else {
             // Some went wrong!
-            self::showErrorPage($this->modelFileError);
+            Router::showErrorPage($this->modelFileError);
         }
     }
 
@@ -62,7 +62,7 @@ trait AnalyzerModelsConnect
             require_once($dataBaseFile);
         } else {
             // Some went wrong!
-            self::showErrorPage($this->DataBaseFileError);
+            Router::showErrorPage($this->DataBaseFileError);
         }
     }
 }
