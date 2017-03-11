@@ -63,7 +63,7 @@ trait AnalyzerInnerPath
             require_once($controllerFile);
         } else {
             // Some went wrong!
-            self::showErrorPage($this->controllerFileError);
+            Router::showErrorPage($this->controllerFileError);
         }
     }
 
@@ -78,7 +78,7 @@ trait AnalyzerInnerPath
             $this->controllerObj = new $controllerClass();
         } else {
             // Some went wrong!
-            self::showErrorPage($this->controllerClassError);
+            Router::showErrorPage($this->controllerClassError);
         }
     }
 
@@ -92,7 +92,7 @@ trait AnalyzerInnerPath
             $this->actionMethod = $actionMethod;
         } else {
             // Some went wrong!
-            self::showErrorPage($this->actionMethodError);
+            Router::showErrorPage($this->actionMethodError);
         }
     }
 
