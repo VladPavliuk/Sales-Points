@@ -2,6 +2,18 @@
 
 class Category extends Model
 {
+    public function getSingleCategory($categoryId)
+    {
+        $categoryId = intval($categoryId);
+
+        $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE `id` = {$categoryId}");
+
+        $singleCategory = $queryResult->fetch();
+        $singleCategory["children_category"] = $this->getChildrenCategory($categoryId);
+
+        return $singleCategory;
+    }
+
     public function getParentCategories()
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE `parent_category_id` = 0");
@@ -44,7 +56,7 @@ class Category extends Model
         $childrenCategory = [];
         $i = 1;
         while($row = $queryResult->fetch()) {
-            $childrenCategory[$i++] = $row["category"];
+            $childrenCategory[$i++] = $row;
         }
 
         return $childrenCategory;

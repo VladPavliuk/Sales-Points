@@ -5,11 +5,11 @@
         <h3>Categories list</h3>
         <ul>
         {foreach $parentCategoriesList as $parentCategory}
-            <li>{$parentCategory["category"]}</li>
+            <li><a href="category/{$parentCategory["id"]}">{$parentCategory["category"]}</a></li>
             {if isset($parentCategory["children_category"])}
                 <ul>
                     {foreach $parentCategory["children_category"] as $childrenCategory}
-                        <li>{$childrenCategory}</li>
+                        <li><a href="category/{$childrenCategory["id"]}">{$childrenCategory["category"]}</a></li>
                     {/foreach}
                 </ul>
             {/if}
