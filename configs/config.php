@@ -20,6 +20,12 @@ define('DEBUG_MODE', true);
  * Path to Router script file.
  *
  */
+define('DEBUG_PATH', '../framework/Debug.php');
+
+/**
+ * Path to Router script file.
+ *
+ */
 define('ROUTER_PATH', '../framework/Router/Router.php');
 
 /**

@@ -11,6 +11,12 @@
 require_once('../configs/config.php');
 
 /**
+ * Include Debug class.
+ *
+ */
+require_once(DEBUG_PATH);
+
+/**
  * Include Router class.
  *
  */

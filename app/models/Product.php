@@ -1,14 +1,7 @@
 <?php
 
-class Product extends Controller
+class Product extends Model
 {
-    private $dataBase = false;
-
-    public function __construct()
-    {
-        $this->dataBase = DataBase::connect();
-    }
-
     public function getSingleProduct($productId)
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE id = {$productId}");

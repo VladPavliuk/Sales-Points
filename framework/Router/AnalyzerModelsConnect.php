@@ -17,6 +17,7 @@ trait AnalyzerModelsConnect
     private $dataBaseFile = DB_CONNECT_PATH;
 
     //> List of error messages
+    private $coreModelFileError = "Файлу із головною моделлю не знайдено";
     private $modelFileError = "Файлу із моделлю не знайдено";
     private $DataBaseFileError = "Файлу із доступом до бази даних не знайдено";
     //<
@@ -26,6 +27,9 @@ trait AnalyzerModelsConnect
         if (isset($modelsArray)) {
             $modelsArray = explode(',', $modelsArray);
 
+            // include parent model
+            $this->includeCoreModelFile();
+
             foreach ($modelsArray as $model) {
                 $model = ucfirst($model) . ".php";
                 $modelFile = $this->modelsFolderPath . $model;
@@ -33,6 +37,24 @@ trait AnalyzerModelsConnect
             }
 
             $this->includeDataBaseFile($this->dataBaseFile);
+        }
+    }
+
+    /**
+     * Include file with parent model class
+     * which will extends to every controller class
+     *
+     */
+    private function includeCoreModelFile()
+    {
+        // Define full path
+        $coreModelFile = $this->modelsFolderPath . 'Model.php';
+
+        if (file_exists($coreModelFile)) {
+            require_once($coreModelFile);
+        } else {
+            // Some went wrong!
+            Router::showErrorPage($this->coreModelFileError);
         }
     }
 

@@ -1,14 +1,7 @@
 <?php
 
-class Category
+class Category extends Model
 {
-    private $dataBase = false;
-
-    public function __construct()
-    {
-        $this->dataBase = DataBase::connect();
-    }
-
     public function getParentCategories()
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE `parent_category_id` = 0");
