@@ -9,8 +9,13 @@ class Cart extends Model
         while($row = $queryResult->fetch()) {
             $_SESSION["cart"][] = $row;
         }
+    }
 
-        print_r($_SESSION["cart"]);
+    public function deleteFromCart($productId)
+    {
+        if(isset($_SESSION["cart"])) {
+            unset($_SESSION["cart"][$productId]);
+        }
     }
 
     public function getCart()

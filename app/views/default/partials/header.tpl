@@ -9,11 +9,13 @@
                 </div>
                 <div class="right-menu">
                     <div class="cart col-lg-5 col-md-5 col-sm-6 col-xs-5 pull-right">
-                        <button type="submit" class="btn btn-info">
-                            <span>Shopping Cart</span>
-                            <span class='glyphicon glyphicon-shopping-cart'></span>
-                        </button>
-                        <p> now in your cart <span>{$totalAmount} items</span></p>
+                        <a href="/cart">
+                            <button type="submit" class="btn btn-info">
+                                <span>Shopping Cart</span>
+                                <span class='glyphicon glyphicon-shopping-cart'></span>
+                            </button>
+                        </a>
+                        <p> now in your cart <span><span id="totalAmountText">{$totalAmount}</span> items</span></p>
                     </div>
                     <ul class="col-lg-5 col-md-6 col-sm-8 col-xs-12 pull-right">
                         <div class="nav nav-pills">

@@ -6,6 +6,16 @@ trait CartInteract
     {
         $cartModelObject = new Cart();
         $cartModelObject->addToCart($productId);
+
+        echo json_encode($this->getTotalAmount());
+    }
+
+    public function deleteFromCart($productId)
+    {
+        $cartModelObject = new Cart();
+        $cartModelObject->deleteFromCart($productId);
+
+
     }
 
     public function getCart()

@@ -6,6 +6,8 @@ class CategoryController extends Controller
     {
         $this->smarty->assign("singleCategory", $this->getSingleCategory($categoryId));
         $this->smarty->assign("categoryProductsList", $this->getCategoryProducts($categoryId));
+        $this->smarty->assign('totalPrice', $this->getTotalPrice());
+        $this->smarty->assign('totalAmount', $this->getTotalAmount());
 
         $this->smarty->display("contents/categoryPage.tpl");
     }

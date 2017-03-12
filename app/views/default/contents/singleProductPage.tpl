@@ -13,6 +13,6 @@
         <br>
         <h5>Description:</h5>
         <p>{$singleProductItem["description"]}</p>
-        <button id="add-{$singleProductItem["id"]}" class="btn btn-success btn-lg">Add to cart</button>
+        <button onclick="addToCart({$singleProductItem["id"]});" class="btn btn-success btn-lg">Add to cart</button>
     </div>
 {/block}
