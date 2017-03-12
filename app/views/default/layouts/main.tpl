@@ -40,8 +40,14 @@
 {include file="partials/header.tpl"}
 
 <!-- CONTENT -->
-<div class="container">
-    {block "content"}Content{/block}
+<div class="main">
+    <div class="container">
+        <div class="row">
+            {include file="partials/categoriesList.tpl"}
+
+            {block "content"}Content{/block}
+        </div>
+    </div>
 </div>
 
 <!-- FOOTER -->

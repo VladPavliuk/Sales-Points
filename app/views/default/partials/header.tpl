@@ -13,7 +13,7 @@
                             <span>Shopping Cart</span>
                             <span class='glyphicon glyphicon-shopping-cart'></span>
                         </button>
-                        <p> now in your cart <span>0 items</span></p>
+                        <p> now in your cart <span>{$totalAmount} items</span></p>
                     </div>
                     <ul class="col-lg-5 col-md-6 col-sm-8 col-xs-12 pull-right">
                         <div class="nav nav-pills">

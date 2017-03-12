@@ -2,6 +2,8 @@
 
 class Controller
 {
+    use CartInteract, CategoryInteract, ProductInteract;
+
     protected $smarty = false;
 
     public function __construct()
