@@ -11,7 +11,7 @@ class ProductController extends Controller
 
     public function viewAllAction()
     {
-        $limitOfProducts = 2;
+        $limitOfProducts = 10;
 
         $this->smarty->assign('productsList', $this->getLastAddedProducts($limitOfProducts));
 

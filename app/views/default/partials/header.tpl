@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="logo col-lg-3 col-md-5 col-sm-4 col-xs-7">
-                    <a href="#"><img src="/src/images/logo.png" alt="logo"></a>
+                    <a href="/"><img src="/src/images/logo.png" alt="logo"></a>
                     <p>Sales<span>Point</span></p>
                     <span>The Best Store Online</span>
                 </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
                     <li><a href="#">Whats New </a></li>
                     <li><a href="#">Specials</a></li>
                     <li><a href="#">My Account</a></li>

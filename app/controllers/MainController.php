@@ -21,7 +21,7 @@ class MainController extends Controller
     private function getLastAddedProducts()
     {
         $productModelObject = new Product();
-        $lastAddedProducts = $productModelObject->getLastAddedProducts(2);
+        $lastAddedProducts = $productModelObject->getLastAddedProducts(8);
 
         return $lastAddedProducts;
     }

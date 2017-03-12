@@ -7,15 +7,22 @@
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
-		.navbar-nav li 	a{
+	.navbar-nav li 	a{
+		padding: 10px 20px;
+	}
+	.navbar-nav li a:hover{
 		padding: 10px 20px;
 	}
 	.navbar-form .form-control	{
 		width: 150px
 	}
-
+	.navbar-collapse{
+		background-image: linear-gradient(rgb(93, 107, 110), rgb(48, 55, 57))
+	}
+	.navbar-collapse .navbar-nav li a{
+		color: #fff
+	}
 				
-	
 }
 
 /* Small Devices, Tablets */
@@ -67,10 +74,27 @@
 	.right-menu .nav-pills li:first-child{
 		 padding-left: 0;
 	}
+	.nav-pills li:last-child{
+			margin: 0;
+			padding: 10px 0;
+		}
+	.main .mobile{
+		text-align: center;
+	}
+	.main .mobile a p{
+		text-align: center;
+		padding: 10px;
+		margin: 0;
+		max-width: 100%
 
-}
-@media only screen and (max-width : 767px) {
-
+	}
+	.main .mobile a img{
+		position: relative;
+		right: 0;
+	}
+	.panel-body{
+		padding: 0;
+	}
 }
 
 /* Extra Small Devices, Phones */
