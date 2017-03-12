@@ -1,8 +1,5 @@
-body {
-  font-family: 'Myriad Pro' 13px; }
-
 .header-top {
-  padding: 10px 0 20px 0; }
+  padding: 15px 0 20px 0; }
 
 .logo {
   padding-top: 20px; }
@@ -10,11 +7,13 @@ body {
     float: left;
     margin-right: 6px; }
   .logo p {
-    font-size: 30px;
+    font-size: 29px;
     color: #121212;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    font-weight: 600; }
     .logo p span {
-      color: #2db6e9; }
+      color: #2db6e9;
+      font-weight: 400; }
 
 .right-menu p {
   display: inline;
@@ -31,10 +30,11 @@ body {
 
 .right-menu .btn-info {
   background-image: linear-gradient(#65d4f6, #27b1ee); }
+  .right-menu .btn-info:hover {
+    background-image: linear-gradient(#65acf6, #27b7ee); }
 
 .right-menu .nav-pills {
-  background: linear-gradient(#5d6b6e, #303739);
-  margin-right: 15px; }
+  background: linear-gradient(#5d6b6e, #303739); }
   .right-menu .nav-pills span {
     float: left;
     margin-right: 10px;
@@ -43,11 +43,11 @@ body {
   .right-menu .nav-pills li {
     padding: 10px; }
     .right-menu .nav-pills li:first-child {
-      padding-left: 50px; }
+      padding-left: 30px; }
     .right-menu .nav-pills li .form-control {
       padding: 0 10px;
       height: 25px;
-      width: 100px;
+      width: 120px;
       margin: 0; }
 
 .navbar-collapse {
@@ -87,5 +87,47 @@ body {
   .navbar-form .btn-info {
     background-image: linear-gradient(#65d4f6, #27b1ee);
     border: none; }
+    .navbar-form .btn-info:hover {
+      background-image: linear-gradient(#65acf6, #27b7ee); }
 
+.main .panel-default {
+  border: none; }
+  .main .panel-default .panel-heading {
+    background-image: linear-gradient(#fff, #f3f3f3);
+    border: 1px solid #ddd; }
+    .main .panel-default .panel-heading .panel-title {
+      font-size: 15px; }
 
+.main .panel-collapse .panel-body {
+  border: none; }
+  .main .panel-collapse .panel-body ul {
+    padding-left: 0; }
+    .main .panel-collapse .panel-body ul li {
+      list-style: none;
+      border-bottom: 1px dotted #ccc;
+      padding: 5px 10px; }
+      .main .panel-collapse .panel-body ul li:last-child {
+        border-bottom: none; }
+      .main .panel-collapse .panel-body ul li span {
+        color: #2db6e9; }
+      .main .panel-collapse .panel-body ul li a {
+        color: #777; }
+        .main .panel-collapse .panel-body ul li a:hover {
+          color: #2db6e9; }
+
+.main .mobile {
+  position: relative;
+  background: linear-gradient(#5d6b6e, #303739); }
+  .main .mobile a:hover {
+    text-decoration: none; }
+  .main .mobile a p {
+    padding: 20px 30px;
+    color: #fff;
+    font-size: 18px;
+    max-width: 160px; }
+    .main .mobile a p span {
+      font-weight: 700; }
+  .main .mobile a img {
+    position: absolute;
+    top: -5px;
+    right: 10px; }

@@ -2,6 +2,19 @@
 
 class Product extends Model
 {
+    public function getCategoryProducts($categoryId)
+    {
+        $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE `category_id` = {$categoryId}");
+
+        $categoryProductsList = [];
+        $i = 1;
+        while($row = $queryResult->fetch()) {
+            $categoryProductsList[$i++] = $row;
+        }
+
+       return $categoryProductsList;
+    }
+
     public function getSingleProduct($productId)
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE id = {$productId}");

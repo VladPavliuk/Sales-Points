@@ -2,41 +2,42 @@
     <div class="header-top">
         <div class="container">
             <div class="row">
-                <div class="logo col-lg-3 col-md-5 col-sm-4 col-xs-5">
+                <div class="logo col-lg-3 col-md-5 col-sm-4 col-xs-7">
                     <a href="#"><img src="/src/images/logo.png" alt="logo"></a>
                     <p>Sales<span>Point</span></p>
                     <span>The Best Store Online</span>
                 </div>
                 <div class="right-menu">
-                    <div class="cart col-lg-4 col-md-5 col-sm-6 col-xs-7 pull-right">
+                    <div class="cart col-lg-5 col-md-5 col-sm-6 col-xs-5 pull-right">
                         <button type="submit" class="btn btn-info">
                             <span>Shopping Cart</span>
                             <span class='glyphicon glyphicon-shopping-cart'></span>
                         </button>
                         <p> now in your cart <span>0 items</span></p>
                     </div>
-                    <ul class="nav nav-pills col-lg-5 col-md-6 col-sm-7 col-xs-5 pull-right">
-                        <li>
-                            <span>Language:</span>
-                            <select class="form-control">
-                                <option value="Українська">Українська</option>
-                                <option value="English">English</option>
-                            </select>
-                        </li>
-                        <li>
-                            <span>Сurrency:</span>
-                            <select class="form-control">
-                                <option value="UA">UA</option>
-                                <option value="USD">USD</option>
-                                <option value="EUR">EUR</option>
-                            </select>
+                    <ul class="col-lg-5 col-md-6 col-sm-8 col-xs-12 pull-right">
+                        <div class="nav nav-pills">
+                            <li>
+                                <span>Language:</span>
+                                <select class="form-control">
+                                    <option value="Українська">Українська</option>
+                                    <option value="English">English</option>
+                                </select>
+                            </li>
+                            <li>
+                                <span>Сurrency:</span>
+                                <select class="form-control">
+                                    <option value="UA">UA</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                        </div>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -67,5 +68,4 @@
             </div>
         </div>
     </nav>
-
 </div>

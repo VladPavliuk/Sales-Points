@@ -13,9 +13,7 @@
 	.navbar-form .form-control	{
 		width: 150px
 	}
-	.right-menu .nav-pills li:first-child{
-		padding-left: 30px
-	}
+
 				
 	
 }
@@ -26,6 +24,7 @@
 		float: right;
 		padding: 0 15px ;
 		text-align: center;
+		opacity: 0.9;
 	}
 	.navbar-collapse li{
 		padding: 0;
@@ -47,9 +46,30 @@
 	.form-group{
 		padding-right: 4px;
 	}
-	.right-menu .nav-pills li:first-child{
-		padding-left: 10px;
+	.navbar{
+		position: absolute;
+		z-index: 10;
+		right: 10px;
+		top: 104px;
 	}
+	.form-control {
+		max-width: 100px;
+	}
+	.cart{
+		padding-top: 20px
+	}
+	.header-top{
+	    padding: 0 0 20px 0;
+	}
+	.right-menu .nav-pills li{
+		margin: 0 10px;
+	}
+	.right-menu .nav-pills li:first-child{
+		 padding-left: 0;
+	}
+
+}
+@media only screen and (max-width : 767px) {
 
 }
 
