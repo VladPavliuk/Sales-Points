@@ -89,7 +89,7 @@ define('SMARTY_LIB_PATH', '../vendor/smarty/smarty/libs/Smarty.class.php');
  * 1. simple;
  * 2. default;
  */
-define('SMARTY_THEME', 'default');
+define('SMARTY_THEME', 'simple');
 
 /**
  * Path to Smarty 3 run file.

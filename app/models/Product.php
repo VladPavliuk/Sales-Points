@@ -13,6 +13,8 @@ class Product extends Model
 
     public function getLastAddedProducts($limitOfProducts = 2)
     {
+        $limitOfProducts = $limitOfProducts > 10 ? 10 : $limitOfProducts;
+
         $queryResult = $this->dataBase->query("SELECT * FROM `products` ORDER BY `id` DESC LIMIT {$limitOfProducts}");
 
         $lastProductsList = [];

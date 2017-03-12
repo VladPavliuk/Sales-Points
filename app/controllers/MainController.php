@@ -25,16 +25,4 @@ class MainController extends Controller
 
         return $lastAddedProducts;
     }
-
-    private function getAllItems()
-    {
-        $mainModel = new Main();
-        $mainModel->getAllItems();
-    }
-
-    private function getSingleItem($id)
-    {
-        $mainModel = new Main();
-        $mainModel->getSingleItem($id);
-    }
 }

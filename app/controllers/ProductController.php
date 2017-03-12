@@ -2,11 +2,20 @@
 
 class ProductController extends Controller
 {
-    public function indexAction($productId)
+    public function viewSingleAction($productId)
     {
         $this->smarty->assign('singleProductItem', $this->getSingleProduct($productId));
 
-        $this->smarty->display("contents/productPage.tpl");
+        $this->smarty->display("contents/singleProductPage.tpl");
+    }
+
+    public function viewAllAction()
+    {
+        $limitOfProducts = 2;
+
+        $this->smarty->assign('productsList', $this->getLastAddedProducts($limitOfProducts));
+
+        $this->smarty->display("contents/productsListPage.tpl");
     }
 
     private function getSingleProduct($productId)
@@ -15,5 +24,13 @@ class ProductController extends Controller
         $singleProductItem = $productModelObject->getSingleProduct($productId);
 
         return $singleProductItem;
+    }
+
+    private function getLastAddedProducts($limitOfProducts)
+    {
+        $productModelObject = new Product();
+        $lastAddedProducts = $productModelObject->getLastAddedProducts($limitOfProducts);
+
+        return $lastAddedProducts;
     }
 }

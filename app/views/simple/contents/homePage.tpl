@@ -1,9 +1,5 @@
 {extends file='../layouts/main.tpl'}
 
-{block name="title"}
-    Welcome page!
-{/block}
-
 {block name="content"}
     <div class="row">
         <h3>Categories list</h3>
