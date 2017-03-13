@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'GET:' => 'main/viewHomePage:category,product,cart',
 
     'GET:category/([0-9]+)' => 'category/view/$1:category,product,cart',
@@ -11,5 +10,9 @@ return [
 
     'GET:add-to-cart/([0-9]+)' => 'product/addToCart/$1:category,product,cart',
     'GET:cart-delete/([0-9]+)' => 'cart/deleteFromCart/$1:category,product,cart',
+
     'GET:cart' => 'cart/viewCart:category,product,cart',
+    'GET:order-form' => 'cart/viewOrderForm:category,product,cart',
+
+    'POST:confirm-order' => 'email/confirmOrder:category,product,cart,email',
 ];

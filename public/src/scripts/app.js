@@ -1,10 +1,18 @@
-function addToCart(productId) {
-    var url = "/add-to-cart/" + productId;
+jQuery(document).ready(function($) {
 
-    $.get(url, function(responseData) {
+    function addToCart(productId) {
+        var url = "/add-to-cart/" + productId;
 
-        var totalAmount = JSON.parse(responseData);
+        $.get(url, function(responseData) {
 
-        $("#totalAmountText").text(totalAmount);
+            var totalAmount = JSON.parse(responseData);
+
+            $("#totalAmountText").text(totalAmount);
+        });
+    }
+
+    $('.show-menu').click(function(event) {
+        $(this).next().slideToggle();
     });
-}
+
+});
