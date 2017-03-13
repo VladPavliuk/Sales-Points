@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(empty($_SESSION["cart"])) {
+    $_SESSION["cart"] = [];
+}
+
 /**
  * THIS SCRIPT START APPLICATION.
  */
@@ -42,5 +46,3 @@ require_once(SMARTY_RUN);
  *
  */
 (new Router());
-
-

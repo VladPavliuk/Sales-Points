@@ -8,6 +8,7 @@ class Controller
 
     public function __construct()
     {
+
         // Smarty initialization
         $this->smarty = SmartyRun::connect();
     }

@@ -5,6 +5,7 @@ class CategoryController extends Controller
     public function viewAction($categoryId)
     {
         $this->smarty->assign("singleCategory", $this->getSingleCategory($categoryId));
+        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree());
         $this->smarty->assign("categoryProductsList", $this->getCategoryProducts($categoryId));
         $this->smarty->assign('totalPrice', $this->getTotalPrice());
         $this->smarty->assign('totalAmount', $this->getTotalAmount());

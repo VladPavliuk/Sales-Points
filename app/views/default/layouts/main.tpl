@@ -9,7 +9,7 @@
 
     <title>{block "title"}Odious Framework{/block}</title>
 
-    <link rel="icon" type="image/x-icon" href="src/images/icon.jpg"/>
+    <link rel="shortcut icon" href="/src/images/icon.jpg" type="image/png">
 
     <!-- BOOTSTRAP THEME
     <link rel="stylesheet"
@@ -17,7 +17,8 @@
      -->
 
     <!-- CDN STYLES-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css"
+          crossorigin="anonymous">
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           rel="stylesheet"
@@ -44,8 +45,11 @@
     <div class="container">
         <div class="row">
             {include file="partials/categoriesList.tpl"}
-
-            {block "content"}Content{/block}
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div class="row product-wrap">
+                    {block "content"}Content{/block}
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -63,6 +67,6 @@
         crossorigin="anonymous"></script>
 
 <!-- CUSTOM SCRIPTS -->
-    <script src="/src/scripts/app.js"></script>
+<script src="/src/scripts/app.js"></script>
 </body>
 </html>

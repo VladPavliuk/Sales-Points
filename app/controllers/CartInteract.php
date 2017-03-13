@@ -14,14 +14,12 @@ trait CartInteract
     {
         $cartModelObject = new Cart();
         $cartModelObject->deleteFromCart($productId);
-
-
     }
 
     public function getCart()
     {
-        if(isset($_SESSION["cart"])) {
-            return $_SESSION["cart"];
+        if(isset($_SESSION['cart'])) {
+            return $_SESSION['cart'];
         } else {
             return false;
         }

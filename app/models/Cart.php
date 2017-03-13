@@ -6,28 +6,21 @@ class Cart extends Model
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE `id` = {$productId} LIMIT 1");
 
-        while($row = $queryResult->fetch()) {
-            $_SESSION["cart"][] = $row;
-        }
+        $_SESSION['cart'][] = $queryResult->fetch();
     }
 
     public function deleteFromCart($productId)
     {
-        if(isset($_SESSION["cart"])) {
-            unset($_SESSION["cart"][$productId]);
+        if(isset($_SESSION['cart'])) {
+            unset($_SESSION['cart'][$productId]);
         }
-    }
-
-    public function getCart()
-    {
-
     }
 
     public function getTotalPrice()
     {
         $totalPrice = 0;
-        if(isset($_SESSION["cart"])) {
-            foreach($_SESSION["cart"] as $cartItem) {
+        if(isset($_SESSION['cart'])) {
+            foreach($_SESSION['cart'] as $cartItem) {
                 $totalPrice += floatval($cartItem["price"]);
             }
         }
@@ -38,8 +31,8 @@ class Cart extends Model
     public function getTotalAmount()
     {
         $totalAmount = 0;
-        if(isset($_SESSION["cart"])) {
-            foreach($_SESSION["cart"] as $cartItem) {
+        if(isset($_SESSION['cart'])) {
+            foreach($_SESSION['cart'] as $cartItem) {
                 $totalAmount++;
             }
         }
