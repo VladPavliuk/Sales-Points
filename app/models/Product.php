@@ -2,14 +2,20 @@
 
 class Product extends Model
 {
-    public function getCategoryProducts($categoryId)
+    public function getCategoryProducts($subCategoriesList, $limitOfProducts)
     {
-        $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE `category_id` = {$categoryId}");
+        $limitOfProducts = $limitOfProducts > 15 ? 15 : $limitOfProducts;
 
         $categoryProductsList = [];
-        $i = 1;
-        while($row = $queryResult->fetch()) {
-            $categoryProductsList[$i++] = $row;
+
+        foreach($subCategoriesList as $subCategoryId) {
+            $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$subCategoryId} ORDER BY `updated_time` DESC LIMIT {$limitOfProducts}";
+            $queryResult = $this->dataBase->query($sqlQuery);
+
+            while($row = $queryResult->fetch()) {
+
+                $categoryProductsList[] = $row;
+            }
         }
 
        return $categoryProductsList;

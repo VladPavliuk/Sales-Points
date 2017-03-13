@@ -5,7 +5,7 @@ class ProductController extends Controller
     public function viewSingleProductAction($productId)
     {
         $this->smarty->assign('singleProductItem', $this->getSingleProduct($productId));
-        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree());
+        $this->smarty->assign('parentCategoriesList', $this->getParentCategories());
         $this->smarty->assign('totalPrice', $this->getTotalPrice());
         $this->smarty->assign('totalAmount', $this->getTotalAmount());
 
@@ -14,10 +14,10 @@ class ProductController extends Controller
 
     public function viewAllProductAction()
     {
-        $limitOfProducts = 10;
+        $limitOfProducts = 3;
 
-        $this->smarty->assign('productsList', $this->getLastAddedProducts($limitOfProducts));
-        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree());
+        $this->smarty->assign('parentCategoriesList', $this->getParentCategories());
+        $this->smarty->assign('productsList', $this->getCategoryProducts(0, $limitOfProducts));
         $this->smarty->assign('totalPrice', $this->getTotalPrice());
         $this->smarty->assign('totalAmount', $this->getTotalAmount());
 
