@@ -8,6 +8,7 @@ class CategoryController extends Controller
 
         $this->smarty->assign('parentCategoriesList', $this->getParentCategories());
         $this->smarty->assign("categoryProductsList", $this->getCategoryProducts($categoryId, $limitOfProducts));
+
         $this->smarty->assign('totalPrice', $this->getTotalPrice());
         $this->smarty->assign('totalAmount', $this->getTotalAmount());
 
