@@ -4,7 +4,7 @@ class CartController extends Controller
 {
     public function viewCartAction()
     {
-        $this->smarty->assign('parentCategoriesList', $this->getParentCategories());
+        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree(0));
         $this->smarty->assign('totalPrice', $this->getTotalPrice());
         $this->smarty->assign('totalAmount', $this->getTotalAmount());
 

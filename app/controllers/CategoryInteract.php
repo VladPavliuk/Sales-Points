@@ -2,6 +2,14 @@
 
 trait CategoryInteract
 {
+    public function getCategoriesTree($parentId)
+    {
+        $categoryModelObject = new Category();
+        $categoriesTree = $categoryModelObject->getCategoriesTree($parentId);
+
+        return $categoriesTree;
+    }
+
     public function getParentCategories()
     {
         $categoryModelObject = new Category();

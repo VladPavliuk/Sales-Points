@@ -6,7 +6,7 @@ class CategoryController extends Controller
     {
         $limitOfProducts = 10;
 
-        $this->smarty->assign('parentCategoriesList', $this->getParentCategories());
+        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree(0));
         $this->smarty->assign("categoryProductsList", $this->getCategoryProducts($categoryId, $limitOfProducts));
 
         $this->smarty->assign('totalPrice', $this->getTotalPrice());
