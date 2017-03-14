@@ -33,7 +33,7 @@
     <div class="mobile">
         <a href="#">
             <p>HTC Google Nexus One <span>$206.99</span></p>
-            <img src="img/mobile.png" alt="mobile">
+            <img src="/src/images/mobile.png" alt="mobile">
         </a>
     </div>
 </sidebar>
