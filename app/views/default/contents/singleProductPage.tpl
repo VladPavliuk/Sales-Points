@@ -33,8 +33,8 @@
                     <span class="glyphicon glyphicon-ok-circle pull-right"></span>
                     <span class="presence pull-right">{#text_in_stock#}</span>
                 {else}
-                    <small>Status:</small>
-                    <p class="label label-default">{#text_out_of_stock#}</p>
+                    <span class="glyphicon glyphicon-ok-circle pull-right"></span>
+                    <span class="presence pull-right">{#text_out_of_stock#}</span>
                 {/if}
 
 
