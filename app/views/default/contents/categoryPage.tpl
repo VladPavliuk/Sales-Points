@@ -19,7 +19,7 @@
                 </div>
             {/foreach}
             {else}
-            <h3>No products in category</h3>
+            <h3>{#text_no_products_in_category#}</h3>
         </div>
     {/if}
 {/block}

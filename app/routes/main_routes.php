@@ -3,7 +3,7 @@
 return [
     'GET:' => 'main/viewHomePage:category,product,cart',
 
-    'GET:set-language/([a-z]+)' => 'language/setLanguage/$1:category,product,cart',
+    'GET:set-language/([a-z]+)' => 'language/setLanguage/$1',
 
     'GET:category/([0-9]+)' => 'category/view/$1:category,product,cart',
 

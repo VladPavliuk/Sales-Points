@@ -5,8 +5,8 @@
         <table border="2">
             <tr>
                 <th>№</th>
-                <th>Title</th>
-                <th>Price</th>
+                <th>{#text_title#}</th>
+                <th>{#text_price#}</th>
                 <th></th>
             </tr>
 
@@ -16,24 +16,24 @@
                     <td>{$id}</td>
                     <td>{$cartItem["title"]}</td>
                     <td>$ {$cartItem["price"]}</td>
-                    <td><a href="/cart-delete/{$idInCart}">remove</a></td>
+                    <td><a href="/cart-delete/{$idInCart}">{#text_remove#}</a></td>
                 </tr>
                 {$id = $id + 1}
             {/foreach}
         </table>
         <br>
-        total price: $ {$totalPrice}
+        {#text_total_price#}: $ {$totalPrice}
         <br>
-        total Amount: {$totalAmount}
+        {#text_total_amount#}: {$totalAmount}
         {if $totalAmount eq 1}
-            item
+            {#text_in_cart_item#}
         {else}
-            items
+            {#text_in_cart_items#}
         {/if}
         <br>
-        <a href="/order-form" class="btn btn-primary">To confirm order page</a>
+        <a href="/order-form" class="btn btn-primary">{#text_to_confirm_order_page#}</a>
     {else}
-        <h3>Your cart is empty</h3>
-        <a href="/" class="btn btn-primary">To main</a>
+        <h3>{#text_your_cart_is_empty#}</h3>
+        <a href="/" class="btn btn-primary">{#text_to_main#}</a>
     {/if}
 {/block}

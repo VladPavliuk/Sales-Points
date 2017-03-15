@@ -20,14 +20,19 @@
                     </div>
                     <ul class="col-lg-5 col-md-6 col-sm-8 col-xs-12 pull-right">
                         <div class="nav nav-pills">
-                            <li>
-                                <span>{#text_language#}:</span>
-                                <select class="form-control" name="forma" onchange="location = '/' + this.value;">
-                                    <option value="ukrainian">Українська</option>
-                                    <option value="english" selected>English</option>
-                                    <option value="russian">Русский</option>
-                                </select>
-                            </li>
+                            {if isset($languagesList)}
+                                <li>
+                                    <span>{#text_language#}:</span>
+                                    <select class="form-control" name="forma"
+                                            onchange="location = '/set-language/' + this.value;">
+                                        {foreach $languagesList as $language}
+                                            <option value="{$language["language"]}"
+                                                {if $renderLanguage eq $language["language"]}selected{/if}>
+                                                {$language["language_title_in_origin"]}</option>
+                                        {/foreach}
+                                    </select>
+                                </li>
+                            {/if}
                             <li>
                                 <span>{#text_currency#}:</span>
                                 <select class="form-control">

@@ -6,18 +6,18 @@
         <ul class="categories">
             {foreach $parentCategoriesList as $parentCategory}
                 <li><span class="glyphicon glyphicon-menu-right"></span>
-                    <a href="/category/{$parentCategory["id"]}"> {$parentCategory["category"]}</a>
+                    <a href="/category/{$parentCategory["id"]}"> {$parentCategory["category_$renderLanguage"]}</a>
                     {if isset($parentCategory["children_categories"])}
                         <ul>
                             {foreach $parentCategory["children_categories"] as $children_categories_1}
                                 <li><span class="glyphicon glyphicon-menu-right"></span>
-                                    <a href="/category/{$children_categories_1["id"]}">{$children_categories_1["category"]}</a>
+                                    <a href="/category/{$children_categories_1["id"]}">{$children_categories_1["category_$renderLanguage"]}</a>
                                     {if isset($children_categories_1["children_categories"])}
                                         <ul>
                                             {foreach $children_categories_1["children_categories"] as $children_categories_2}
                                                 <li>
                                                     <span class="glyphicon glyphicon-menu-right"></span>
-                                                    <a href="/category/{$children_categories_2["id"]}">{$children_categories_2["category"]}</a>
+                                                    <a href="/category/{$children_categories_2["id"]}">{$children_categories_2["category_$renderLanguage"]}</a>
                                                 </li>
                                             {/foreach}
                                         </ul>

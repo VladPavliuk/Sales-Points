@@ -35,13 +35,14 @@ class Router
         // Start trait - AnalyzerURI
         $singleRoute = $this->getInnerPathArray();
 
-        // Start trait - AnalyzerControllerConnect
         $innerPathArray = array_shift($singleRoute);
-        $this->defineInnerPath($innerPathArray);
+        $modelsArray = array_shift($singleRoute);
 
         // Start trait - AnalyzerModelsConnect
-        $modelsArray = array_shift($singleRoute);
         $this->defineModels($modelsArray);
+
+        // Start trait - AnalyzerControllerConnect
+        $this->defineInnerPath($innerPathArray);
 
         // Start if all OK
         $this->runActionMethod();

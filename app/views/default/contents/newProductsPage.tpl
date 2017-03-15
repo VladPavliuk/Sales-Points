@@ -7,10 +7,10 @@
 {block name="content"}
     <div class="row product-wrap">
         <div class="col-lg-9 col-md-8 col-sm-6 col-xs-6 title">
-            <h3>Featured <span>Products</span></h3>
+            <h3>{#text_new_products_1#} <span>{#text_new_products_2#}</span></h3>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 title">
-            <a href="/products" class="btn btn-info pull-right">View All Products</a>
+            <button class="btn btn-info pull-right">{#text_view_all_products#}</button>
         </div>
         {foreach $lastAddedProducts as $product}
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product">
