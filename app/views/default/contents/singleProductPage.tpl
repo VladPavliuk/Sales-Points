@@ -1,34 +1,47 @@
 {extends file='../layouts/main.tpl'}
 
-{block name="title"}
-    Welcome page!
-{/block}
-
 {block name="content"}
-    <div class="row">
-        <h2>{$singleProductItem["title"]}</h2>
-        <small>Added {$singleProductItem["updated_time"]|date_format:'%Y-%m-%d'}</small>
-        <br>
-        <img src="/src/images/products/{$singleProductItem["image"]}" alt="{$singleProductItem["title"]}" height="300">
+    <div class="row product-item">
+        <div class="product-img col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="main-img">
+                <img src="/src/images/products/{$singleProductItem["image"]}" alt="{$singleProductItem["title"]}"
+                     title="{$singleProductItem["title"]}">
+            </div>
+            {if isset($singleProductItem["other_images"])}
+                <div class="other-img">
+                    <img src="img/prod-img-2.jpg" alt="1">
+                    <img src="img/prod-img-1.jpg" alt="1">
+                    <img src="img/img-1.jpg" alt="1">
+                </div>
+            {/if}
+        </div>
+        <div class="description-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h3>{$singleProductItem["title"]}</h3>
+            <div class="button">
+                {if $singleProductItem["status"] eq 1}
+                    <button onclick="addToCart({$singleProductItem["id"]});" class="btn btn-info pull-right">Add to
+                        cart
+                    </button>
+                {else}
+                    <button class="btn btn-info pull-right disabled">Not Available</button>
+                {/if}
+            </div>
+            <div class="product-price">
+                <span class="price">$ {$singleProductItem["price"]}</span>
 
-        <h4>Price: $ {$singleProductItem["price"]}</h4>
-        {if $singleProductItem["status"] eq 1}
-            <small>Status:</small>
-            <p class="label label-success">in stock</p>
-        {else}
-            <small>Status:</small>
-            <p class="label label-default">out of stock</p>
-        {/if}
-        <br>
-        <br>
-        <h5>Description:</h5>
-        <p>{$singleProductItem["description"]}</p>
+                {if $singleProductItem["status"] eq 1}
+                    <span class="glyphicon glyphicon-ok-circle pull-right"></span>
+                    <span class="presence pull-right">В наявності</span>
+                {else}
+                    <small>Status:</small>
+                    <p class="label label-default">out of stock</p>
+                {/if}
 
-        <br>
-        {if $singleProductItem["status"] eq 1}
-            <button onclick="addToCart({$singleProductItem["id"]});" class="btn btn-success btn-lg">Add to cart</button>
-        {else}
-            <button class="btn btn-default btn-lg disabled">Not Available</button>
-        {/if}
+
+            </div>
+            <div class="product-description">
+                <p>{$singleProductItem["description"]}</p>
+            </div>
+        </div>
     </div>
 {/block}
