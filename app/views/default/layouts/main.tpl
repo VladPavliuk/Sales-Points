@@ -1,4 +1,3 @@
-{config_load file='smarty_main.conf'}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=500px, initial-scale=1">
 
-    <title>{block "title"}Odious Framework{/block}</title>
+    <title>{#pageTitle#}</title>
 
     <link rel="shortcut icon" href="/src/images/icon.jpg" type="image/png">
 
@@ -45,9 +44,7 @@
         <div class="row">
             {include file="partials/categoriesList.tpl"}
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                <div class="row product-wrap">
-                    {block "content"}Content{/block}
-                </div>
+                {block "content"}Content{/block}
             </div>
         </div>
     </div>

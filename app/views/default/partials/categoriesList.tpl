@@ -1,7 +1,7 @@
 <sidebar class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
     <div class="panel-menu-wrap">
         <button class="show-menu btn btn-default">
-            <span class="glyphicon glyphicon-menu-right"></span> Categories
+            <span class="glyphicon glyphicon-menu-right"></span> {#text_categories#}
         </button>
         <ul class="categories">
             {foreach $parentCategoriesList as $parentCategory}

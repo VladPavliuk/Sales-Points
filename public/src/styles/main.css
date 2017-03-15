@@ -154,7 +154,8 @@
       .main .product-wrap .product .prod-img img {
         display: inline-block;
         height: auto;
-        max-width: 100%; }
+        max-width: 100%;
+        max-height: 125px; }
     .main .product-wrap .product .prod-footer {
       height: 40px; }
       .main .product-wrap .product .prod-footer h5 {

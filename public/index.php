@@ -1,8 +1,8 @@
 <?php
-session_set_cookie_params(3600,"/");
+session_set_cookie_params(3600, "/");
 session_start();
 
-if(empty($_SESSION["cart"])) {
+if (empty($_SESSION["cart"])) {
     $_SESSION["cart"] = [];
 }
 
