@@ -20,6 +20,7 @@ class EmailController extends Controller
             $this->customerTotalOrderPrice = $this->getTotalPrice();
             $this->checkInCustomer();
             $this->sendEmail();
+
         } else {
             header('Location: http://www.vladdev.com/');
         }
@@ -41,7 +42,7 @@ class EmailController extends Controller
         $emailModelObject = new Email();
 
         $emailModelObject->customerFirstName = $this->customerFirstName;
-        $emailModelObject->customerSecondName = $this->customerSecondName;
+        $emailModelObject->customerLastName = $this->customerSecondName;
         $emailModelObject->customerEmail = $this->customerEmail;
         $emailModelObject->customerMobile = $this->customerMobile;
         $emailModelObject->customerOrderList = $this->customerOrderList;
@@ -55,7 +56,7 @@ class EmailController extends Controller
         $emailModelObject = new Email();
 
         $emailModelObject->customerFirstName = $this->customerFirstName;
-        $emailModelObject->customerSecondName = $this->customerSecondName;
+        $emailModelObject->customerLastName = $this->customerSecondName;
         $emailModelObject->customerEmail = $this->customerEmail;
         $emailModelObject->customerMobile = $this->customerMobile;
         $emailModelObject->customerOrderList = $this->customerOrderList;

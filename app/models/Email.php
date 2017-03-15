@@ -3,7 +3,7 @@
 class Email extends Model
 {
     public $customerFirstName = "";
-    public $customerSecondName = "";
+    public $customerLastName = "";
     public $customerEmail = "";
     public $customerMobile = "";
     public $customerOrderList = "";
@@ -36,7 +36,7 @@ class Email extends Model
     private function validData()
     {
         $this->stringValidator($this->customerFirstName);
-        $this->stringValidator($this->customerSecondName);
+        $this->stringValidator($this->customerLastName);
         $this->emailValidator($this->customerEmail);
         $this->stringValidator($this->customerMobile);
         $this->encodeArrayToJSON($this->customerOrderList);
@@ -56,9 +56,13 @@ class Email extends Model
         $smarty = SmartyRun::connect();
         //<
 
-        //> Include content template.
-        $smarty->assign('templateFile', 'email.tpl');
-        //<
+        $smarty->assign('cart', $_SESSION['cart']);
+
+        $smarty->assign('firstName', $this->customerFirstName);
+        $smarty->assign('lastName', $this->customerLastName);
+        $smarty->assign('email', $this->customerEmail);
+        $smarty->assign('mobile', $this->customerMobile);
+        $smarty->assign('totalOrderPrice ', $this->customerTotalOrderPrice);
 
         $this->emailBody = $smarty->fetch('layouts/email.tpl');
     }
@@ -77,7 +81,7 @@ class Email extends Model
                       VALUES 
                       (
                       '{$this->customerFirstName}',
-                      '{$this->customerSecondName}',
+                      '{$this->customerLastName}',
                       '{$this->customerEmail}',
                       '{$this->customerMobile}',
                       '{$this->customerOrderList}',
