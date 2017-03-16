@@ -15,7 +15,7 @@
                     <div class="prod-footer">
                         <h5><a href="/product/{$categoryProduct["id"]}"">{$categoryProduct["title"]}</a></h5>
                     </div>
-                    <span class="price">$ {$categoryProduct["price"]}</span>
+                    <span class="price">{$categoryProduct["price"]}</span>
                 </div>
             {/foreach}
             {else}

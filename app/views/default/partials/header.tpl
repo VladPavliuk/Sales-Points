@@ -23,25 +23,32 @@
                             {if isset($languagesList)}
                                 <li>
                                     <span>{#text_language#}:</span>
-                                    <select class="form-control" name="forma"
+                                    <select class="form-control"
                                             onchange="location = '/set-language/' + this.value;">
                                         {foreach $languagesList as $language}
                                             <option value="{$language["language"]}"
-                                                {if $renderLanguage eq $language["language"]}selected{/if}>
-                                                {$language["language_title_in_origin"]}</option>
+                                                    {if $renderLanguage eq $language["language"]}selected{/if}>
+                                                {$language["language_title_in_origin"]}
+                                            </option>
                                         {/foreach}
                                     </select>
                                 </li>
                             {/if}
-                            <li>
-                                <span>{#text_currency#}:</span>
-                                <select class="form-control">
-                                    <option value="UA">UA</option>
-                                    <option value="USD">USD</option>
-                                    <option value="EUR">EUR</option>
-                                </select>
+                            {if isset($currencyList)}
+                                <li>
+                                    <span>{#text_currency#}:</span>
+                                    <select class="form-control"
+                                            onchange="location = '/set-currency/' + this.value;">
+                                        {foreach $currencyList as $currency}
+                                        <option value="{$currency["currency"]}"
+                                            {if $renderCurrency eq $currency["currency"]}selected{/if}>
+                                            {$currency["currency"]}
+                                        </option>
+                                        {/foreach}
+                                    </select>
+                                </li>
+                            {/if}
                         </div>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -62,8 +69,6 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">{#text_home#} <span class="sr-only">(current)</span></a></li>
                     <li><a href="/new">{#text_whats_new#} </a></li>
-                    <li><a href="#">{#text_specials#}</a></li>
-                    <li><a href="#">{#text_my_account#}</a></li>
                     <li><a href="/contacts">{#text_contacts#}</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">

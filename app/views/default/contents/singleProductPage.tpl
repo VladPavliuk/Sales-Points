@@ -27,7 +27,7 @@
                 {/if}
             </div>
             <div class="product-price">
-                <span class="price">$ {$singleProductItem["price"]}</span>
+                <span class="price">{$singleProductItem["price"]}</span>
 
                 {if $singleProductItem["status"] eq 1}
                     <span class="glyphicon glyphicon-ok-circle pull-right"></span>

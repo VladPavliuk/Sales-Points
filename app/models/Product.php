@@ -7,14 +7,16 @@ class Product extends Model
         $limitOfProducts = $limitOfProducts > 15 ? 15 : $limitOfProducts;
 
         $categoryProductsList = [];
-
+        $currencyModelObject = new Currency();
         foreach($subCategoriesList as $subCategoryId) {
             $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$subCategoryId} ORDER BY `updated_time` DESC LIMIT {$limitOfProducts}";
             $queryResult = $this->dataBase->query($sqlQuery);
 
+            $i = 1;
             while($row = $queryResult->fetch()) {
 
-                $categoryProductsList[] = $row;
+                $categoryProductsList[$i] = $row;
+                $categoryProductsList[$i++]["price"] = $currencyModelObject->getPriceInCurrentCurrency($row["price"]);
             }
         }
 
@@ -27,6 +29,9 @@ class Product extends Model
 
         $singleProductItem = $queryResult->fetch();
 
+        $currencyModelObject = new Currency();
+        $singleProductItem["price"] = $currencyModelObject->getPriceInCurrentCurrency($singleProductItem["price"]);
+
         return $singleProductItem;
     }
 
@@ -36,12 +41,15 @@ class Product extends Model
 
         $queryResult = $this->dataBase->query("SELECT * FROM `products` ORDER BY `id` DESC LIMIT {$limitOfProducts}");
 
+        $currencyModelObject = new Currency();
         $lastProductsList = [];
         $i = 1;
         while($row = $queryResult->fetch()) {
-            $lastProductsList[$i++] = $row;
+            $lastProductsList[$i] = $row;
+            $lastProductsList[$i++]["price"] = $currencyModelObject->getPriceInCurrentCurrency($row["price"]);
         }
 
         return $lastProductsList;
     }
+
 }

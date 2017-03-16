@@ -8,6 +8,7 @@ class Email extends Model
     public $customerMobile = "";
     public $customerOrderList = "";
     public $customerTotalOrderPrice = 0;
+    public $customerTotalAmount = 0;
 
     private $emailHeaders = "";
     private $emailSubject = "Internet shop Sales Point";
@@ -19,18 +20,18 @@ class Email extends Model
         $this->insertCustomerIntoDataBaseTable();
     }
 
-    public function sendEmail()
+    public function sendEmail($smartyObject)
     {
         $this->validData();
 
         $this->formEmailHeader();
-        $this->formEmailBody();
-        echo 'yea';
+        $this->formEmailBody($smartyObject);
 
         mail($this->customerEmail, $this->emailSubject, $this->emailBody, $this->emailHeaders);
         mail(EMAIL_ADMIN, $this->emailSubject, $this->emailBody, $this->emailHeaders);
 
         session_unset();
+        header('Location: http://www.vladdev.com/');
     }
 
     private function validData()
@@ -40,7 +41,6 @@ class Email extends Model
         $this->emailValidator($this->customerEmail);
         $this->stringValidator($this->customerMobile);
         $this->encodeArrayToJSON($this->customerOrderList);
-        $this->floatNumberValidator($this->customerTotalOrderPrice);
     }
 
     private function formEmailHeader()
@@ -50,21 +50,19 @@ class Email extends Model
         $this->emailHeaders .= "From: Sale Point <sale.point@gmail.com>" . "\r\n";
     }
 
-    private function formEmailBody()
+    private function formEmailBody($smartyObject)
     {
-        //> Smarty initialization.
-        $smarty = SmartyRun::connect();
-        //<
+        $cartModelObject = new Cart();
+        $smartyObject->assign('cart', $cartModelObject->getCart());
 
-        $smarty->assign('cart', $_SESSION['cart']);
+        $smartyObject->assign('firstName', $this->customerFirstName);
+        $smartyObject->assign('lastName', $this->customerLastName);
+        $smartyObject->assign('email', $this->customerEmail);
+        $smartyObject->assign('mobile', $this->customerMobile);
+        $smartyObject->assign('totalOrderPrice', $this->customerTotalOrderPrice);
+        $smartyObject->assign('totalAmount', $this->customerTotalAmount);
 
-        $smarty->assign('firstName', $this->customerFirstName);
-        $smarty->assign('lastName', $this->customerLastName);
-        $smarty->assign('email', $this->customerEmail);
-        $smarty->assign('mobile', $this->customerMobile);
-        $smarty->assign('totalOrderPrice ', $this->customerTotalOrderPrice);
-
-        $this->emailBody = $smarty->fetch('layouts/email.tpl');
+        $this->emailBody = $smartyObject->fetch('layouts/email.tpl');
     }
 
     private function insertCustomerIntoDataBaseTable()
@@ -103,12 +101,6 @@ class Email extends Model
         $stringForValidation = (string)$stringForValidation;
         $stringForValidation = substr($stringForValidation, 0, 50);
         $stringForValidation = filter_var($stringForValidation, FILTER_SANITIZE_STRING);
-    }
-
-    private function floatNumberValidator(&$floatNumber)
-    {
-        $floatNumber = substr($floatNumber, 0, 50);
-        $floatNumber = filter_var($floatNumber, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     }
 
     private function encodeArrayToJSON(&$encodingArray)

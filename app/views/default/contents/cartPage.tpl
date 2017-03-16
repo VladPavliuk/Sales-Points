@@ -15,14 +15,14 @@
                 <tr>
                     <td>{$id}</td>
                     <td>{$cartItem["title"]}</td>
-                    <td>$ {$cartItem["price"]}</td>
+                    <td>{$cartItem["price"]}</td>
                     <td><a href="/cart-delete/{$idInCart}">{#text_remove#}</a></td>
                 </tr>
                 {$id = $id + 1}
             {/foreach}
         </table>
         <br>
-        {#text_total_price#}: $ {$totalPrice}
+        {#text_total_price#}: {$totalPrice}
         <br>
         {#text_total_amount#}: {$totalAmount}
         {if $totalAmount eq 1}

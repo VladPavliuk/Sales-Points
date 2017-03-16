@@ -51,6 +51,7 @@ trait AnalyzerModelsConnect
         $coreModelFile = $this->modelsFolderPath . 'Model.php';
 
         if (file_exists($coreModelFile)) {
+
             require_once($coreModelFile);
         } else {
             // Some went wrong!

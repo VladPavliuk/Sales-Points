@@ -18,11 +18,8 @@ trait CartInteract
 
     public function getCart()
     {
-        if(isset($_SESSION['cart'])) {
-            return $_SESSION['cart'];
-        } else {
-            return false;
-        }
+        $cartModelObject = new Cart();
+        return $cartModelObject->getCart();
     }
 
     public function getTotalPrice()

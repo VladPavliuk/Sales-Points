@@ -1,8 +1,8 @@
 <?php
 
-class LanguageController
+class LanguageController extends Controller
 {
-    public function setLanguageAction($language)
+    public function changeLanguageAction($language)
     {
         $_SESSION["language"] = $language;
 

@@ -24,7 +24,7 @@
                 <div class="prod-footer">
                     <h5><a href="product/{$product["id"]}"">{$product["title"]}</a></h5>
                 </div>
-                <span class="price">$ {$product["price"]}</span>
+                <span class="price">{$product["price"]}</span>
             </div>
         {/foreach}
     </div>

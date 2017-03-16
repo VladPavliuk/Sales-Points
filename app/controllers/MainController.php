@@ -5,7 +5,7 @@ class MainController extends Controller
 
     public function viewHomePageAction()
     {
-        $limitOfProducts = 1;
+        $limitOfProducts = 15;
 
         $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree(0));
         $this->smarty->assign('lastAddedProductInCategories', $this->getCategoryProducts(0, $limitOfProducts));

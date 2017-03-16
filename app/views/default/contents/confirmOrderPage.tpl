@@ -25,7 +25,7 @@
         <input id="customerMobile" name="customerMobile" type="tel" required>
         <br>
         <br>
-        {#text_total_price#}: $ {$totalPrice}
+        {#text_total_price#}: {$totalPrice}
         <br>
         {#text_total_amount#}: {$totalAmount}
         {if $totalAmount eq 1}

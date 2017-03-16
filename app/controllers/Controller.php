@@ -12,12 +12,13 @@ class Controller
         $this->smarty = SmartyRun::connect();
 
         $this->defineLanguagesList();
-        $this->setDefaultLanguage();
+        $this->setDefaultLanguage("ukrainian");
         $this->defineRenderingLanguage();
+        $this->loadLanguageText();
 
-        $fileWithLanguagesText = $_SESSION["language"] . ".conf";
-
-        $this->smarty->configLoad($fileWithLanguagesText);
+        $this->defineCurrencyList();
+        $this->setDefaultCurrency("UAH");
+        $this->defineRenderingCurrency();
     }
 
     /**
@@ -34,10 +35,14 @@ class Controller
         $this->smarty->assign('languagesList', $languagesList);
     }
 
-    protected function setDefaultLanguage()
+    /**
+     * Set language when client first time come to web site
+     *
+     */
+    protected function setDefaultLanguage($defaultLanguage)
     {
         if (empty($_SESSION["language"])) {
-            $_SESSION["language"] = "ukrainian";
+            $_SESSION["language"] = $defaultLanguage;
         }
     }
 
@@ -47,4 +52,48 @@ class Controller
             $this->smarty->assign('renderLanguage', $_SESSION["language"]);
         }
     }
+
+    /**
+     * Load config file which contains all text of selected language
+     *
+     */
+    protected function loadLanguageText()
+    {
+        $fileWithLanguagesText = $_SESSION["language"] . ".conf";
+
+        $this->smarty->configLoad($fileWithLanguagesText);
+    }
+
+    /**
+     * Include Currency model
+     * and get currency list from Data Base
+     *
+     */
+    protected function defineCurrencyList()
+    {
+        require_once(MODELS_PATH . "Currency.php");
+        $currencyModelObject = new Currency();
+        $currencyList = $currencyModelObject->getCurrencyList();
+
+        $this->smarty->assign('currencyList', $currencyList);
+    }
+
+    /**
+     * Set language when client first time come to web site
+     *
+     */
+    protected function setDefaultCurrency($defaultCurrency)
+    {
+        if (empty($_SESSION["currency"])) {
+            $_SESSION["currency"] = $defaultCurrency;
+        }
+    }
+
+    protected function defineRenderingCurrency()
+    {
+        if (isset($_SESSION["currency"])) {
+            $this->smarty->assign('renderCurrency', $_SESSION["currency"]);
+        }
+    }
+
 }

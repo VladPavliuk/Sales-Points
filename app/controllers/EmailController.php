@@ -8,16 +8,21 @@ class EmailController extends Controller
     private $customerMobile = "";
     private $customerOrderList = "";
     private $customerTotalOrderPrice = 0;
+    private $customerTotalAmount = 0;
 
     public function confirmOrderAction()
     {
-        if ($this->getTotalPrice() > 0) {
+        $cartObject = new Cart();
+
+        if ($cartObject->getTotalPrice() > 0) {
             $this->customerFirstName = $_POST["customerFirstName"];
             $this->customerSecondName = $_POST["customerSecondName"];
             $this->customerEmail = $_POST["customerEmail"];
             $this->customerMobile = $_POST["customerMobile"];
             $this->customerOrderList = $this->getOrderList();
-            $this->customerTotalOrderPrice = $this->getTotalPrice();
+
+            $this->customerTotalOrderPrice = $cartObject->getTotalPrice();
+            $this->customerTotalAmount = $cartObject->getTotalAmount();
             $this->checkInCustomer();
             $this->sendEmail();
 
@@ -28,13 +33,7 @@ class EmailController extends Controller
 
     private function getOrderList()
     {
-        if (isset($_SESSION["cart"])) {
-            $orderList = $_SESSION["cart"];
-
-            return $orderList;
-        } else {
-            Debug::showErrorPage("Ваш кошик порожній");
-        }
+        return $this->getCart();
     }
 
     private function sendEmail()
@@ -47,8 +46,9 @@ class EmailController extends Controller
         $emailModelObject->customerMobile = $this->customerMobile;
         $emailModelObject->customerOrderList = $this->customerOrderList;
         $emailModelObject->customerTotalOrderPrice = $this->customerTotalOrderPrice;
+        $emailModelObject->customerTotalAmount = $this->customerTotalAmount;
 
-        $emailModelObject->sendEmail();
+        $emailModelObject->sendEmail($this->smarty);
     }
 
     private function checkInCustomer()
