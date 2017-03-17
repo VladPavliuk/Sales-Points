@@ -2,15 +2,16 @@
 
 class CategoryController extends Controller
 {
-    public function viewAction($categoryId)
+    public function viewProductsInCategoryAction($categoryId)
     {
         $limitOfProducts = 10;
+        $categoryModelObject = new Category();
+        $productModelObject = new Product();
 
-        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree(0));
-        $this->smarty->assign("categoryProductsList", $this->getCategoryProducts($categoryId, $limitOfProducts));
+        $listOfSubcategoriesId = $categoryModelObject->getSubCategoriesIdOfParentCategory($categoryId);
+        $categoryProductsList = $productModelObject->getCategoryAndSubCategoriesProducts($listOfSubcategoriesId, $limitOfProducts);
 
-        $this->smarty->assign('totalPrice', $this->getTotalPrice());
-        $this->smarty->assign('totalAmount', $this->getTotalAmount());
+        $this->smarty->assign("categoryProductsList", $categoryProductsList);
 
         $this->smarty->display("contents/categoryPage.tpl");
     }

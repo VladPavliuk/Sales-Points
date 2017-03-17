@@ -33,7 +33,8 @@ class EmailController extends Controller
 
     private function getOrderList()
     {
-        return $this->getCart();
+        $cartModelObject = new Cart();
+        return $cartModelObject->getCartForRendering();
     }
 
     private function sendEmail()

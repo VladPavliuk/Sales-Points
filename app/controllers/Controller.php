@@ -2,8 +2,6 @@
 
 class Controller
 {
-    use CartInteract, CategoryInteract, ProductInteract;
-
     protected $smarty = false;
 
     public function __construct()
@@ -19,6 +17,19 @@ class Controller
         $this->defineCurrencyList();
         $this->setDefaultCurrency("UAH");
         $this->defineRenderingCurrency();
+
+        $this->defineDefaultSmartyVariables();
+    }
+
+    protected function defineDefaultSmartyVariables()
+    {
+        $cartModelObject = new Cart();
+        $categoryModelObject = new Category();
+
+        $this->smarty->assign('parentCategoriesList', $categoryModelObject->getCategoriesTree(0));
+
+        $this->smarty->assign('totalPrice', $cartModelObject->getTotalPrice());
+        $this->smarty->assign('totalAmount', $cartModelObject->getTotalAmount());
     }
 
     /**

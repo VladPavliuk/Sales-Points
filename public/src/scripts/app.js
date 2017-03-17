@@ -12,6 +12,6 @@ function addToCart(productId) {
 
         var totalAmount = JSON.parse(responseData);
 
-        $("#totalAmountText").text(totalAmount);
+        $(".total-amount-text").text(totalAmount);
     });
 }

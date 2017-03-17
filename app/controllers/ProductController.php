@@ -4,24 +4,22 @@ class ProductController extends Controller
 {
     public function viewSingleProductAction($productId)
     {
-        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree(0));
-        $this->smarty->assign('singleProductItem', $this->getSingleProduct($productId));
-        $this->smarty->assign('totalPrice', $this->getTotalPrice());
-        $this->smarty->assign('totalAmount', $this->getTotalAmount());
+        $productModelObject = new Product();
+        $singleProductItem = $productModelObject->getSingleProduct($productId);
+
+        $this->smarty->assign('singleProductItem', $singleProductItem);
 
         $this->smarty->display("contents/singleProductPage.tpl");
     }
 
-    public function viewAllProductAction()
+    public function viewLastAddedProductsAction()
     {
-        $limitOfProducts = 3;
+        $productModelObject = new Product();
+        $lastAddedProducts = $productModelObject->getLastAddedProducts(12);
 
-        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree(0));
-        $this->smarty->assign('productsList', $this->getCategoryProducts(0, $limitOfProducts));
+        $this->smarty->assign('lastAddedProducts', $lastAddedProducts);
 
-        $this->smarty->assign('totalPrice', $this->getTotalPrice());
-        $this->smarty->assign('totalAmount', $this->getTotalAmount());
-
-        $this->smarty->display("contents/productsListPage.tpl");
+        $this->smarty->display("contents/newProductsPage.tpl");
     }
+
 }

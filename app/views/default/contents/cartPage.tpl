@@ -12,19 +12,19 @@
 
             {$id = 1}
             {foreach from=$cart key=idInCart item=cartItem}
-                <tr>
+                <tr id="product-in-cart-page{$idInCart}">
                     <td>{$id}</td>
-                    <td>{$cartItem["title"]}</td>
+                    <td>{$cartItem["product_title"]}</td>
                     <td>{$cartItem["price"]}</td>
-                    <td><a href="/cart-delete/{$idInCart}">{#text_remove#}</a></td>
+                    <td><button onclick="deleteFromCart({$idInCart}, this);">{#text_remove#}</button></td>
                 </tr>
                 {$id = $id + 1}
             {/foreach}
         </table>
         <br>
-        {#text_total_price#}: {$totalPrice}
+        {#text_total_price#}: <span class="total-price-text">{$totalPrice}</span>
         <br>
-        {#text_total_amount#}: {$totalAmount}
+        {#text_total_amount#}: <span class="total-amount-text">{$totalAmount}</span>
         {if $totalAmount eq 1}
             {#text_in_cart_item#}
         {else}

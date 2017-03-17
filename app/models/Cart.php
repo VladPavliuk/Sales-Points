@@ -2,25 +2,46 @@
 
 class Cart extends Model
 {
-    public function getCart()
+    /**
+     * Return list of all products in shopping cart.
+     * price is converting in current currency.
+     *
+     * @return array|bool
+     */
+    public function getCartForRendering()
     {
-        $renderCart = [];
-        $i = 0;
+        $cartForRendering = [];
         $currencyModelObject = new Currency();
 
         if(isset($_SESSION['cart'])) {
-            foreach($_SESSION['cart'] as $cartItem) {
-                $renderCart[$i] = $cartItem;
+            foreach($_SESSION['cart'] as $itemKeyInCart => $cartItem) {
 
-                $renderCart[$i++]["price"] = $currencyModelObject->getPriceInCurrentCurrency($cartItem["price"]);
+                $convertedPrice = $currencyModelObject->getPriceInCurrentCurrency($cartItem["price"]);
+
+                $cartForRendering[$itemKeyInCart]["id"] = $cartItem["id"];
+                $cartForRendering[$itemKeyInCart]["category_id"] = $cartItem["category_id"];
+                $cartForRendering[$itemKeyInCart]["product_title"] = $cartItem["product_title"];
+                $cartForRendering[$itemKeyInCart]["description_english"] = $cartItem["description_english"];
+                $cartForRendering[$itemKeyInCart]["description_ukraine"] = $cartItem["description_ukraine"];
+                $cartForRendering[$itemKeyInCart]["description_russian"] = $cartItem["description_russian"];
+                $cartForRendering[$itemKeyInCart]["price"] = $convertedPrice;
+                $cartForRendering[$itemKeyInCart]["main_image"] = $cartItem["main_image"];
+                $cartForRendering[$itemKeyInCart]["status"] = $cartItem["status"];
+                $cartForRendering[$itemKeyInCart]["upload_time"] = $cartItem["upload_time"];
             }
 
-            return $renderCart;
+            return $cartForRendering;
         } else {
             return false;
         }
     }
 
+    /**
+     * Add one product to shopping cart.
+     * Require id of product in data base table.
+     *
+     * @param $productId
+     */
     public function addToCart($productId)
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE `id` = {$productId} LIMIT 1");
@@ -28,6 +49,12 @@ class Cart extends Model
         $_SESSION['cart'][] = $queryResult->fetch();
     }
 
+    /**
+     * Remove one product from shopping cart.
+     * Require id of product in shopping cart.
+     *
+     * @param $productId
+     */
     public function deleteFromCart($productId)
     {
         if (isset($_SESSION['cart'])) {
@@ -35,6 +62,11 @@ class Cart extends Model
         }
     }
 
+    /**
+     * Return total price of all products in shopping cart.
+     *
+     * @return float|int|string
+     */
     public function getTotalPrice()
     {
         if (isset($_SESSION['cart'])) {
@@ -52,6 +84,11 @@ class Cart extends Model
         return 0;
     }
 
+    /**
+     * Return summary of all products in shopping cart.
+     *
+     * @return int
+     */
     public function getTotalAmount()
     {
         $totalAmount = 0;

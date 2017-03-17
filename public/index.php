@@ -23,13 +23,6 @@ require_once('../configs/config.php');
 require_once(DEBUG_PATH);
 
 /**
- *
- */
-require_once(CONTROLLERS_PATH . "CartInteract.php");
-require_once(CONTROLLERS_PATH . "CategoryInteract.php");
-require_once(CONTROLLERS_PATH . "ProductInteract.php");
-
-/**
  * Include Router class.
  *
  */

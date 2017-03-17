@@ -53,7 +53,7 @@ class Email extends Model
     private function formEmailBody($smartyObject)
     {
         $cartModelObject = new Cart();
-        $smartyObject->assign('cart', $cartModelObject->getCart());
+        $smartyObject->assign('cart', $cartModelObject->getCartForRendering());
 
         $smartyObject->assign('firstName', $this->customerFirstName);
         $smartyObject->assign('lastName', $this->customerLastName);

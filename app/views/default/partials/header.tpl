@@ -16,7 +16,7 @@
                             </button>
                         </a>
                         <p> {#text_now_in_your_cart#} <span><span
-                                        id="totalAmountText">{$totalAmount}</span> {#text_items#}</span></p>
+                                        class="total-amount-text">{$totalAmount}</span> {#text_items#}</span></p>
                     </div>
                     <ul class="col-lg-5 col-md-6 col-sm-8 col-xs-12 pull-right">
                         <div class="nav nav-pills">

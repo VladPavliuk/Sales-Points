@@ -64,5 +64,6 @@
 
 <!-- CUSTOM SCRIPTS -->
 <script src="/src/scripts/app.js"></script>
+<script src="/src/scripts/cart.js"></script>
 </body>
 </html>

@@ -4,23 +4,20 @@ class CartController extends Controller
 {
     public function viewCartAction()
     {
-        $this->smarty->assign('parentCategoriesList', $this->getCategoriesTree(0));
-        $this->smarty->assign('totalPrice', $this->getTotalPrice());
-        $this->smarty->assign('totalAmount', $this->getTotalAmount());
+        $cartModelObject = new Cart();
 
-        $this->smarty->assign('cart', $this->getCart());
+        $this->smarty->assign('cart', $cartModelObject->getCartForRendering());
 
         $this->smarty->display("contents/cartPage.tpl");
     }
 
     public function viewOrderFormAction()
     {
-        if ($this->getTotalAmount() > 0) {
-            $this->smarty->assign('parentCategoriesList', $this->getParentCategories());
-            $this->smarty->assign('totalPrice', $this->getTotalPrice());
-            $this->smarty->assign('totalAmount', $this->getTotalAmount());
+        $cartModelObject = new Cart();
 
-            $this->smarty->assign('cart', $this->getCart());
+        if ($cartModelObject->getTotalAmount() > 0) {
+
+            $this->smarty->assign('cart', $cartModelObject->getCartForRendering());
 
             $this->smarty->display("contents/confirmOrderPage.tpl");
         } else {
@@ -28,11 +25,22 @@ class CartController extends Controller
         }
     }
 
+    public function addToCartAction($productId)
+    {
+        $cartModelObject = new Cart();
+        $cartModelObject->addToCart($productId);
+
+        echo json_encode($cartModelObject->getTotalAmount());
+    }
 
     public function deleteFromCartAction($productId)
     {
-        $this->deleteFromCart($productId);
+        $cartModelObject = new Cart();
+        $cartModelObject->deleteFromCart($productId);
 
-        $this->viewCartAction();
+        $cartInfoList["total_products_amount"] = $cartModelObject->getTotalAmount();
+        $cartInfoList["total_products_price"] = $cartModelObject->getTotalPrice();
+
+        echo json_encode($cartInfoList);
     }
 }
