@@ -4,6 +4,52 @@ class Category extends Model
 {
     private $subCategoriesIdList = [];
 
+    public function getSingleCategoryTitleById($categoryId)
+    {
+        $singleCategory = $this->getSingleCategoryById($categoryId);
+
+        return $singleCategory["category_english"];
+    }
+
+    public function getSingleCategoryById($categoryId)
+    {
+        $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE `id` = {$categoryId}");
+        $tableRow = $queryResult->fetch();
+
+        $singleCategory["id"] = $tableRow["id"];
+        $singleCategory["parent_category_id"] = $tableRow["parent_category_id"];
+        $singleCategory["category_english"] = $tableRow["category_english"];
+        $singleCategory["category_ukrainian"] = $tableRow["category_ukrainian"];
+        $singleCategory["category_russian"] = $tableRow["category_russian"];
+        $singleCategory["created_time"] = $tableRow["created_time"];
+
+        return $singleCategory;
+    }
+
+    /**
+     * Return list of all categories.
+     *
+     */
+    public function getListOfAllCategories()
+    {
+        $queryResult = $this->dataBase->query("SELECT * FROM `categories`");
+        $categoriesList = [];
+        $i = 0;
+
+        while ($tableRow = $queryResult->fetch()) {
+            $categoriesList[$i]["id"] = $tableRow["id"];
+            $categoriesList[$i]["parent_category_id"] = $tableRow["parent_category_id"];
+            $categoriesList[$i]["category_english"] = $tableRow["category_english"];
+            $categoriesList[$i]["category_ukrainian"] = $tableRow["category_ukrainian"];
+            $categoriesList[$i]["category_russian"] = $tableRow["category_russian"];
+            $categoriesList[$i]["created_time"] = $tableRow["created_time"];
+
+            $i++;
+        }
+
+        return $categoriesList;
+    }
+
     /**
      * Return categories tree.
      *

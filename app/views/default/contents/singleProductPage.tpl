@@ -44,7 +44,7 @@
 
             </div>
             <div class="product-description">
-                <p>{$singleProductItem["description_english"]}</p>
+                <p>{$singleProductItem["description"]}</p>
             </div>
         </div>
     </div>

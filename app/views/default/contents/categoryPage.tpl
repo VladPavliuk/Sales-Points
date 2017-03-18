@@ -22,6 +22,9 @@
                     <span class="price">{$categoryProduct["price"]}</span>
                 </div>
             {/foreach}
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-view-more">
+                <button class="btn btn-info pull-right">{#text_view_more_products#}</button>
+            </div>
             {else}
             <h3>{#text_no_products_in_category#}</h3>
         </div>

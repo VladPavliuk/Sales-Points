@@ -13,8 +13,6 @@ class Product extends Model
     {
         $limitOfProducts = $limitOfProducts > 20 ? 20 : $limitOfProducts;
 
-
-
         $categoryProductsList = [];
         $currencyModelObject = new Currency();
         $i = 0;
@@ -55,15 +53,14 @@ class Product extends Model
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE id = {$productId}");
         $productFromDataBase = $queryResult->fetch();
+        $currentLanguage = $_SESSION["language"];
 
         $currencyModelObject = new Currency();
 
         $singleProductItem["id"] = $productFromDataBase["id"];
         $singleProductItem["category_id"] = $productFromDataBase["category_id"];
         $singleProductItem["product_title"] = $productFromDataBase["product_title"];
-        $singleProductItem["description_english"] = $productFromDataBase["description_english"];
-        $singleProductItem["description_ukraine"] = $productFromDataBase["description_ukraine"];
-        $singleProductItem["description_russian"] = $productFromDataBase["description_russian"];
+        $singleProductItem["description"] = stripslashes($productFromDataBase["description_{$currentLanguage}"]);
         $singleProductItem["price"] = $currencyModelObject->getPriceInCurrentCurrency($productFromDataBase["price"]);
         $singleProductItem["main_image"] = $productFromDataBase["main_image"];
         $singleProductItem["other_images"] = json_decode($productFromDataBase["other_images"]);
@@ -123,6 +120,10 @@ class Product extends Model
 
         $queryResult = $this->dataBase->query("SELECT `category_english` FROM `categories` WHERE `id` = {$category_id}");
         $category_title = $queryResult->fetch()["category_english"];
+
+        $category_title = trim($category_title);
+        $category_title = strtolower($category_title);
+        $category_title = str_replace(" ", "_", $category_title);
 
         return $category_title;
     }

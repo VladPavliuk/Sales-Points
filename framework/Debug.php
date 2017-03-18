@@ -18,4 +18,21 @@ class Debug
         $errorMessage = DEBUG_MODE ? $errorMessage : "Невідома помилка";
         exit($errorMessage);
     }
+
+    /**
+     * View array in readable form.
+     *
+     * @param $arrayToView
+     * @param $stopAfterArrayRender
+     */
+    public static function viewArray($arrayToView, $stopAfterArrayRender = false)
+    {
+        echo '<pre>';
+        print_r($arrayToView);
+        echo '</pre>';
+
+        if($stopAfterArrayRender) {
+            exit();
+        }
+    }
 }
