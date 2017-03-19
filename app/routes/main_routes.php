@@ -14,6 +14,7 @@ return [
     'GET:product/([0-9]+)' => 'product/viewSingleProduct/$1:category,product,cart,currency',
 
     'GET:new' => 'product/viewLastAddedProducts:category,product,cart,currency',
+    'GET:load-more-new-products/([0-9]+)/([0-9]+)' => 'product/loadMoreNewProducts/$1/$2:category,product,cart,currency',
 
     //> Cart interact
     'GET:add-to-cart/([0-9]+)' => 'cart/addToCart/$1:category,product,cart',

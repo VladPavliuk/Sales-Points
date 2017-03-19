@@ -22,4 +22,12 @@ class ProductController extends Controller
         $this->smarty->display("contents/newProductsPage.tpl");
     }
 
+    public function loadMoreNewProductsAction($productsAmount, $minProductsId)
+    {
+        $productModelObject  = new Product();
+        $productsList = $productModelObject->getMoreNewProducts($productsAmount, $minProductsId);
+
+        echo json_encode($productsList);
+    }
+
 }

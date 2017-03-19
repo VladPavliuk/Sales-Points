@@ -106,6 +106,51 @@ class Product extends Model
         return $lastProductsList;
     }
 
+    public function getMoreNewProducts($productsAmount, $minProductsId)
+    {
+        $productsAmount = $productsAmount > 10 ? 10 : $productsAmount;
+
+        $sqlQuery = " SELECT * FROM `products` 
+                              WHERE `id`<{$minProductsId} 
+                              ORDER BY `id` DESC LIMIT {$productsAmount}";
+
+        $sqlResult = $this->dataBase->query($sqlQuery);
+
+        $currencyModelObject = new Currency();
+        $moreNewProductsList = [];
+        $i = 0;
+
+        while($tableRow = $sqlResult->fetch()) {
+
+            $moreNewProductsList[$i]["id"] = $tableRow["id"];
+            $moreNewProductsList[$i]["category_id"] = $tableRow["category_id"];
+            $moreNewProductsList[$i]["product_title"] = $tableRow["product_title"];
+            $moreNewProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
+            $moreNewProductsList[$i]["main_image"] = $tableRow["main_image"];
+            $moreNewProductsList[$i]["status"] = $tableRow["status"];
+            $moreNewProductsList[$i]["upload_time"] = $tableRow["upload_time"];
+            $moreNewProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
+
+            $i++;
+        }
+
+        return $moreNewProductsList;
+    }
+
+    /**
+     * Sort list of products by added time.
+     * Last added products on top of return list.
+     *
+     * @param $productsList
+     * @return mixed
+     */
+    public function sortProductsListByTime(&$productsList)
+    {
+        arsort($productsList);
+
+        return $productsList;
+    }
+
     /**
      * Return title of category which refers the id of product.
      *
@@ -125,20 +170,6 @@ class Product extends Model
         $category_title = str_replace(" ", "_", $category_title);
 
         return $category_title;
-    }
-
-    /**
-     * Sort list of products by added time.
-     * Last added products on top of return list.
-     *
-     * @param $productsList
-     * @return mixed
-     */
-    public function sortProductsListByTime(&$productsList)
-    {
-        arsort($productsList);
-
-        return $productsList;
     }
 
 }
