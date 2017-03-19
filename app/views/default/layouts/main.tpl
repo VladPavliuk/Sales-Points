@@ -71,8 +71,8 @@
 <script src="/src/scripts/app.js"></script>
 <script src="/src/scripts/cart.js"></script>
 
-<script src="src/scripts/show-menu.js"></script>
-<script src="src/scripts/owl.carousel.min.js"></script>
-<script src="src/scripts/js.js"></script>
+<script src="/src/scripts/show-menu.js"></script>
+<script src="/src/scripts/owl.carousel.min.js"></script>
+<script src="/src/scripts/js.js"></script>
 </body>
 </html>
