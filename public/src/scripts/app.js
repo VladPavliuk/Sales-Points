@@ -18,7 +18,7 @@ function addToCart(productId) {
 
 function loadMoreNewProducts() {
 
-    var productsNumber = 3;
+    var productsNumber = 4;
 
     var minId = $(".product")[0].id;
 
@@ -31,7 +31,7 @@ function loadMoreNewProducts() {
 
         var newProductsList = JSON.parse(response);
 
-        alert(JSON.stringify(newProductsList, null, 4));
+        //alert(JSON.stringify(newProductsList, null, 4));
 
         newProductsList.forEach(function (productItem) {
 

@@ -10,7 +10,7 @@
         {foreach from=$cart key=idInCart item=cartItem}
             <tr>
                 <td>{$id}</td>
-                <td>{$cartItem["title"]}</td>
+                <td>{$cartItem["product_title"]}</td>
                 <td>{$cartItem["price"]}</td>
             </tr>
             {$id = $id + 1}
