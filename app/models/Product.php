@@ -106,6 +106,35 @@ class Product extends Model
         return $lastProductsList;
     }
 
+    public function getRandomProductsList($amountOfRandomProducts = 9)
+    {
+        $amountOfRandomProducts = $amountOfRandomProducts > 9 ? 9 : $amountOfRandomProducts;
+
+        $queryResult = $this->dataBase->query("SELECT * FROM `products` ORDER BY RAND() DESC LIMIT {$amountOfRandomProducts}");
+        $currentLanguage = $_SESSION["language"];
+
+        $currencyModelObject = new Currency();
+        $randomProductsList = [];
+        $i = 1;
+        while($tableRow = $queryResult->fetch()) {
+
+            $randomProductsList[$i]["id"] = $tableRow["id"];
+            $randomProductsList[$i]["category_id"] = $tableRow["category_id"];
+            $randomProductsList[$i]["product_title"] = $tableRow["product_title"];
+            $randomProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
+            $randomProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
+            $randomProductsList[$i]["main_image"] = $tableRow["main_image"];
+            $randomProductsList[$i]["other_images"] = json_decode($tableRow["other_images"]);
+            $randomProductsList[$i]["status"] = $tableRow["status"];
+            $randomProductsList[$i]["upload_time"] = $tableRow["upload_time"];
+            $randomProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
+
+            $i++;
+        }
+
+        return $randomProductsList;
+    }
+
     public function getMoreNewProducts($productsAmount, $minProductsId)
     {
         $productsAmount = $productsAmount > 10 ? 10 : $productsAmount;
