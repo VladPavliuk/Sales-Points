@@ -23,9 +23,14 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous">
 
+    <link href="/src/styles/owl.carousel.min.css" rel="stylesheet">
+    <link href="/src/styles/owl.theme.default.css" rel="stylesheet" >
+
+
     <!-- CUSTOM STYLES -->
     <link href="/src/styles/main.css" rel="stylesheet">
     <link href="/src/styles/media.css" rel="stylesheet">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -65,5 +70,9 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="/src/scripts/app.js"></script>
 <script src="/src/scripts/cart.js"></script>
+
+<script src="src/scripts/show-menu.js"></script>
+<script src="src/scripts/owl.carousel.min.js"></script>
+<script src="src/scripts/js.js"></script>
 </body>
 </html>

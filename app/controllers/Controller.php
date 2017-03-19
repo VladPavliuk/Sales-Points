@@ -25,8 +25,12 @@ class Controller
     {
         $cartModelObject = new Cart();
         $categoryModelObject = new Category();
+        $productModelObject = new Product();
+
+        $randomProductsList = $productModelObject->getRandomProductsList(9);
 
         $this->smarty->assign('parentCategoriesList', $categoryModelObject->getCategoriesTree(0));
+        $this->smarty->assign('randomProductsList', $randomProductsList);
 
         $this->smarty->assign('totalPrice', $cartModelObject->getTotalPrice());
         $this->smarty->assign('totalAmount', $cartModelObject->getTotalAmount());
