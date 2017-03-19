@@ -89,17 +89,19 @@ class Admin extends Model
     public function addNewProduct()
     {
         $otherImages = json_encode($this->newProductPriceOtherImages);
+
         $newProductProductTitle = addslashes($this->newProductProductTitle);
-        $newProductDescriptionOnEnglish = addslashes($this->newProductDescriptionOnEnglish);
-        $newProductDescriptionOnUkrainian = addslashes($this->newProductDescriptionOnUkrainian);
-        $ewProductDescriptionOnRussian = addslashes($this->newProductDescriptionOnRussian);
+        $newProductProductMainImage = addslashes($this->newProductPriceMainImage);
+        $newProductDescriptionOnEnglish = $this->newProductDescriptionOnEnglish;
+        $newProductDescriptionOnUkrainian = $this->newProductDescriptionOnUkrainian;
+        $ewProductDescriptionOnRussian = $this->newProductDescriptionOnRussian;
 
         $sqlQuery = ("INSERT INTO `products` 
                         (
                         `category_id`, 
                         `product_title`, 
                         `description_english`, 
-                        `description_ukraine`, 
+                        `description_ukrainian`, 
                         `description_russian`, 
                         `main_image`, 
                         `other_images`, 
@@ -112,14 +114,13 @@ class Admin extends Model
                         '$newProductDescriptionOnEnglish', 
                         '$newProductDescriptionOnUkrainian', 
                         '$ewProductDescriptionOnRussian', 
-                        '$this->newProductPriceMainImage', 
+                        '$newProductProductMainImage', 
                         '$otherImages', 
                         $this->newProductPrice
                         )");
-
+        //Debug::viewArray($sqlQuery, true);
         $queryResult = $this->dataBase->query($sqlQuery);
 
-        Debug::viewArray($sqlQuery);
         if ($queryResult) {
             return true;
         } else {
@@ -142,12 +143,14 @@ class Admin extends Model
             $imageSize = $otherImage["size"];
 
             $imageFileType = pathinfo($loadedFileName, PATHINFO_EXTENSION);
+
             $saveImageAsPath = $dirWhereProductImagesAreLocated . $this->newProductProductTitle . "_$i." . $imageFileType;
 
             $this->checkIfDirectoryExists($dirWhereProductImagesAreLocated);
             $this->saveImageInDirectory($tmpImage, $imageSize, $imageFileType, $saveImageAsPath);
 
             $this->newProductPriceOtherImages[] = $this->newProductProductTitle . "_$i." . $imageFileType;
+
             $i++;
         }
 
@@ -164,6 +167,7 @@ class Admin extends Model
         $imageSize = $imageNameFromClient["size"];
 
         $imageFileType = pathinfo($loadedFileName, PATHINFO_EXTENSION);
+
         $saveImageAsPath = $dirWhereProductImagesAreLocated . $this->newProductProductTitle . '.' . $imageFileType;
 
         $this->checkIfDirectoryExists($dirWhereProductImagesAreLocated);

@@ -6,7 +6,12 @@ class Currency extends Model
     {
         $currentCurrency = $_SESSION["currency"];
 
-        $productPrice = $this->convertCurrency($priceInDollars, "USD", $currentCurrency);
+        if ($_SESSION["currency"] != "USD") {
+            $productPrice = $this->convertCurrency($priceInDollars, "USD", $currentCurrency);
+        } else {
+            $productPrice = $priceInDollars;
+        }
+
         $renderCurrencySign = $this->getCurrencySign($_SESSION["currency"]);
 
         if ($renderCurrencySign == "$" || $renderCurrencySign == "€") {

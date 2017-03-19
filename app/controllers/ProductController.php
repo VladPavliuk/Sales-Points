@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function viewLastAddedProductsAction()
     {
         $productModelObject = new Product();
-        $lastAddedProducts = $productModelObject->getLastAddedProducts(12);
+        $lastAddedProducts = $productModelObject->getLastAddedProducts(1);
 
         $this->smarty->assign('lastAddedProducts', $lastAddedProducts);
 

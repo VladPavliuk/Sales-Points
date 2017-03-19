@@ -9,6 +9,8 @@ class CategoryController extends Controller
         $productModelObject = new Product();
 
         $listOfSubcategoriesId = $categoryModelObject->getSubCategoriesIdOfParentCategory($categoryId);
+        $listOfSubcategoriesId[] = $categoryId;
+
         $categoryProductsList = $productModelObject->getCategoryAndSubCategoriesProducts($listOfSubcategoriesId, $limitOfProducts);
 
         $this->smarty->assign("categoryProductsList", $categoryProductsList);

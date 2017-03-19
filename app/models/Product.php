@@ -14,6 +14,8 @@ class Product extends Model
         $limitOfProducts = $limitOfProducts > 20 ? 20 : $limitOfProducts;
 
         $categoryProductsList = [];
+        $currentLanguage = $_SESSION["language"];
+
         $currencyModelObject = new Currency();
         $i = 0;
 
@@ -26,9 +28,7 @@ class Product extends Model
                 $categoryProductsList[$i]["id"] = $tableRow["id"];
                 $categoryProductsList[$i]["category_id"] = $tableRow["category_id"];
                 $categoryProductsList[$i]["product_title"] = $tableRow["product_title"];
-                $categoryProductsList[$i]["description_english"] = $tableRow["description_english"];
-                $categoryProductsList[$i]["description_ukraine"] = $tableRow["description_ukraine"];
-                $categoryProductsList[$i]["description_russian"] = $tableRow["description_russian"];
+                $lastProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
                 $categoryProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
                 $categoryProductsList[$i]["main_image"] = $tableRow["main_image"];
                 $categoryProductsList[$i]["status"] = $tableRow["status"];
@@ -59,10 +59,10 @@ class Product extends Model
 
         $singleProductItem["id"] = $productFromDataBase["id"];
         $singleProductItem["category_id"] = $productFromDataBase["category_id"];
-        $singleProductItem["product_title"] = $productFromDataBase["product_title"];
+        $singleProductItem["product_title"] = stripslashes($productFromDataBase["product_title"]);
         $singleProductItem["description"] = stripslashes($productFromDataBase["description_{$currentLanguage}"]);
         $singleProductItem["price"] = $currencyModelObject->getPriceInCurrentCurrency($productFromDataBase["price"]);
-        $singleProductItem["main_image"] = $productFromDataBase["main_image"];
+        $singleProductItem["main_image"] = stripslashes($productFromDataBase["main_image"]);
         $singleProductItem["other_images"] = json_decode($productFromDataBase["other_images"]);
         $singleProductItem["status"] = $productFromDataBase["status"];
         $singleProductItem["upload_time"] = $productFromDataBase["upload_time"];
@@ -82,6 +82,7 @@ class Product extends Model
         $limitOfProducts = $limitOfProducts > 20 ? 20 : $limitOfProducts;
 
         $queryResult = $this->dataBase->query("SELECT * FROM `products` ORDER BY `id` DESC LIMIT {$limitOfProducts}");
+        $currentLanguage = $_SESSION["language"];
 
         $currencyModelObject = new Currency();
         $lastProductsList = [];
@@ -91,9 +92,7 @@ class Product extends Model
             $lastProductsList[$i]["id"] = $tableRow["id"];
             $lastProductsList[$i]["category_id"] = $tableRow["category_id"];
             $lastProductsList[$i]["product_title"] = $tableRow["product_title"];
-            $lastProductsList[$i]["description_english"] = $tableRow["description_english"];
-            $lastProductsList[$i]["description_ukraine"] = $tableRow["description_ukraine"];
-            $lastProductsList[$i]["description_russian"] = $tableRow["description_russian"];
+            $lastProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
             $lastProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
             $lastProductsList[$i]["main_image"] = $tableRow["main_image"];
             $lastProductsList[$i]["other_images"] = json_decode($tableRow["other_images"]);

@@ -78,13 +78,16 @@ class AdminController extends Controller
         $adminModelObject = new Admin();
         $categoryModelObject = new Category();
         $newProductCategory = $categoryModelObject->getSingleCategoryTitleById($_POST["category_id"]);
+        $newProductProductTitle = str_replace("'", " ", $_POST["product_title"]);
+        $newProductProductTitle = str_replace("\"", " ", $newProductProductTitle);
+        $newProductProductTitle = trim($newProductProductTitle);
 
-        $adminModelObject->newProductProductTitle = $_POST["product_title"];
+        $adminModelObject->newProductProductTitle = $newProductProductTitle;
         $adminModelObject->newProductCategoryId = $_POST["category_id"];
         $adminModelObject->newProductCategoryTitle = $newProductCategory;
-        $adminModelObject->newProductDescriptionOnEnglish = $_POST["description_english"];
-        $adminModelObject->newProductDescriptionOnUkrainian = $_POST["description_ukrainian"];
-        $adminModelObject->newProductDescriptionOnRussian = $_POST["description_russian"];
+        $adminModelObject->newProductDescriptionOnEnglish = addslashes($_POST["description_english"]);
+        $adminModelObject->newProductDescriptionOnUkrainian = addslashes($_POST["description_ukrainian"]);
+        $adminModelObject->newProductDescriptionOnRussian = addslashes($_POST["description_russian"]);
         $adminModelObject->newProductPrice = $_POST["price"];
 
         $adminModelObject->createMainImageInImagesFolder($_FILES["main_image"]);
