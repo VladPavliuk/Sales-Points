@@ -3,46 +3,6 @@
 class Product extends Model
 {
     /**
-     * Return list of product of selected category and all subcategories.
-     *
-     * @param $subCategoriesList
-     * @param $limitOfProducts
-     * @return array
-     */
-    public function getCategoryAndSubCategoriesProducts($subCategoriesList, $limitOfProducts = 20)
-    {
-        $limitOfProducts = $limitOfProducts > 20 ? 20 : $limitOfProducts;
-
-        $categoryProductsList = [];
-        $currentLanguage = $_SESSION["language"];
-
-        $currencyModelObject = new Currency();
-        $i = 0;
-
-        foreach($subCategoriesList as $subCategoryId) {
-            $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$subCategoryId} ORDER BY `upload_time` DESC LIMIT {$limitOfProducts}";
-            $queryResult = $this->dataBase->query($sqlQuery);
-
-            while($tableRow = $queryResult->fetch()) {
-
-                $categoryProductsList[$i]["id"] = $tableRow["id"];
-                $categoryProductsList[$i]["category_id"] = $tableRow["category_id"];
-                $categoryProductsList[$i]["product_title"] = $tableRow["product_title"];
-                $lastProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
-                $categoryProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
-                $categoryProductsList[$i]["main_image"] = $tableRow["main_image"];
-                $categoryProductsList[$i]["status"] = $tableRow["status"];
-                $categoryProductsList[$i]["upload_time"] = $tableRow["upload_time"];
-                $categoryProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
-
-                $i++;
-            }
-        }
-
-       return $categoryProductsList;
-    }
-
-    /**
      * Return one product from data base.
      * Require Id of one product in data base table.
      *
@@ -72,6 +32,46 @@ class Product extends Model
     }
 
     /**
+     * Return list of product of selected category and all subcategories.
+     *
+     * @param $subCategoriesList
+     * @param $limitOfProducts
+     * @return array
+     */
+    public function getCategoryAndSubCategoriesProducts($subCategoriesList, $limitOfProducts = 20)
+    {
+        $limitOfProducts = $limitOfProducts > 20 ? 20 : $limitOfProducts;
+
+        $categoryProductsList = [];
+        $currentLanguage = $_SESSION["language"];
+
+        $currencyModelObject = new Currency();
+        $i = 0;
+
+        foreach ($subCategoriesList as $subCategoryId) {
+            $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$subCategoryId} ORDER BY `upload_time` DESC LIMIT {$limitOfProducts}";
+            $queryResult = $this->dataBase->query($sqlQuery);
+
+            while ($tableRow = $queryResult->fetch()) {
+
+                $categoryProductsList[$i]["id"] = $tableRow["id"];
+                $categoryProductsList[$i]["category_id"] = $tableRow["category_id"];
+                $categoryProductsList[$i]["product_title"] = $tableRow["product_title"];
+                $lastProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
+                $categoryProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
+                $categoryProductsList[$i]["main_image"] = $tableRow["main_image"];
+                $categoryProductsList[$i]["status"] = $tableRow["status"];
+                $categoryProductsList[$i]["upload_time"] = $tableRow["upload_time"];
+                $categoryProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
+
+                $i++;
+            }
+        }
+
+        return $categoryProductsList;
+    }
+
+    /**
      * Return list of last add products in data base table.
      *
      * @param int $limitOfProducts
@@ -87,7 +87,7 @@ class Product extends Model
         $currencyModelObject = new Currency();
         $lastProductsList = [];
         $i = 1;
-        while($tableRow = $queryResult->fetch()) {
+        while ($tableRow = $queryResult->fetch()) {
 
             $lastProductsList[$i]["id"] = $tableRow["id"];
             $lastProductsList[$i]["category_id"] = $tableRow["category_id"];
@@ -116,7 +116,7 @@ class Product extends Model
         $currencyModelObject = new Currency();
         $randomProductsList = [];
         $i = 1;
-        while($tableRow = $queryResult->fetch()) {
+        while ($tableRow = $queryResult->fetch()) {
 
             $randomProductsList[$i]["id"] = $tableRow["id"];
             $randomProductsList[$i]["category_id"] = $tableRow["category_id"];
@@ -137,6 +137,8 @@ class Product extends Model
 
     public function getMoreNewProducts($productsAmount, $minProductsId)
     {
+        if ($minProductsId == $this->getOldestProduct()) return [];
+        //Debug::viewArray($minProductsId);
         $productsAmount = $productsAmount > 10 ? 10 : $productsAmount;
 
         $sqlQuery = " SELECT * FROM `products` 
@@ -149,7 +151,7 @@ class Product extends Model
         $moreNewProductsList = [];
         $i = 0;
 
-        while($tableRow = $sqlResult->fetch()) {
+        while ($tableRow = $sqlResult->fetch()) {
 
             $moreNewProductsList[$i]["id"] = $tableRow["id"];
             $moreNewProductsList[$i]["category_id"] = $tableRow["category_id"];
@@ -186,7 +188,7 @@ class Product extends Model
      * @param $productId
      * @return string
      */
-    private function getParentCategoryTitleOfSingleProduct($productId)
+    public function getParentCategoryTitleOfSingleProduct($productId)
     {
         $queryResult = $this->dataBase->query("SELECT `category_id` FROM `products` WHERE `id` = {$productId}");
         $category_id = $queryResult->fetch()["category_id"];
@@ -199,6 +201,16 @@ class Product extends Model
         $category_title = str_replace(" ", "_", $category_title);
 
         return $category_title;
+    }
+
+    private function getOldestProduct()
+    {
+
+        $sqlQuery = "SELECT MIN(id) from `products`";
+
+        $sqlResult = $this->dataBase->query($sqlQuery);
+
+        return $sqlResult->fetch()["MIN(id)"];
     }
 
 }

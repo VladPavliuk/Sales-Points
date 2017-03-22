@@ -17,7 +17,9 @@ class Admin extends Model
     public $newProductPriceMainImage = "";
     public $newProductPriceOtherImages = [];
 
-    public function addNewCategoryToDataBase()
+    public $productStatus = 0;
+
+    public function addNewCategory()
     {
         $categoryParentCategoryId = intval($this->categoryParentCategoryId);
         $categoryTitleOnEnglish = strip_tags($this->categoryTitleOnEnglish);
@@ -70,6 +72,33 @@ class Admin extends Model
         }
     }
 
+    public function deleteCategory($categoryId)
+    {
+        $categoryModelObject = new Category();
+        $productModelObject = new Product();
+
+        $subCategoriesIdListToDelete = $categoryModelObject->getSubCategoriesIdOfParentCategory($categoryId);
+        $subCategoriesIdListToDelete[] = $categoryId;
+
+        $productsListToDelete = $productModelObject->getCategoryAndSubCategoriesProducts($subCategoriesIdListToDelete);
+
+        foreach ($subCategoriesIdListToDelete as $categoryIdoDelete) {
+
+            $sqlQuery = "DELETE FROM `categories` WHERE id = {$categoryIdoDelete}";
+
+            $this->dataBase->query($sqlQuery);
+        }
+
+        foreach ($productsListToDelete as $productToDelete) {
+            $productToDeleteId = $productToDelete["id"];
+
+            $this->deleteProduct($productToDeleteId);
+
+        }
+
+        return true;
+    }
+
     public function getCategoryForEditor($categoryId)
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE id = {$categoryId}");
@@ -88,7 +117,7 @@ class Admin extends Model
 
     public function addNewProduct()
     {
-        $otherImages = json_encode($this->newProductPriceOtherImages);
+        $otherImages = json_encode($this->newProductPriceOtherImages, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
 
         $newProductProductTitle = addslashes($this->newProductProductTitle);
         $newProductProductMainImage = addslashes($this->newProductPriceMainImage);
@@ -126,6 +155,63 @@ class Admin extends Model
         } else {
             return false;
         }
+    }
+
+    public function updateProduct($productId)
+    {
+        $sqlQueryString = "UPDATE `products` SET 
+                                `product_title` = '$this->newProductProductTitle', 
+                                `description_english` = '$this->newProductDescriptionOnEnglish', 
+                                `description_ukrainian` = '$this->newProductDescriptionOnUkrainian', 
+                                `description_russian` = '$this->newProductDescriptionOnRussian', 
+                                `price` = '$this->newProductPrice',
+                                `status`= '$this->productStatus'
+                                WHERE `id` = {$productId}";
+
+        $queryResult = $this->dataBase->query($sqlQueryString);
+
+        if ($queryResult) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteProduct($productToDeleteId)
+    {
+        $sqlQuery = "DELETE FROM `products` WHERE id = {$productToDeleteId}";
+
+        $this->dataBase->query($sqlQuery);
+    }
+
+    /**
+     * Return one product from data base.
+     * Require Id of one product in data base table.
+     *
+     * @param $productId
+     * @return array
+     */
+    public function getProductForEditing($productId)
+    {
+        $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE id = {$productId}");
+        $productFromDataBase = $queryResult->fetch();
+
+        $productModelObject = new Product();
+
+        $singleProductItem["id"] = $productFromDataBase["id"];
+        $singleProductItem["category_id"] = $productFromDataBase["category_id"];
+        $singleProductItem["product_title"] = stripslashes($productFromDataBase["product_title"]);
+        $singleProductItem["description_english"] = stripslashes($productFromDataBase["description_english"]);
+        $singleProductItem["description_ukrainian"] = stripslashes($productFromDataBase["description_ukrainian"]);
+        $singleProductItem["description_russian"] = stripslashes($productFromDataBase["description_russian"]);
+        $singleProductItem["price"] = $productFromDataBase["price"];
+        $singleProductItem["main_image"] = stripslashes($productFromDataBase["main_image"]);
+        $singleProductItem["other_images"] = json_decode($productFromDataBase["other_images"]);
+        $singleProductItem["status"] = $productFromDataBase["status"];
+        $singleProductItem["upload_time"] = $productFromDataBase["upload_time"];
+        $singleProductItem["category"] = $productModelObject->getParentCategoryTitleOfSingleProduct($singleProductItem["id"]);
+
+        return $singleProductItem;
     }
 
     public function createOtherImageInImagesFolder($listOfOtherImages)

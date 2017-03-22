@@ -29,23 +29,24 @@ return [
 
     'GET:admin/editor/category/select' => 'admin/viewCategoryEditorSelectPage:category,product,cart,currency,admin',
 
-    'GET:admin/editor/category/([0-9]+)' => 'admin/viewCategoryEditorEditPage/$1:category,product,cart,currency,admin',
+    'POST:admin/editor/category' => 'admin/viewCategoryEditorEditPage:category,product,cart,currency,admin',
 
     'POST:admin/category/add' => 'admin/addCategory:category,product,cart,currency,admin',
-    'POST:admin/category/edit/([0-9]+)' => 'admin/editCategory/$1:category,product,cart,currency,admin',
-    'POST:admin/category/delete/([0-9]+)' => 'admin/removeCategory/$1:category,product,cart,currency,admin',
+    'POST:admin/category/edit' => 'admin/editCategory:category,product,cart,currency,admin',
+    'GET:admin/category/delete/([0-9]+)' => 'admin/deleteCategory/$1:category,product,cart,currency,admin',
     //<
 
     //> Product editor
     'GET:admin/editor/product/add' => 'admin/viewProductAddPage:category,product,cart,currency,admin',
 
     'GET:admin/editor/product/select' => 'admin/viewProductEditorSelectPage:category,product,cart,currency,admin',
+    'GET:admin/get-products-from-category/([0-9]+)' => 'admin/getProductsFromCategory/$1:category,product,cart,currency,admin',
 
-    'GET:admin/editor/product/([0-9]+)' => 'admin/viewProductEditorEditPage:category,product,cart,currency,admin',
+    'GET:admin/editor/product/([0-9]+)' => 'admin/viewProductEditorEditPage/$1:category,product,cart,currency,admin',
 
     'POST:admin/product/add' => 'admin/addProduct:category,product,cart,currency,admin',
-    'POST:admin/product/edit/([0-9]+)' => 'admin/editProduct:category,product,cart,currency,admin',
-    'POST:admin/product/delete/([0-9]+)' => 'admin/deleteProduct:category,product,cart,currency,admin',
+    'POST:admin/product/edit' => 'admin/editProduct:category,product,cart,currency,admin',
+    'GET:admin/product/delete/([0-9]+)' => 'admin/deleteProduct:category,product,cart,currency,admin',
     //<
 
     //<

@@ -1,6 +1,7 @@
 {extends file='../layouts/main.tpl'}
 
 {block name="content"}
+    <a href="/admin" class="btn btn-default btn-sm">Beck to main admin page</a>
     <h3>Add new Category</h3>
     <form action="/admin/category/add" method="POST" enctype="multipart/form-data">
 

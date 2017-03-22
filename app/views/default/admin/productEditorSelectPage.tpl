@@ -2,11 +2,11 @@
 
 {block name="content"}
     <a href="/admin" class="btn btn-default btn-sm">Beck to main admin page</a>
-    <h3>Select category to edit</h3>
-    <form action="/admin/editor/category" method="POST">
+    <h3>Select category to find product</h3>
         <div class="input-group">
             <label for="category_id">Categories list</label>
-            <select class="form-control" name="category_id" id="category_id">
+            <select onchange="loadProductsFromCategory(this.value)" class="form-control" name="category_id" id="category_id">
+                <option value="none">Виберіть категорію</option>
                 {foreach $parentCategoriesList as $parentCategory}
                     <option value="{$parentCategory["id"]}">{$parentCategory["category_$renderLanguage"]}</option>
                     {if isset($parentCategory["children_categories"])}
@@ -23,6 +23,10 @@
             </select>
         </div>
         <br>
-        <input type="submit" value="Edit Category" class="btn btn-primary">
-    </form>
+
+    <div class="row product-wrap">
+        <div class="products-list">
+
+        </div>
+    </div>
 {/block}

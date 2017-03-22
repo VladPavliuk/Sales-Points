@@ -8,7 +8,7 @@
         </div>
         <div class="products-list">
             {foreach $lastAddedProducts as $product}
-                <div id="{$product["id"]}" class="product col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                <div id="{$product["id"]}" class="product-in-content product col-lg-3 col-md-4 col-sm-6 col-xs-6">
                     <div class="prod-img">
                         <a href="product/{$product["id"]}">
                             <img src="/src/images/products/{$product["category"]}/{$product["main_image"]}"
@@ -25,7 +25,7 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn-view-more">
             <button onclick="loadMoreNewProducts();"
-                    class="btn btn-info pull-right">{#text_view_more_products#}</button>
+                    class="button-load-more btn btn-info pull-right">{#text_view_more_products#}</button>
         </div>
     </div>
     <!-- END OF LIST -->

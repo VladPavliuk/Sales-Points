@@ -20,16 +20,20 @@ function loadMoreNewProducts() {
 
     var productsNumber = 4;
 
-    var minId = $(".product")[0].id;
+    var minId = $(".product-in-content")[0].id;
 
-    $(".product").each(function () {
+    $(".product-in-content").each(function () {
         minId = Math.min(this.id, minId);
     });
 
-    var uri = 'load-more-new-products/' + productsNumber + '/' + minId;
+    var uri = '/load-more-new-products/' + productsNumber + '/' + minId;
     $.get(uri, function (response) {
 
         var newProductsList = JSON.parse(response);
+
+        if(newProductsList.length <1) {
+            $(".button-load-more").hide();
+        }
 
         //alert(JSON.stringify(newProductsList, null, 4));
 
@@ -53,19 +57,42 @@ function formMessageHtml(item) {
     var productItemCategory = item["category"];
 
     var textBody =
-        '<div id="' + productItemId + '" class="product col-lg-3 col-md-4 col-sm-6 col-xs-6">' +
+        '<div id="' + productItemId + '" class="product-in-content product col-lg-3 col-md-4 col-sm-6 col-xs-6">' +
         '<div class="prod-img">' +
-        '<a href="product/' + productItemId + '">' +
+        '<a href="/admin/editor/product/' + productItemId + '">' +
         '<img src="/src/images/products/' + productItemCategory + '/' + productItemImage + '"' +
         'alt="' + productItemTitle + '"' +
         'title="' + productItemTitle + '">' +
         '</a>' +
         '</div>' +
         '<div class="prod-footer">' +
-        '<h5><a href="product/' + productItemId + '"">' + productItemTitle + '</a></h5>' +
+        '<h5><a href="/admin/editor/product/' + productItemId + '"">' + productItemTitle + '</a></h5>' +
         '</div>' +
         '<span class="price">' + productItemPrice + '</span>' +
         '</div>';
 
     return textBody;
+}
+
+function loadProductsFromCategory(categoryId)
+{
+    $(".products-list").empty();
+
+    var uri = '/admin/get-products-from-category/' + categoryId;
+    $.get(uri, function (response) {
+
+        var newProductsList = JSON.parse(response);
+
+        //alert(JSON.stringify(newProductsList, null, 4));
+
+        /*if(newProductsList.length <1) {
+            $(".button-load-more").hide();
+        }*/
+
+        newProductsList.forEach(function (productItem) {
+
+            var textBody = formMessageHtml(productItem);
+            $(".products-list").append(textBody);
+        });
+    });
 }
