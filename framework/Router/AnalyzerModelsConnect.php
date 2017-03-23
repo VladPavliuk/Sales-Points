@@ -4,7 +4,7 @@
  * Trait AnalyzerModelsConnect
  *
  * Require array of models file name
- * Include all models from array
+ * Include all models from models folder
  * Connect to database
  *
  */
@@ -22,22 +22,16 @@ trait AnalyzerModelsConnect
     private $DataBaseFileError = "Файлу із доступом до бази даних не знайдено";
     //<
 
-    public function defineModels($modelsArray)
+    public function defineModels()
     {
-        if (isset($modelsArray)) {
-            $modelsArray = explode(',', $modelsArray);
+        // Include parent model.
+        $this->includeCoreModelFile();
 
-            // include parent model
-            $this->includeCoreModelFile();
+        // Include all models.
+        $this->includeModelsFile($this->modelsFolderPath);
 
-            foreach ($modelsArray as $model) {
-                $model = ucfirst($model) . ".php";
-                $modelFile = $this->modelsFolderPath . $model;
-                $this->includeModelFile($modelFile);
-            }
-
-            $this->includeDataBaseFile($this->dataBaseFile);
-        }
+        // Include class which connects to data base.
+        $this->includeDataBaseFile($this->dataBaseFile);
     }
 
     /**
@@ -52,7 +46,7 @@ trait AnalyzerModelsConnect
 
         if (file_exists($coreModelFile)) {
 
-            require_once($coreModelFile);
+            include($coreModelFile);
         } else {
             // Some went wrong!
             Router::showErrorPage($this->coreModelFileError);
@@ -60,22 +54,23 @@ trait AnalyzerModelsConnect
     }
 
     /**
-     * Check and include single file with model class
+     * Include all files from models folder.
      *
-     * @param $modelFile
+     * @param $modelsFolderPath
      */
-    private function includeModelFile($modelFile)
+    private function includeModelsFile($modelsFolderPath)
     {
-        if (file_exists($modelFile)) {
-            require_once($modelFile);
-        } else {
-            // Some went wrong!
-            Router::showErrorPage($this->modelFileError);
+        foreach (glob("{$modelsFolderPath}*.php") as $modelFileName) {
+            if ($modelFileName == "{$modelsFolderPath}Model.php") {
+                continue;
+            }
+
+            include($modelFileName);
         }
     }
 
     /**
-     * Include file where you can define connection to data base
+     * Include file where defines connection to data base.
      *
      * @param $dataBaseFile
      */

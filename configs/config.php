@@ -28,11 +28,13 @@ define('DEBUG_PATH', '../framework/Debug.php');
  */
 define('ROUTER_PATH', '../framework/Router/Router.php');
 
+//> Routes
 /**
- * Path to script witch contains all routes.
+ * Path to folder witch contains all routes.
  *
  */
-define('ROUTES_PATH', '../app/routes/main_routes.php');
+define('ROUTES_FOLDER_PATH', '../app/routes/');
+//<
 
 //> CONTROLLERS CONFIGURATIONS
 /**

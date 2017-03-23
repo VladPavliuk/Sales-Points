@@ -7,19 +7,18 @@
  */
 trait AnalyzerURI
 {
-    // Path to routes array
-    private $routesPath = ROUTES_PATH;
+    // Path to routes array.
+    private $pathToRoutesFolder = ROUTES_FOLDER_PATH;
 
-    //> List of request variables
+    //> List of request variables.
     private $routesArray = [];
     private $requestURI = "/";
     private $requestHttpMethod = "GET";
     //<
 
-    //> List of error messages
+    //> List of error messages.
     private $routesArrayError = "Масиву із роутерами не було знайдено";
     private $routeError = "Роут не знайдено";
-
     //<
 
     /**
@@ -30,7 +29,7 @@ trait AnalyzerURI
     public function getInnerPathArray()
     {
         //> Define parameters for Analyzer
-        $this->getRoutesArray();
+        $this->getRoutes();
         $this->getURI();
         $this->getHttpMethod();
         //<
@@ -64,6 +63,22 @@ trait AnalyzerURI
     }
 
     /**
+     * Get array of routes.
+     *
+     * @return array
+     */
+    private function getRoutes()
+    {
+        foreach (glob("{$this->pathToRoutesFolder}*.php") as $fileWithRoutes) {
+
+            $routesInFile = include($fileWithRoutes);
+            foreach ($routesInFile as $uriRequest => $route) {
+                $this->routesArray[$uriRequest] = $route;
+            }
+        }
+    }
+
+    /**
      * Get string of request URI.
      *
      * @return string
@@ -85,20 +100,5 @@ trait AnalyzerURI
     private function getHttpMethod()
     {
         $this->requestHttpMethod = $_SERVER["REQUEST_METHOD"];
-    }
-
-    /**
-     * Get array of routes.
-     *
-     * @return array
-     */
-    private function getRoutesArray()
-    {
-        if (file_exists($this->routesPath)) {
-            $this->routesArray = include($this->routesPath);
-        } else {
-            // Some went wrong!
-            Router::showErrorPage($this->routesArrayError);
-        }
     }
 }
