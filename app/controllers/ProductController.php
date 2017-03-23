@@ -9,7 +9,7 @@ class ProductController extends Controller
 
         $this->smarty->assign('singleProductItem', $singleProductItem);
 
-        $this->smarty->display("contents/singleProductPage.tpl");
+        $this->smarty->display("shop/singleProductPage.tpl");
     }
 
     public function viewLastAddedProductsAction()
@@ -19,7 +19,7 @@ class ProductController extends Controller
 
         $this->smarty->assign('lastAddedProducts', $lastAddedProducts);
 
-        $this->smarty->display("contents/newProductsPage.tpl");
+        $this->smarty->display("shop/newProductsPage.tpl");
     }
 
     public function loadMoreNewProductsAction($productsAmount, $minProductsId)

@@ -8,7 +8,7 @@ class CartController extends Controller
 
         $this->smarty->assign('cart', $cartModelObject->getCartForRendering());
 
-        $this->smarty->display("contents/cartPage.tpl");
+        $this->smarty->display("shop/cartPage.tpl");
     }
 
     public function viewOrderFormAction()
@@ -19,7 +19,7 @@ class CartController extends Controller
 
             $this->smarty->assign('cart', $cartModelObject->getCartForRendering());
 
-            $this->smarty->display("contents/confirmOrderPage.tpl");
+            $this->smarty->display("shop/confirmOrderPage.tpl");
         } else {
             Debug::showErrorPage("Ваш коши порожній");
         }

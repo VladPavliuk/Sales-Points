@@ -1,19 +1,36 @@
 <?php
 
-class UserController
+class UserController extends Controller
 {
     public function showUserAccountPageAction()
     {
-
+        if (isset($_SESSION["user_token"]))
+        {
+            $this->smarty->display('user/userAccountPage.tpl');
+        } else {
+            $this->smarty->display('user/userSignInPage.tpl');
+        }
     }
 
-
-    public function showSignInPage()
+    public function showSignInPageAction()
     {
 
     }
 
-    public function showSignUpPage()
+    public function signInAction()
+    {
+        $userModelObject = new User();
+
+        $login = isset($_REQUEST["login"]) ? $_REQUEST["login"] : 'null';
+        $login = trim($login);
+
+        $password = isset($_REQUEST["password"]) ? $_REQUEST["password"] : 'null';
+        $password = trim($password);
+
+        $userModelObject->signIn($login, $password);
+    }
+
+    public function showSignUpPageAction()
     {
 
     }

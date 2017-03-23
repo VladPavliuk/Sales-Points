@@ -14,11 +14,11 @@ class MainController extends Controller
 
         $this->smarty->assign('lastAddedProductInCategories', $categoryProductsList);
 
-        $this->smarty->display("contents/homePage.tpl");
+        $this->smarty->display("shop/homePage.tpl");
     }
 
     public function viewContactsAction()
     {
-        $this->smarty->display("contents/contactsPage.tpl");
+        $this->smarty->display("shop/contactsPage.tpl");
     }
 }

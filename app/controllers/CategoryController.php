@@ -15,6 +15,6 @@ class CategoryController extends Controller
 
         $this->smarty->assign("categoryProductsList", $categoryProductsList);
 
-        $this->smarty->display("contents/categoryPage.tpl");
+        $this->smarty->display("shop/categoryPage.tpl");
     }
 }
