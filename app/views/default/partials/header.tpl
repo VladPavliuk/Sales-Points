@@ -68,6 +68,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">{#text_home#} <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/user/account">My Account</a></li>
                     <li><a href="/new">{#text_whats_new#} </a></li>
                     <li><a href="/contacts">{#text_contacts#}</a></li>
                 </ul>

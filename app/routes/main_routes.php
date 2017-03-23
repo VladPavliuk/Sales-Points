@@ -21,6 +21,12 @@ return [
     'GET:cart-delete/([0-9]+)' => 'cart/deleteFromCart/$1:category,product,cart',
     //<
 
+    //> User
+   // 'GET:user/account' => 'user/showUserAccountPage:user',
+    //'GET:' => '',
+   // 'GET:' => '',
+    //<
+
     //> Admin
     'GET:admin' => 'admin/viewAdminPage:category,product,cart,currency,admin',
 

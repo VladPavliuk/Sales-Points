@@ -19,6 +19,11 @@ class Admin extends Model
 
     public $productStatus = 0;
 
+    public function loginUser($login, $password)
+    {
+
+    }
+
     public function addNewCategory()
     {
         $categoryParentCategoryId = intval($this->categoryParentCategoryId);

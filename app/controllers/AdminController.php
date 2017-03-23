@@ -2,6 +2,19 @@
 
 class AdminController extends Controller
 {
+    public function loginAction()
+    {
+        $adminModelObject = new Admin();
+
+        $login = isset($_REQUEST["login"]) ? $_REQUEST["login"] : 'null';
+        $login = trim($login);
+
+        $password = isset($_REQUEST["password"]) ? $_REQUEST["password"] : 'null';
+        $password = trim($password);
+
+        $loginData = $adminModelObject->loginUser($login, $password);
+    }
+
     public function viewAdminPageAction()
     {
         $this->smarty->display("admin/adminPage.tpl");
