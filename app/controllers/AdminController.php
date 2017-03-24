@@ -38,7 +38,7 @@ class AdminController extends Controller
         $changeResult = $this->adminModel->addNewCategory();
 
         if ($changeResult) {
-            header('Location: http://vladdev.com/admin/');
+            Router::redirectTo("admin");
         } else {
             Debug::showErrorPage("Не вдалося додати категорію.");
         }
@@ -55,7 +55,7 @@ class AdminController extends Controller
         $changeResult = $this->adminModel->updateCategory($categoryId);
 
         if ($changeResult) {
-            header('Location: http://vladdev.com/admin/');
+            Router::redirectTo("admin");
         } else {
             Debug::showErrorPage("Не вдалося змінити категорію.");
         }
@@ -66,7 +66,7 @@ class AdminController extends Controller
         $deletingResult = $this->adminModel->deleteCategory($categoryId);
 
         if ($deletingResult) {
-            header('Location: http://vladdev.com/admin/');
+            Router::redirectTo("admin");
         } else {
             Debug::showErrorPage("Не вдалося видалити категорію.");
         }
@@ -127,7 +127,7 @@ class AdminController extends Controller
         $changeResult = $this->adminModel->addNewProduct();
 
         if ($changeResult) {
-            header('Location: http://vladdev.com/admin/');
+            Router::redirectTo("admin");
         } else {
             Debug::showErrorPage("Не вдалося додати товар.");
         }
@@ -151,7 +151,7 @@ class AdminController extends Controller
         $changeResult = $this->adminModel->updateProduct($productId);
 
         if ($changeResult) {
-            header('Location: http://vladdev.com/admin/');
+            Router::redirectTo("admin");
         } else {
             Debug::showErrorPage("Не вдалося змінити товар.");
         }
@@ -162,7 +162,7 @@ class AdminController extends Controller
         $deletingResult = $this->adminModel->deleteProduct($id);
 
         if ($deletingResult) {
-            header('Location: http://vladdev.com/admin/');
+            Router::redirectTo("admin");
         } else {
             Debug::showErrorPage("Не вдалося видалити категорію.");
         }

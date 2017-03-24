@@ -2,12 +2,12 @@
 
 {block name="content"}
     <div class="row">
-        <form action="/user/account" method="POST">
+        <form action="/user/sign-in" method="POST">
 
             <div class="input-group">
-                <label for="user_login">User login</label>
-                <input class="form-control" type="text" value="" id="user_login"
-                       name="user_login" required>
+                <label for="user_nickname">User login</label>
+                <input class="form-control" type="text" value="" id="user_nickname"
+                       name="user_nickname" required>
             </div>
 
             <div class="input-group">

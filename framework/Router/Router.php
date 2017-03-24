@@ -3,6 +3,7 @@
 require_once("AnalyzerURI.php");
 require_once("AnalyzerInnerPath.php");
 require_once("AnalyzerModelsConnect.php");
+require_once("AnalyzerMiddleware.php");
 
 /**
  * Class Router execute running controller and action.
@@ -11,7 +12,20 @@ require_once("AnalyzerModelsConnect.php");
  */
 class Router
 {
-    use AnalyzerURI, AnalyzerInnerPath, AnalyzerModelsConnect;
+    use AnalyzerURI, AnalyzerInnerPath, AnalyzerModelsConnect, AnalyzerMiddleware;
+
+    /**
+     * Redirect to selected route.
+     *
+     * @param $uriToRedirect
+     */
+    public static function redirectTo($uriToRedirect)
+    {
+        $uriToRedirect = trim($uriToRedirect);
+        $host = $_SERVER['HTTP_HOST'];
+
+        header("Location: http://$host/$uriToRedirect");
+    }
 
     /**
      * If some went wrong this function will execute.
@@ -21,6 +35,8 @@ class Router
     public static function showErrorPage($errorMessage)
     {
         $errorMessage = DEBUG_MODE ? $errorMessage : "Невідома помилка";
+
+        echo "<a href='/'>На головну сторінку</a><br>";
         exit($errorMessage);
     }
 
@@ -36,9 +52,13 @@ class Router
         $singleRoute = $this->getInnerPathArray();
 
         $innerPathArray = array_shift($singleRoute);
+        $middlewaresArray = array_shift($singleRoute);
 
         // Start trait - AnalyzerModelsConnect
         $this->defineModels();
+
+        // Start trait - AnalyzerMiddleware
+        $this->defineMiddlewares($middlewaresArray);
 
         // Start trait - AnalyzerControllerConnect
         $this->defineInnerPath($innerPathArray);

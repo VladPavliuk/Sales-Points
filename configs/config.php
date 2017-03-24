@@ -28,13 +28,11 @@ define('DEBUG_PATH', '../framework/Debug.php');
  */
 define('ROUTER_PATH', '../framework/Router/Router.php');
 
-//> Routes
 /**
  * Path to folder witch contains all routes.
  *
  */
 define('ROUTES_FOLDER_PATH', '../app/routes/');
-//<
 
 //> CONTROLLERS CONFIGURATIONS
 /**
@@ -75,6 +73,15 @@ define('DB_PARAMETERS_PATH', '../configs/dbconfig.php');
  *
  */
 define('DB_CONNECT_PATH', '../framework/DataBase/DataBase.php');
+//<
+
+//> MIDDLEWARE CONFIGURATIONS
+/**
+ * Path to folder with middlewares.
+ *
+ */
+define('MIDDLEWARES_PATH', '../app/middlewares/');
+
 //<
 
 //> TEMPLATE CONFIGURATIONS
