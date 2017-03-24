@@ -5,13 +5,11 @@ class CategoryController extends Controller
     public function viewProductsInCategoryAction($categoryId)
     {
         $limitOfProducts = 10;
-        $categoryModelObject = new Category();
-        $productModelObject = new Product();
 
-        $listOfSubcategoriesId = $categoryModelObject->getSubCategoriesIdOfParentCategory($categoryId);
+        $listOfSubcategoriesId = $this->categoryModel->getSubCategoriesIdOfParentCategory($categoryId);
         $listOfSubcategoriesId[] = $categoryId;
 
-        $categoryProductsList = $productModelObject->getCategoryAndSubCategoriesProducts($listOfSubcategoriesId, $limitOfProducts);
+        $categoryProductsList = $this->productModel->getCategoryAndSubCategoriesProducts($listOfSubcategoriesId, $limitOfProducts);
 
         $this->smarty->assign("categoryProductsList", $categoryProductsList);
 

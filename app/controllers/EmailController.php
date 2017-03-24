@@ -12,17 +12,15 @@ class EmailController extends Controller
 
     public function confirmOrderAction()
     {
-        $cartObject = new Cart();
-
-        if ($cartObject->getTotalPrice() > 0) {
+        if ($this->cartModel->getTotalPrice() > 0) {
             $this->customerFirstName = $_POST["customerFirstName"];
             $this->customerSecondName = $_POST["customerSecondName"];
             $this->customerEmail = $_POST["customerEmail"];
             $this->customerMobile = $_POST["customerMobile"];
             $this->customerOrderList = $this->getOrderList();
 
-            $this->customerTotalOrderPrice = $cartObject->getTotalPrice();
-            $this->customerTotalAmount = $cartObject->getTotalAmount();
+            $this->customerTotalOrderPrice = $this->cartModel->getTotalPrice();
+            $this->customerTotalAmount = $this->cartModel->getTotalAmount();
             $this->checkInCustomer();
             $this->sendEmail();
 
@@ -33,36 +31,31 @@ class EmailController extends Controller
 
     private function getOrderList()
     {
-        $cartModelObject = new Cart();
-        return $cartModelObject->getCartForRendering();
+        return $this->cartModel->getCartForRendering();
     }
 
     private function sendEmail()
     {
-        $emailModelObject = new Email();
+        $this->emailModel->customerFirstName = $this->customerFirstName;
+        $this->emailModel->customerLastName = $this->customerSecondName;
+        $this->emailModel->customerEmail = $this->customerEmail;
+        $this->emailModel->customerMobile = $this->customerMobile;
+        $this->emailModel->customerOrderList = $this->customerOrderList;
+        $this->emailModel->customerTotalOrderPrice = $this->customerTotalOrderPrice;
+        $this->emailModel->customerTotalAmount = $this->customerTotalAmount;
 
-        $emailModelObject->customerFirstName = $this->customerFirstName;
-        $emailModelObject->customerLastName = $this->customerSecondName;
-        $emailModelObject->customerEmail = $this->customerEmail;
-        $emailModelObject->customerMobile = $this->customerMobile;
-        $emailModelObject->customerOrderList = $this->customerOrderList;
-        $emailModelObject->customerTotalOrderPrice = $this->customerTotalOrderPrice;
-        $emailModelObject->customerTotalAmount = $this->customerTotalAmount;
-
-        $emailModelObject->sendEmail($this->smarty);
+        $this->emailModel->sendEmail($this->smarty);
     }
 
     private function checkInCustomer()
     {
-        $emailModelObject = new Email();
+        $this->emailModel->customerFirstName = $this->customerFirstName;
+        $this->emailModel->customerLastName = $this->customerSecondName;
+        $this->emailModel->customerEmail = $this->customerEmail;
+        $this->emailModel->customerMobile = $this->customerMobile;
+        $this->emailModel->customerOrderList = $this->customerOrderList;
+        $this->emailModel->customerTotalOrderPrice = $this->customerTotalOrderPrice;
 
-        $emailModelObject->customerFirstName = $this->customerFirstName;
-        $emailModelObject->customerLastName = $this->customerSecondName;
-        $emailModelObject->customerEmail = $this->customerEmail;
-        $emailModelObject->customerMobile = $this->customerMobile;
-        $emailModelObject->customerOrderList = $this->customerOrderList;
-        $emailModelObject->customerTotalOrderPrice = $this->customerTotalOrderPrice;
-
-        $emailModelObject->checkInCustomer();
+        $this->emailModel->checkInCustomer();
     }
 }

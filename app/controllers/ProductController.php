@@ -4,8 +4,7 @@ class ProductController extends Controller
 {
     public function viewSingleProductAction($productId)
     {
-        $productModelObject = new Product();
-        $singleProductItem = $productModelObject->getSingleProduct($productId);
+        $singleProductItem = $this->productModel->getSingleProduct($productId);
 
         $this->smarty->assign('singleProductItem', $singleProductItem);
 
@@ -14,8 +13,7 @@ class ProductController extends Controller
 
     public function viewLastAddedProductsAction()
     {
-        $productModelObject = new Product();
-        $lastAddedProducts = $productModelObject->getLastAddedProducts(12);
+        $lastAddedProducts = $this->productModel->getLastAddedProducts(12);
 
         $this->smarty->assign('lastAddedProducts', $lastAddedProducts);
 
@@ -24,8 +22,7 @@ class ProductController extends Controller
 
     public function loadMoreNewProductsAction($productsAmount, $minProductsId)
     {
-        $productModelObject  = new Product();
-        $productsList = $productModelObject->getMoreNewProducts($productsAmount, $minProductsId);
+        $productsList = $this->productModel->getMoreNewProducts($productsAmount, $minProductsId);
 
         echo json_encode($productsList);
     }

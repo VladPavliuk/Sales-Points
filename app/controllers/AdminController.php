@@ -20,9 +20,8 @@ class AdminController extends Controller
     public function viewCategoryEditorEditPageAction()
     {
         $categoryId = $_POST["category_id"];
-        $adminModelObject = new Admin();
 
-        $categoryForEdit = $adminModelObject->getCategoryForEditor($categoryId);
+        $categoryForEdit = $this->adminModel->getCategoryForEditor($categoryId);
 
         $this->smarty->assign("categoryForEdit", $categoryForEdit);
 
@@ -31,14 +30,12 @@ class AdminController extends Controller
 
     public function addCategoryAction()
     {
-        $adminModelObject = new Admin();
+        $this->adminModel->categoryTitleOnEnglish = trim($_POST["category_english_title"]);
+        $this->adminModel->categoryTitleOnUkrainian = trim($_POST["category_ukrainian_title"]);
+        $this->adminModel->categoryTitleOnRussian = trim($_POST["category_russian_title"]);
+        $this->adminModel->categoryParentCategoryId = intval($_POST["parent_category_id"]);
 
-        $adminModelObject->categoryTitleOnEnglish = trim($_POST["category_english_title"]);
-        $adminModelObject->categoryTitleOnUkrainian = trim($_POST["category_ukrainian_title"]);
-        $adminModelObject->categoryTitleOnRussian = trim($_POST["category_russian_title"]);
-        $adminModelObject->categoryParentCategoryId = intval($_POST["parent_category_id"]);
-
-        $changeResult = $adminModelObject->addNewCategory();
+        $changeResult = $this->adminModel->addNewCategory();
 
         if ($changeResult) {
             header('Location: http://vladdev.com/admin/');
@@ -51,13 +48,11 @@ class AdminController extends Controller
     {
         $categoryId = $_POST["category_for_edit_id"];
 
-        $adminModelObject = new Admin();
+        $this->adminModel->categoryTitleOnEnglish = $_POST["category_english_title"];
+        $this->adminModel->categoryTitleOnUkrainian = $_POST["category_ukrainian_title"];
+        $this->adminModel->categoryTitleOnRussian = $_POST["category_russian_title"];
 
-        $adminModelObject->categoryTitleOnEnglish = $_POST["category_english_title"];
-        $adminModelObject->categoryTitleOnUkrainian = $_POST["category_ukrainian_title"];
-        $adminModelObject->categoryTitleOnRussian = $_POST["category_russian_title"];
-
-        $changeResult = $adminModelObject->updateCategory($categoryId);
+        $changeResult = $this->adminModel->updateCategory($categoryId);
 
         if ($changeResult) {
             header('Location: http://vladdev.com/admin/');
@@ -68,8 +63,7 @@ class AdminController extends Controller
 
     public function deleteCategoryAction($categoryId)
     {
-        $adminModelObject = new Admin();
-        $deletingResult = $adminModelObject->deleteCategory($categoryId);
+        $deletingResult = $this->adminModel->deleteCategory($categoryId);
 
         if ($deletingResult) {
             header('Location: http://vladdev.com/admin/');
@@ -80,8 +74,7 @@ class AdminController extends Controller
 
     public function viewProductAddPageAction()
     {
-        $categoryModelObject = new Category();
-        $listOfAllCategories = $categoryModelObject->getListOfAllCategories();
+        $listOfAllCategories = $this->categoryModel->getListOfAllCategories();
 
         $this->smarty->assign('listOfAllCategories', $listOfAllCategories);
 
@@ -95,21 +88,17 @@ class AdminController extends Controller
 
     public function getProductsFromCategoryAction($categoryId)
     {
-        $productModelObject = new Product();
-        $categoryModelObject = new Category();
-
-        $listOfSubCategoriesList = $categoryModelObject->getSubCategoriesIdOfParentCategory($categoryId);
+        $listOfSubCategoriesList = $this->categoryModel->getSubCategoriesIdOfParentCategory($categoryId);
         $listOfSubCategoriesList[] = $categoryId;
 
-        $listOfCategoriesProducts = $productModelObject->getCategoryAndSubCategoriesProducts($listOfSubCategoriesList);
+        $listOfCategoriesProducts = $this->productModel->getCategoryAndSubCategoriesProducts($listOfSubCategoriesList);
 
         echo json_encode($listOfCategoriesProducts);
     }
 
     public function viewProductEditorEditPageAction($productId)
     {
-        $adminModelObject = new Admin();
-        $productForEditing = $adminModelObject->getProductForEditing($productId);
+        $productForEditing = $this->adminModel->getProductForEditing($productId);
 
         $this->smarty->assign('productForEditing', $productForEditing);
 
@@ -119,25 +108,23 @@ class AdminController extends Controller
 
     public function addProductAction()
     {
-        $adminModelObject = new Admin();
-        $categoryModelObject = new Category();
-        $newProductCategory = $categoryModelObject->getSingleCategoryTitleById($_POST["category_id"]);
+        $newProductCategory = $this->categoryModel->getSingleCategoryTitleById($_POST["category_id"]);
         $newProductProductTitle = str_replace("'", " ", $_POST["product_title"]);
         $newProductProductTitle = str_replace("\"", " ", $newProductProductTitle);
         $newProductProductTitle = trim($newProductProductTitle);
 
-        $adminModelObject->newProductProductTitle = $newProductProductTitle;
-        $adminModelObject->newProductCategoryId = $_POST["category_id"];
-        $adminModelObject->newProductCategoryTitle = $newProductCategory;
-        $adminModelObject->newProductDescriptionOnEnglish = addslashes($_POST["description_english"]);
-        $adminModelObject->newProductDescriptionOnUkrainian = addslashes($_POST["description_ukrainian"]);
-        $adminModelObject->newProductDescriptionOnRussian = addslashes($_POST["description_russian"]);
-        $adminModelObject->newProductPrice = $_POST["price"];
+        $this->adminModel->newProductProductTitle = $newProductProductTitle;
+        $this->adminModel->newProductCategoryId = $_POST["category_id"];
+        $this->adminModel->newProductCategoryTitle = $newProductCategory;
+        $this->adminModel->newProductDescriptionOnEnglish = addslashes($_POST["description_english"]);
+        $this->adminModel->newProductDescriptionOnUkrainian = addslashes($_POST["description_ukrainian"]);
+        $this->adminModel->newProductDescriptionOnRussian = addslashes($_POST["description_russian"]);
+        $this->adminModel->newProductPrice = $_POST["price"];
 
-        $adminModelObject->createMainImageInImagesFolder($_FILES["main_image"]);
-        $adminModelObject->createOtherImageInImagesFolder($_FILES["other_images"]);
+        $this->adminModel->createMainImageInImagesFolder($_FILES["main_image"]);
+        $this->adminModel->createOtherImageInImagesFolder($_FILES["other_images"]);
 
-        $changeResult = $adminModelObject->addNewProduct();
+        $changeResult = $this->adminModel->addNewProduct();
 
         if ($changeResult) {
             header('Location: http://vladdev.com/admin/');
@@ -150,20 +137,18 @@ class AdminController extends Controller
     {
         $productId = $_POST["product_for_edit_id"];
 
-        $adminModelObject = new Admin();
-
         $newProductProductTitle = str_replace("'", " ", $_POST["product_title"]);
         $newProductProductTitle = str_replace("\"", " ", $newProductProductTitle);
         $newProductProductTitle = trim($newProductProductTitle);
 
-        $adminModelObject->newProductProductTitle = $newProductProductTitle;
-        $adminModelObject->newProductDescriptionOnEnglish = addslashes($_POST["description_english"]);
-        $adminModelObject->newProductDescriptionOnUkrainian = addslashes($_POST["description_ukrainian"]);
-        $adminModelObject->newProductDescriptionOnRussian = addslashes($_POST["description_russian"]);
-        $adminModelObject->newProductPrice = $_POST["product_price"];
-        $adminModelObject->productStatus = intval($_POST["product_status"]);
+        $this->adminModel->newProductProductTitle = $newProductProductTitle;
+        $this->adminModel->newProductDescriptionOnEnglish = addslashes($_POST["description_english"]);
+        $this->adminModel->newProductDescriptionOnUkrainian = addslashes($_POST["description_ukrainian"]);
+        $this->adminModel->newProductDescriptionOnRussian = addslashes($_POST["description_russian"]);
+        $this->adminModel->newProductPrice = $_POST["product_price"];
+        $this->adminModel->productStatus = intval($_POST["product_status"]);
 
-        $changeResult = $adminModelObject->updateProduct($productId);
+        $changeResult = $this->adminModel->updateProduct($productId);
 
         if ($changeResult) {
             header('Location: http://vladdev.com/admin/');
@@ -174,8 +159,7 @@ class AdminController extends Controller
 
     public function deleteProductAction($id)
     {
-        $adminModelObject = new Admin();
-        $deletingResult = $adminModelObject->deleteProduct($id);
+        $deletingResult = $this->adminModel->deleteProduct($id);
 
         if ($deletingResult) {
             header('Location: http://vladdev.com/admin/');

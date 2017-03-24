@@ -4,20 +4,16 @@ class CartController extends Controller
 {
     public function viewCartAction()
     {
-        $cartModelObject = new Cart();
-
-        $this->smarty->assign('cart', $cartModelObject->getCartForRendering());
+        $this->smarty->assign('cart', $this->cartModel->getCartForRendering());
 
         $this->smarty->display("shop/cartPage.tpl");
     }
 
     public function viewOrderFormAction()
     {
-        $cartModelObject = new Cart();
+        if ($this->cartModel->getTotalAmount() > 0) {
 
-        if ($cartModelObject->getTotalAmount() > 0) {
-
-            $this->smarty->assign('cart', $cartModelObject->getCartForRendering());
+            $this->smarty->assign('cart', $this->cartModel->getCartForRendering());
 
             $this->smarty->display("shop/confirmOrderPage.tpl");
         } else {
@@ -27,19 +23,17 @@ class CartController extends Controller
 
     public function addToCartAction($productId)
     {
-        $cartModelObject = new Cart();
-        $cartModelObject->addToCart($productId);
+        $this->cartModel->addToCart($productId);
 
-        echo json_encode($cartModelObject->getTotalAmount());
+        echo json_encode($this->cartModel->getTotalAmount());
     }
 
     public function deleteFromCartAction($productId)
     {
-        $cartModelObject = new Cart();
-        $cartModelObject->deleteFromCart($productId);
+        $this->cartModel->deleteFromCart($productId);
 
-        $cartInfoList["total_products_amount"] = $cartModelObject->getTotalAmount();
-        $cartInfoList["total_products_price"] = $cartModelObject->getTotalPrice();
+        $cartInfoList["total_products_amount"] = $this->cartModel->getTotalAmount();
+        $cartInfoList["total_products_price"] = $this->cartModel->getTotalPrice();
 
         echo json_encode($cartInfoList);
     }

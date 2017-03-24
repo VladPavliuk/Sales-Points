@@ -22,7 +22,7 @@ class Cart extends Model
                 $cartForRendering[$itemKeyInCart]["category_id"] = $cartItem["category_id"];
                 $cartForRendering[$itemKeyInCart]["product_title"] = $cartItem["product_title"];
                 $cartForRendering[$itemKeyInCart]["description_english"] = $cartItem["description_english"];
-                $cartForRendering[$itemKeyInCart]["description_ukraine"] = $cartItem["description_ukraine"];
+                $cartForRendering[$itemKeyInCart]["description_ukraine"] = $cartItem["description_ukrainian"];
                 $cartForRendering[$itemKeyInCart]["description_russian"] = $cartItem["description_russian"];
                 $cartForRendering[$itemKeyInCart]["price"] = $convertedPrice;
                 $cartForRendering[$itemKeyInCart]["main_image"] = $cartItem["main_image"];

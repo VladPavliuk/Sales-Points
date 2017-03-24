@@ -2,12 +2,25 @@
 
 class Controller
 {
+    //> List of models objects
+    protected $adminModel;
+    protected $cartModel;
+    protected $categoryModel;
+    protected $currencyModel;
+    protected $emailModel;
+    protected $languageModel;
+    protected $productModel;
+    protected $userModel;
+    //<
+
     protected $smarty = false;
 
     public function __construct()
     {
         // Smarty initialization
         $this->smarty = SmartyRun::connect();
+
+        $this->defineModelObjectsVariables();
 
         $this->defineLanguagesList();
         $this->setDefaultLanguage("ukrainian");
@@ -19,6 +32,18 @@ class Controller
         $this->defineRenderingCurrency();
 
         $this->defineDefaultSmartyVariables();
+    }
+
+    protected function defineModelObjectsVariables()
+    {
+        $this->adminModel = new Admin();
+        $this->cartModel = new Cart();
+        $this->categoryModel = new Category();
+        $this->currencyModel = new Currency();
+        $this->emailModel = new Email();
+        $this->languageModel = new Language();
+        $this->productModel = new Product();
+        $this->userModel = new User();
     }
 
     protected function defineDefaultSmartyVariables()

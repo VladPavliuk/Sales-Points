@@ -8,13 +8,13 @@ class UserController extends Controller
         {
             $this->smarty->display('user/userAccountPage.tpl');
         } else {
-            $this->smarty->display('user/userSignInPage.tpl');
+            $this->showSignInPageAction();
         }
     }
 
     public function showSignInPageAction()
     {
-
+        $this->smarty->display('user/userSignInPage.tpl');
     }
 
     public function signInAction()
