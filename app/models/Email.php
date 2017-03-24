@@ -31,7 +31,7 @@ class Email extends Model
         mail(EMAIL_ADMIN, $this->emailSubject, $this->emailBody, $this->emailHeaders);
 
         session_unset();
-        header('Location: http://www.vladdev.com/');
+        Router::redirectTo("/");
     }
 
     private function validData()

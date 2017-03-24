@@ -8,11 +8,12 @@ class UserController extends Controller
      */
     public function showUserAccountPageAction()
     {
-        if (isset($_SESSION["user_token"]))
-        {
+        if (isset($_SESSION["user_token"])) {
             $this->smarty->display('user/userAccountPage.tpl');
+        } elseif (isset($_SESSION["admin_token"])) {
+            Router::redirectTo("admin");
         } else {
-            $this->showSignInPageAction();
+            Router::redirectTo("user/sign-in");
         }
     }
 
