@@ -28,7 +28,7 @@ class Controller
         $this->loadLanguageText();
 
         $this->defineCurrencyList();
-        $this->setDefaultCurrency("UAH");
+        $this->setDefaultCurrency("USD");
         $this->defineRenderingCurrency();
 
         $this->defineDefaultSmartyVariables();

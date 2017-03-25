@@ -1,7 +1,6 @@
 <?php
 
 return [
-    //> Admin
     'GET:admin' => 'admin/viewAdminPage:admin',
 
     //> Category editor
@@ -26,7 +25,6 @@ return [
 
     'POST:admin/product/add' => 'admin/addProduct:admin',
     'POST:admin/product/edit' => 'admin/editProduct:admin',
-    'GET:admin/product/delete/([0-9]+)' => 'admin/deleteProduct:admin',
-    //<
+    'GET:admin/product/delete/([0-9]+)' => 'admin/deleteProduct/$1:admin',
     //<
 ];

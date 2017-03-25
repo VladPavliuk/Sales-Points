@@ -2,9 +2,14 @@
 
 class CategoryController extends Controller
 {
+    /**
+     * Render products in category and subcategories.
+     *
+     * @param $categoryId
+     */
     public function viewProductsInCategoryAction($categoryId)
     {
-        $limitOfProducts = 10;
+        $limitOfProducts = 12;
 
         $listOfSubcategoriesId = $this->categoryModel->getSubCategoriesIdOfParentCategory($categoryId);
         $listOfSubcategoriesId[] = $categoryId;

@@ -24,7 +24,7 @@
           crossorigin="anonymous">
 
     <link href="/src/styles/owl.carousel.min.css" rel="stylesheet">
-    <link href="/src/styles/owl.theme.default.css" rel="stylesheet" >
+    <link href="/src/styles/owl.theme.default.css" rel="stylesheet">
 
 
     <!-- CUSTOM STYLES -->
@@ -63,16 +63,14 @@
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-
-<!-- CUSTOM SCRIPTS -->
-<script src="/src/scripts/app.js"></script>
-<script src="/src/scripts/cart.js"></script>
-
+<script src="/src/scripts/bootstrap.min.js"></script>
 <script src="/src/scripts/show-menu.js"></script>
 <script src="/src/scripts/owl.carousel.min.js"></script>
+
+<!-- CUSTOM SCRIPTS -->
+{block "scripts"}{/block}
+
+
 <script src="/src/scripts/js.js"></script>
 </body>
 </html>

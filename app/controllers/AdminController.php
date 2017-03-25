@@ -119,7 +119,7 @@ class AdminController extends Controller
         $this->adminModel->newProductDescriptionOnEnglish = addslashes($_POST["description_english"]);
         $this->adminModel->newProductDescriptionOnUkrainian = addslashes($_POST["description_ukrainian"]);
         $this->adminModel->newProductDescriptionOnRussian = addslashes($_POST["description_russian"]);
-        $this->adminModel->newProductPrice = $_POST["price"];
+        $this->adminModel->newProductPrice = floatval($_POST["price"]) > 0 ? floatval($_POST["price"]) : 1;
 
         $this->adminModel->createMainImageInImagesFolder($_FILES["main_image"]);
         $this->adminModel->createOtherImageInImagesFolder($_FILES["other_images"]);
@@ -145,7 +145,7 @@ class AdminController extends Controller
         $this->adminModel->newProductDescriptionOnEnglish = addslashes($_POST["description_english"]);
         $this->adminModel->newProductDescriptionOnUkrainian = addslashes($_POST["description_ukrainian"]);
         $this->adminModel->newProductDescriptionOnRussian = addslashes($_POST["description_russian"]);
-        $this->adminModel->newProductPrice = $_POST["product_price"];
+        $this->adminModel->newProductPrice = floatval($_POST["product_price"]) > 0 ? floatval($_POST["product_price"]) : 1;
         $this->adminModel->productStatus = intval($_POST["product_status"]);
 
         $changeResult = $this->adminModel->updateProduct($productId);
@@ -164,7 +164,7 @@ class AdminController extends Controller
         if ($deletingResult) {
             Router::redirectTo("admin");
         } else {
-            Debug::showErrorPage("Не вдалося видалити категорію.");
+            Debug::showErrorPage("Не вдалося видалити товар.");
         }
     }
 }

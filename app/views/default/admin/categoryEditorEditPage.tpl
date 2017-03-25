@@ -29,3 +29,7 @@
     <hr>
     <a href="/admin/category/delete/{$categoryForEdit["id"]}" class="btn btn-warning">Delete category</a>
 {/block}
+
+{block name="scripts"}
+    <script src="/src/scripts/editor.js"></script>
+{/block}

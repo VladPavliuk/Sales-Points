@@ -57,6 +57,17 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Log out from user and admin account
+     *
+     */
+    public function logoutAction()
+    {
+        $this->userModel->logout();
+
+        Router::redirectTo(" ");
+    }
+
     public function showSignUpPageAction()
     {
 

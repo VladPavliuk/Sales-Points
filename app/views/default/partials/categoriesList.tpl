@@ -1,4 +1,4 @@
-<sidebar class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<sidebar class="col-lg-3 col-md-4 col-sm-4 col-xs-5">
     <div class="panel-menu-wrap">
         <button class="show-menu btn btn-default">
             <span class="glyphicon glyphicon-menu-right"></span> {#text_categories#}
@@ -30,10 +30,9 @@
             {/foreach}
         </ul>
     </div>
-    <div class="mobile">
-        <a href="#">
-            <p>HTC Google Nexus One <span>$206.99</span></p>
-            <img src="/src/images/mobile.png" alt="mobile">
-        </a>
+    <div class="shares">
+        <h2>Special proposition! -50%</h2>
+        <a href="#"><img src="img/mobile.png" alt="mobile"></a>
+        <p>HTC Google Nexus One<span>$206.99</span></p>
     </div>
 </sidebar>

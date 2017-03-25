@@ -179,9 +179,13 @@ class Admin extends Model
 
     public function deleteProduct($productToDeleteId)
     {
+        $productToDeleteId = intval($productToDeleteId);
+
         $sqlQuery = "DELETE FROM `products` WHERE id = {$productToDeleteId}";
 
         $this->dataBase->query($sqlQuery);
+
+        return true;
     }
 
     /**

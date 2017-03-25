@@ -38,9 +38,9 @@ class Product extends Model
      * @param $limitOfProducts
      * @return array
      */
-    public function getCategoryAndSubCategoriesProducts($subCategoriesList, $limitOfProducts = 20)
+    public function getCategoryAndSubCategoriesProducts($subCategoriesList, $limitOfProducts = 12)
     {
-        $limitOfProducts = $limitOfProducts > 20 ? 20 : $limitOfProducts;
+        $limitOfProducts = $limitOfProducts > 12 ? 12 : $limitOfProducts;
 
         $categoryProductsList = [];
         $currentLanguage = $_SESSION["language"];

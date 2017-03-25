@@ -5,7 +5,7 @@ class CartController extends Controller
     public function viewCartAction()
     {
         $this->smarty->assign('cart', $this->cartModel->getCartForRendering());
-
+        // Debug::viewArray($this->cartModel->getCartForRendering());
         $this->smarty->display("shop/cartPage.tpl");
     }
 

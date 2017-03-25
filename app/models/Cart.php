@@ -12,7 +12,7 @@ class Cart extends Model
     {
         $cartForRendering = [];
         $currencyModelObject = new Currency();
-
+        // Debug::viewArray($_SESSION['cart'],true);
         if(isset($_SESSION['cart'])) {
             foreach($_SESSION['cart'] as $itemKeyInCart => $cartItem) {
 
@@ -21,12 +21,10 @@ class Cart extends Model
                 $cartForRendering[$itemKeyInCart]["id"] = $cartItem["id"];
                 $cartForRendering[$itemKeyInCart]["category_id"] = $cartItem["category_id"];
                 $cartForRendering[$itemKeyInCart]["product_title"] = $cartItem["product_title"];
-                $cartForRendering[$itemKeyInCart]["description_english"] = $cartItem["description_english"];
-                $cartForRendering[$itemKeyInCart]["description_ukraine"] = $cartItem["description_ukrainian"];
-                $cartForRendering[$itemKeyInCart]["description_russian"] = $cartItem["description_russian"];
                 $cartForRendering[$itemKeyInCart]["price"] = $convertedPrice;
                 $cartForRendering[$itemKeyInCart]["main_image"] = $cartItem["main_image"];
                 $cartForRendering[$itemKeyInCart]["status"] = $cartItem["status"];
+                $cartForRendering[$itemKeyInCart]["products_amount"] = $cartItem["products_amount"];;
                 $cartForRendering[$itemKeyInCart]["upload_time"] = $cartItem["upload_time"];
             }
 
@@ -44,9 +42,16 @@ class Cart extends Model
      */
     public function addToCart($productId)
     {
+        if($this->checkIfProductExistsInCart($productId)) {
+            return;
+        }
+
         $queryResult = $this->dataBase->query("SELECT * FROM `products` WHERE `id` = {$productId} LIMIT 1");
 
-        $_SESSION['cart'][] = $queryResult->fetch();
+        $cartProductFromDataBase = $queryResult->fetch();
+        $cartProductFromDataBase["products_amount"] = 1;
+
+        $_SESSION['cart'][] = $cartProductFromDataBase;
     }
 
     /**
@@ -73,7 +78,7 @@ class Cart extends Model
             $totalPrice = 0;
 
             foreach ($_SESSION['cart'] as $cartItem) {
-                $totalPrice += floatval($cartItem["price"]);
+                $totalPrice += floatval($cartItem["price"] * $cartItem["products_amount"]);
             }
             $currencyModelObject = new Currency();
             $totalPrice = $currencyModelObject->getPriceInCurrentCurrency($totalPrice);
@@ -94,10 +99,29 @@ class Cart extends Model
         $totalAmount = 0;
         if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $cartItem) {
-                $totalAmount++;
+                $totalAmount += $cartItem["products_amount"];
             }
         }
 
         return $totalAmount;
+    }
+
+    /**
+     * Check if product item is already exists in shopping cart.
+     *
+     * @param $productId
+     * @return bool
+     */
+    private function checkIfProductExistsInCart($productId)
+    {
+        foreach($_SESSION['cart'] as &$cartProduct) {
+            if($cartProduct["id"] === $productId) {
+                $cartProduct["products_amount"]++;
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

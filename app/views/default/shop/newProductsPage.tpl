@@ -31,4 +31,8 @@
     <!-- END OF LIST -->
 {/block}
 
+{block name="scripts"}
+    <script src="/src/scripts/app.js"></script>
+{/block}
+
 

@@ -63,3 +63,7 @@
         </div>
     </form>
 {/block}
+
+{block name="scripts"}
+    <script src="/src/scripts/editor.js"></script>
+{/block}

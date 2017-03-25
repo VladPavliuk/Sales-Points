@@ -1,21 +1,3 @@
-jQuery(document).ready(function ($) {
-    $('.show-menu').click(function (event) {
-        $(this).next().slideToggle();
-    });
-
-});
-
-function addToCart(productId) {
-    var url = "/add-to-cart/" + productId;
-
-    $.get(url, function (responseData) {
-
-        var totalAmount = JSON.parse(responseData);
-
-        $(".total-amount-text").text(totalAmount);
-    });
-}
-
 function loadMoreNewProducts() {
 
     var productsNumber = 4;
@@ -39,13 +21,13 @@ function loadMoreNewProducts() {
 
         newProductsList.forEach(function (productItem) {
 
-            var textBody = formProductItem(productItem);
+            var textBody = formProductItemForEditor(productItem);
             $(".products-list").append(textBody);
         });
     });
 }
 
-function formProductItem(item) {
+function formProductItemForEditor(item) {
 
     var productItemId = item["id"];
     var productCategoryId = item["category_id"];
@@ -59,14 +41,14 @@ function formProductItem(item) {
     var textBody =
         '<div id="' + productItemId + '" class="product-in-content product col-lg-3 col-md-4 col-sm-6 col-xs-6">' +
         '<div class="prod-img">' +
-        '<a href="/product/' + productItemId + '">' +
+        '<a href="/admin/editor/product/' + productItemId + '">' +
         '<img src="/src/images/products/' + productItemCategory + '/' + productItemImage + '"' +
         'alt="' + productItemTitle + '"' +
         'title="' + productItemTitle + '">' +
         '</a>' +
         '</div>' +
         '<div class="prod-footer">' +
-        '<h5><a href="/product/' + productItemId + '"">' + productItemTitle + '</a></h5>' +
+        '<h5><a href="/admin/editor/product/' + productItemId + '"">' + productItemTitle + '</a></h5>' +
         '</div>' +
         '<span class="price">' + productItemPrice + '</span>' +
         '</div>';

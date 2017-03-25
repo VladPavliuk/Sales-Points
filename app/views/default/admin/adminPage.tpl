@@ -15,4 +15,10 @@
         <li><a href="/admin/editor/product/select/" class="btn btn-default btn-lg">Edit Product</a></li>
         <br>
     </ul>
+    <br>
+    <a href="/log-out" class="btn btn-primary">Logout</a>
+{/block}
+
+{block name="scripts"}
+    <script src="/src/scripts/editor.js"></script>
 {/block}

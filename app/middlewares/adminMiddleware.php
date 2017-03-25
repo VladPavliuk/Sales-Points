@@ -10,17 +10,27 @@ class adminMiddleware
     {
         $adminToken = isset($_SESSION["admin_token"]) ? $_SESSION["admin_token"] : null;
 
-        $this->checkIfSessionVariableExists($adminToken);
+        $this->checkIfTokenVariableExists($adminToken);
         $this->checkIfAdminTokenMatches($adminToken);
     }
 
-    private function checkIfSessionVariableExists($adminToken)
+    /**
+     * Check if session token variable exists.
+     *
+     * @param $adminToken
+     */
+    private function checkIfTokenVariableExists($adminToken)
     {
         if (!$adminToken) {
             Router::redirectTo("user/sign-in");
         }
     }
 
+    /**
+     * Check if session token variable matches with token in data base table.
+     *
+     * @param $adminToken
+     */
     private function checkIfAdminTokenMatches($adminToken)
     {
         $userModel = new User();

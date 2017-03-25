@@ -28,4 +28,8 @@
     </div>
 {/block}
 
+{block name="scripts"}
+    <script src="/src/scripts/app.js"></script>
+{/block}
+
 

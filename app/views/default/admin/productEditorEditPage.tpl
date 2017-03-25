@@ -84,3 +84,7 @@
     <hr>
     <a href="/admin/product/delete/{$productForEditing["id"]}" class="btn btn-warning">Delete product</a>
 {/block}
+
+{block name="scripts"}
+    <script src="/src/scripts/editor.js"></script>
+{/block}

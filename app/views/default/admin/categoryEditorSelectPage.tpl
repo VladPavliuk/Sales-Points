@@ -26,3 +26,7 @@
         <input type="submit" value="Edit Category" class="btn btn-primary">
     </form>
 {/block}
+
+{block name="scripts"}
+    <script src="/src/scripts/editor.js"></script>
+{/block}

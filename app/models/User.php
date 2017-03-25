@@ -16,6 +16,16 @@ class User extends Model
         }
     }
 
+    public function logout()
+    {
+        //$this->deleteUserTokenFromDB($userToken);
+        if(isset($_SESSION["admin_token"]))
+        {
+            $this->deleteAdminTokenFromDB($_SESSION["admin_token"]);
+            unset($_SESSION["admin_token"]);
+        }
+    }
+
     public function checkIfAdminTokenMatches($adminToken)
     {
         $sqlQuery = "SELECT * FROM `admins` WHERE `token` = '{$adminToken}'";
@@ -66,6 +76,20 @@ class User extends Model
         $this->dataBase->query($sqlQuery);
 
         $this->setAdminTokenToSession($adminToken);
+    }
+
+    private function deleteAdminTokenFromDB($adminToken)
+    {
+        $sqlQuery = "UPDATE `admins` SET `token` = NULL WHERE `token` = '{$adminToken}'";
+
+        $queryResult = $this->dataBase->query($sqlQuery);
+
+        if ($queryResult->fetch()) {
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
