@@ -3,7 +3,7 @@
 {block name="content"}
     <a href="/admin" class="btn btn-default btn-sm">Beck to main admin page</a>
     <h3>Select category to edit</h3>
-    <form action="/admin/editor/category" method="POST">
+    <form action="/admin/editor/category/edit" method="GET">
         <div class="input-group">
             <label for="category_id">Categories list</label>
             <select class="form-control" name="category_id" id="category_id">

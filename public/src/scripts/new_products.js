@@ -1,21 +1,3 @@
-jQuery(document).ready(function ($) {
-    $('.show-menu').click(function (event) {
-        $(this).next().slideToggle();
-    });
-
-});
-
-function addToCart(productId) {
-    var url = "/add-to-cart/" + productId;
-
-    $.get(url, function (responseData) {
-
-        var totalAmount = JSON.parse(responseData);
-
-        $(".total-amount-text").text(totalAmount);
-    });
-}
-
 function loadMoreNewProducts() {
 
     var productsNumber = 4;
@@ -35,17 +17,19 @@ function loadMoreNewProducts() {
             $(".button-load-more").hide();
         }
 
-        //alert(JSON.stringify(newProductsList, null, 4));
+        // alert(JSON.stringify(newProductsList, null, 4));
 
-        newProductsList.forEach(function (productItem) {
+        for (variable in newProductsList) {
 
-            var textBody = formProductItem(productItem);
+            var textBody = formProductItem(variable, newProductsList[variable]);
+
             $(".products-list").append(textBody);
-        });
+        }
+
     });
 }
 
-function formProductItem(item) {
+function formProductItem(key, item) {
 
     var productItemId = item["id"];
     var productCategoryId = item["category_id"];
@@ -60,8 +44,8 @@ function formProductItem(item) {
         '<div id="' + productItemId + '" class="product-in-content product col-lg-3 col-md-4 col-sm-6 col-xs-6">' +
         '<div class="prod-img">' +
         '<a href="/admin/editor/product/' + productItemId + '">' +
-        '<img src="/src/images/products/' + productItemCategory + '/' + productItemImage + '"' +
-        'alt="' + productItemTitle + '"' +
+        '<img src="/src/images/products/' + productItemCategory + '/' + productItemImage + '" ' +
+        'alt="' + productItemTitle + '" ' +
         'title="' + productItemTitle + '">' +
         '</a>' +
         '</div>' +

@@ -33,6 +33,7 @@
 
 {block name="scripts"}
     <script src="/src/scripts/app.js"></script>
+    <script src="/src/scripts/new_products.js"></script>
 {/block}
 
 

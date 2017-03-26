@@ -62,8 +62,8 @@ class Controller
     }
 
     /**
-     * Include Language model
-     * and get languages from Data Base
+     * Include Language model.
+     * and get languages from Data Base.
      *
      */
     protected function defineLanguagesList()
@@ -76,7 +76,7 @@ class Controller
     }
 
     /**
-     * Set language when client first time come to web site
+     * Set language when client first time come to web site.
      *
      */
     protected function setDefaultLanguage($defaultLanguage)
@@ -86,6 +86,10 @@ class Controller
         }
     }
 
+    /**
+     * Set smarty variable.
+     *
+     */
     protected function defineRenderingLanguage()
     {
         if (isset($_SESSION["language"])) {
@@ -94,7 +98,7 @@ class Controller
     }
 
     /**
-     * Load config file which contains all text of selected language
+     * Load config file which contains all text of selected language.
      *
      */
     protected function loadLanguageText()
@@ -105,8 +109,8 @@ class Controller
     }
 
     /**
-     * Include Currency model
-     * and get currency list from Data Base
+     * Include Currency model.
+     * and get currency list from Data Base.
      *
      */
     protected function defineCurrencyList()
@@ -119,7 +123,7 @@ class Controller
     }
 
     /**
-     * Set language when client first time come to web site
+     * Set currency when client first time come to web site.
      *
      */
     protected function setDefaultCurrency($defaultCurrency)
@@ -129,6 +133,10 @@ class Controller
         }
     }
 
+    /**
+     * Set smarty variable.
+     *
+     */
     protected function defineRenderingCurrency()
     {
         if (isset($_SESSION["currency"])) {

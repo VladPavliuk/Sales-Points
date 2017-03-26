@@ -2,32 +2,47 @@
 
 class AdminController extends Controller
 {
+    /**
+     * Render main admin page.
+     *
+     */
     public function viewAdminPageAction()
     {
         $this->smarty->display("admin/adminPage.tpl");
     }
 
-    public function viewCategoryEditorAddPageAction()
+    /**
+     * Render different category editor.
+     *
+     * @param $action
+     */
+    public function viewCategoryEditorAction($action)
     {
-        $this->smarty->display("admin/categoryEditorAddPage.tpl");
+        switch($action) {
+            case "add":
+                $this->smarty->display("admin/categoryEditorAddPage.tpl");
+                break;
+            case "select":
+                $this->smarty->display("admin/categoryEditorSelectPage.tpl");
+                break;
+            case "edit":
+                $categoryId = $_POST["category_id"];
+
+                $categoryForEdit = $this->adminModel->getCategoryForEditor($categoryId);
+
+                $this->smarty->assign("categoryForEdit", $categoryForEdit);
+
+                $this->smarty->display("admin/categoryEditorEditPage.tpl");
+                break;
+            default:
+                Router::redirectTo("admin");
+        }
     }
 
-    public function viewCategoryEditorSelectPageAction()
-    {
-        $this->smarty->display("admin/categoryEditorSelectPage.tpl");
-    }
-
-    public function viewCategoryEditorEditPageAction()
-    {
-        $categoryId = $_POST["category_id"];
-
-        $categoryForEdit = $this->adminModel->getCategoryForEditor($categoryId);
-
-        $this->smarty->assign("categoryForEdit", $categoryForEdit);
-
-        $this->smarty->display("admin/categoryEditorEditPage.tpl");
-    }
-
+    /**
+     * Add new category.
+     *
+     */
     public function addCategoryAction()
     {
         $this->adminModel->categoryTitleOnEnglish = trim($_POST["category_english_title"]);
@@ -44,6 +59,10 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Edit exists category.
+     *
+     */
     public function editCategoryAction()
     {
         $categoryId = $_POST["category_for_edit_id"];
@@ -61,6 +80,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Delete category
+     *
+     * @param $categoryId
+     */
     public function deleteCategoryAction($categoryId)
     {
         $deletingResult = $this->adminModel->deleteCategory($categoryId);
@@ -72,40 +96,53 @@ class AdminController extends Controller
         }
     }
 
-    public function viewProductAddPageAction()
+    /**
+     * Render different product editor.
+     *
+     * @param $action
+     * @param $productId
+     */
+    public function viewProductEditorAction($action, $productId)
     {
-        $listOfAllCategories = $this->categoryModel->getListOfAllCategories();
+        switch($action) {
+            case "add":
+                $listOfAllCategories = $this->categoryModel->getListOfAllCategories();
 
-        $this->smarty->assign('listOfAllCategories', $listOfAllCategories);
+                $this->smarty->assign('listOfAllCategories', $listOfAllCategories);
 
-        $this->smarty->display("admin/productEditorAddPage.tpl");
+                $this->smarty->display("admin/productEditorAddPage.tpl");
+                break;
+            case "select":
+                $this->smarty->display("admin/productEditorSelectPage.tpl");
+                break;
+            case "edit":
+                $productForEditing = $this->adminModel->getProductForEditing($productId);
+
+                $this->smarty->assign('productForEditing', $productForEditing);
+
+                $this->smarty->display("admin/productEditorEditPage.tpl");
+                break;
+            default:
+                Router::redirectTo("admin");
+        }
     }
 
-    public function viewProductEditorSelectPageAction()
-    {
-        $this->smarty->display("admin/productEditorSelectPage.tpl");
-    }
-
+    /**
+     * Return JSON string of category products.
+     *
+     * @param $categoryId
+     */
     public function getProductsFromCategoryAction($categoryId)
     {
-        $listOfSubCategoriesList = $this->categoryModel->getSubCategoriesIdOfParentCategory($categoryId);
-        $listOfSubCategoriesList[] = $categoryId;
-
-        $listOfCategoriesProducts = $this->productModel->getCategoryAndSubCategoriesProducts($listOfSubCategoriesList);
+        $listOfCategoriesProducts = $this->productModel->getCategoryProducts($categoryId);
 
         echo json_encode($listOfCategoriesProducts);
     }
 
-    public function viewProductEditorEditPageAction($productId)
-    {
-        $productForEditing = $this->adminModel->getProductForEditing($productId);
-
-        $this->smarty->assign('productForEditing', $productForEditing);
-
-        $this->smarty->display("admin/productEditorEditPage.tpl");
-
-    }
-
+    /**
+     * Add new product.
+     *
+     */
     public function addProductAction()
     {
         $newProductCategory = $this->categoryModel->getSingleCategoryTitleById($_POST["category_id"]);
@@ -133,6 +170,10 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Edit product.
+     *
+     */
     public function editProductAction()
     {
         $productId = $_POST["product_for_edit_id"];
@@ -157,6 +198,11 @@ class AdminController extends Controller
         }
     }
 
+    /**
+     * Delete product.
+     *
+     * @param $id
+     */
     public function deleteProductAction($id)
     {
         $deletingResult = $this->adminModel->deleteProduct($id);

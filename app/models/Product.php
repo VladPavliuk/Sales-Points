@@ -32,43 +32,87 @@ class Product extends Model
     }
 
     /**
+     * Return list of one product of each category.
+     *
+     */
+    public function getProductFromEachCategory()
+    {
+        $categoryModel = new Category();
+        $listOfIDofAllCategories = $categoryModel->getListOfIdOfAllCategories();
+        $listOfProductsFromEachCategory = [];
+
+        foreach ($listOfIDofAllCategories as $key => $categoryId) {
+
+            $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$categoryId} LIMIT 1";
+            $queryResult = $this->dataBase->query($sqlQuery);
+
+            $product = $this->formProductsList($queryResult);
+            if(empty($product)) continue;
+
+            $listOfProductsFromEachCategory[] = $product[1];
+        }
+
+        return $listOfProductsFromEachCategory;
+    }
+
+    /**
+     * Return chuck of products from list of products from each category.
+     *
+     * @param $maxIdOfProductInList
+     * @return array
+     */
+    public function getMoreProductFromEachCategory($maxIdOfProductInList)
+    {
+        $productListOfEachCategory = $this->getProductFromEachCategory();
+        $chunkSizeOfAddedProducts = 6;
+        $maxIdOfProductInList++;
+
+        return array_slice($productListOfEachCategory, $maxIdOfProductInList, $chunkSizeOfAddedProducts, true);
+    }
+
+    /**
+     * Return list of category products.
+     *
+     * @param $categoryId
+     * @return array
+     */
+    public function getCategoryProducts($categoryId)
+    {
+        $limitOfProducts = 10;
+
+        $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$categoryId} ORDER BY `upload_time` DESC LIMIT {$limitOfProducts}";
+        $queryResult = $this->dataBase->query($sqlQuery);
+
+        $categoryProductsList = $this->formProductsList($queryResult);
+
+        return empty($categoryProductsList) ? null : $categoryProductsList;
+    }
+
+    /**
      * Return list of product of selected category and all subcategories.
      *
-     * @param $subCategoriesList
+     * @param $categoryId
      * @param $limitOfProducts
      * @return array
      */
-    public function getCategoryAndSubCategoriesProducts($subCategoriesList, $limitOfProducts = 12)
+    public function getSubCategoriesProducts($categoryId, $limitOfProducts = 12)
     {
         $limitOfProducts = $limitOfProducts > 12 ? 12 : $limitOfProducts;
 
+        $categoryModel = new Category();
         $categoryProductsList = [];
-        $currentLanguage = $_SESSION["language"];
-
-        $currencyModelObject = new Currency();
-        $i = 0;
+        $subCategoriesList = $categoryModel->getSubCategoriesIdOfParentCategory($categoryId);
 
         foreach ($subCategoriesList as $subCategoryId) {
             $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$subCategoryId} ORDER BY `upload_time` DESC LIMIT {$limitOfProducts}";
             $queryResult = $this->dataBase->query($sqlQuery);
 
-            while ($tableRow = $queryResult->fetch()) {
-
-                $categoryProductsList[$i]["id"] = $tableRow["id"];
-                $categoryProductsList[$i]["category_id"] = $tableRow["category_id"];
-                $categoryProductsList[$i]["product_title"] = $tableRow["product_title"];
-                $lastProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
-                $categoryProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
-                $categoryProductsList[$i]["main_image"] = $tableRow["main_image"];
-                $categoryProductsList[$i]["status"] = $tableRow["status"];
-                $categoryProductsList[$i]["upload_time"] = $tableRow["upload_time"];
-                $categoryProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
-
-                $i++;
+            if ($productsList = $this->formProductsList($queryResult)) {
+                $categoryProductsList[$subCategoryId] = $productsList;
             }
         }
 
-        return $categoryProductsList;
+        return empty($categoryProductsList) ? null : $categoryProductsList;
     }
 
     /**
@@ -81,89 +125,51 @@ class Product extends Model
     {
         $limitOfProducts = $limitOfProducts > 20 ? 20 : $limitOfProducts;
 
-        $queryResult = $this->dataBase->query("SELECT * FROM `products` ORDER BY `id` DESC LIMIT {$limitOfProducts}");
-        $currentLanguage = $_SESSION["language"];
+        $sqlQuery = "SELECT * FROM `products` ORDER BY `id` DESC LIMIT {$limitOfProducts}";
+        $queryResult = $this->dataBase->query($sqlQuery);
 
-        $currencyModelObject = new Currency();
-        $lastProductsList = [];
-        $i = 1;
-        while ($tableRow = $queryResult->fetch()) {
-
-            $lastProductsList[$i]["id"] = $tableRow["id"];
-            $lastProductsList[$i]["category_id"] = $tableRow["category_id"];
-            $lastProductsList[$i]["product_title"] = $tableRow["product_title"];
-            $lastProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
-            $lastProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
-            $lastProductsList[$i]["main_image"] = $tableRow["main_image"];
-            $lastProductsList[$i]["other_images"] = json_decode($tableRow["other_images"]);
-            $lastProductsList[$i]["status"] = $tableRow["status"];
-            $lastProductsList[$i]["upload_time"] = $tableRow["upload_time"];
-            $lastProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
-
-            $i++;
-        }
+        $lastProductsList = $this->formProductsList($queryResult);
 
         return $lastProductsList;
     }
 
+    /**
+     * Return random products for footer.
+     *
+     * @param int $amountOfRandomProducts
+     * @return array
+     */
     public function getRandomProductsList($amountOfRandomProducts = 9)
     {
         $amountOfRandomProducts = $amountOfRandomProducts > 9 ? 9 : $amountOfRandomProducts;
 
-        $queryResult = $this->dataBase->query("SELECT * FROM `products` ORDER BY RAND() DESC LIMIT {$amountOfRandomProducts}");
-        $currentLanguage = $_SESSION["language"];
+        $sqlQuery = "SELECT * FROM `products` ORDER BY RAND() DESC LIMIT {$amountOfRandomProducts}";
+        $queryResult = $this->dataBase->query($sqlQuery);
 
-        $currencyModelObject = new Currency();
-        $randomProductsList = [];
-        $i = 1;
-        while ($tableRow = $queryResult->fetch()) {
-
-            $randomProductsList[$i]["id"] = $tableRow["id"];
-            $randomProductsList[$i]["category_id"] = $tableRow["category_id"];
-            $randomProductsList[$i]["product_title"] = $tableRow["product_title"];
-            $randomProductsList[$i]["description"] = $tableRow["description_{$currentLanguage}"];
-            $randomProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
-            $randomProductsList[$i]["main_image"] = $tableRow["main_image"];
-            $randomProductsList[$i]["other_images"] = json_decode($tableRow["other_images"]);
-            $randomProductsList[$i]["status"] = $tableRow["status"];
-            $randomProductsList[$i]["upload_time"] = $tableRow["upload_time"];
-            $randomProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
-
-            $i++;
-        }
+        $randomProductsList = $this->formProductsList($queryResult);
 
         return $randomProductsList;
     }
 
+    /**
+     * Return few last added products list from selected id.
+     *
+     * @param $productsAmount
+     * @param $minProductsId
+     * @return array
+     */
     public function getMoreNewProducts($productsAmount, $minProductsId)
     {
         if ($minProductsId == $this->getOldestProduct()) return [];
-        //Debug::viewArray($minProductsId);
+
         $productsAmount = $productsAmount > 10 ? 10 : $productsAmount;
 
         $sqlQuery = " SELECT * FROM `products` 
-                              WHERE `id`<{$minProductsId} 
-                              ORDER BY `id` DESC LIMIT {$productsAmount}";
+                      WHERE `id`<{$minProductsId} 
+                      ORDER BY `id` DESC LIMIT {$productsAmount}";
+        $queryResult = $this->dataBase->query($sqlQuery);
 
-        $sqlResult = $this->dataBase->query($sqlQuery);
-
-        $currencyModelObject = new Currency();
-        $moreNewProductsList = [];
-        $i = 0;
-
-        while ($tableRow = $sqlResult->fetch()) {
-
-            $moreNewProductsList[$i]["id"] = $tableRow["id"];
-            $moreNewProductsList[$i]["category_id"] = $tableRow["category_id"];
-            $moreNewProductsList[$i]["product_title"] = $tableRow["product_title"];
-            $moreNewProductsList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
-            $moreNewProductsList[$i]["main_image"] = $tableRow["main_image"];
-            $moreNewProductsList[$i]["status"] = $tableRow["status"];
-            $moreNewProductsList[$i]["upload_time"] = $tableRow["upload_time"];
-            $moreNewProductsList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
-
-            $i++;
-        }
+        $moreNewProductsList = $this->formProductsList($queryResult);
 
         return $moreNewProductsList;
     }
@@ -201,6 +207,37 @@ class Product extends Model
         $category_title = str_replace(" ", "_", $category_title);
 
         return $category_title;
+    }
+
+    /**
+     * Create list of products.
+     * Require sql query result.
+     *
+     * @param $queryResult
+     * @return array
+     */
+    private function formProductsList($queryResult)
+    {
+        $currencyModelObject = new Currency();
+        $productList = [];
+
+        $i = 1;
+        while ($tableRow = $queryResult->fetch()) {
+
+            if(empty($tableRow)) continue;
+
+            $productList[$i]["id"] = $tableRow["id"];
+            $productList[$i]["category_id"] = $tableRow["category_id"];
+            $productList[$i]["product_title"] = $tableRow["product_title"];
+            $productList[$i]["price"] = $currencyModelObject->getPriceInCurrentCurrency($tableRow["price"]);
+            $productList[$i]["main_image"] = $tableRow["main_image"];
+            $productList[$i]["status"] = $tableRow["status"];
+            $productList[$i]["category"] = $this->getParentCategoryTitleOfSingleProduct($tableRow["id"]);
+
+            $i++;
+        }
+
+        return $productList;
     }
 
     private function getOldestProduct()

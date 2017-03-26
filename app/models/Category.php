@@ -4,6 +4,12 @@ class Category extends Model
 {
     private $subCategoriesIdList = [];
 
+    /**
+     * Return single category title.
+     *
+     * @param $categoryId
+     * @return mixed
+     */
     public function getSingleCategoryTitleById($categoryId)
     {
         $singleCategory = $this->getSingleCategoryById($categoryId);
@@ -11,6 +17,12 @@ class Category extends Model
         return $singleCategory["category_english"];
     }
 
+    /**
+     * Return single category.
+     *
+     * @param $categoryId
+     * @return mixed
+     */
     public function getSingleCategoryById($categoryId)
     {
         $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE `id` = {$categoryId}");
@@ -77,7 +89,7 @@ class Category extends Model
 
     /**
      * Return all parent categories.
-     * Parent category has `parent_category` equal to 0
+     * Parent category has `parent_category` equal to 0.
      *
      * @return array
      */
@@ -102,16 +114,38 @@ class Category extends Model
     }
 
     /**
-     * Return list of id of all subcategories of selected category
+     * Return list of if of each category.
+     *
+     */
+    public function getListOfIdOfAllCategories()
+    {
+        $sqlQuery = "SELECT `id` FROM `categories` ";
+        $queryResult = $this->dataBase->query($sqlQuery);
+        $listOfIDofAllCategories = [];
+
+        while($tableRow = $queryResult->fetch()) {
+            $listOfIDofAllCategories[] = $tableRow["id"];
+        }
+
+        return $listOfIDofAllCategories;
+    }
+
+    /**
+     * Return list of id of all subcategories of selected category.
      *
      * @param $parentCategoryId
      * @return array
      */
     public function getSubCategoriesIdOfParentCategory($parentCategoryId)
     {
-        $queryResult = $this->dataBase->query("SELECT `id` FROM `categories` WHERE `parent_category_id` = {$parentCategoryId}");
+        $parentCategoryId = intval($parentCategoryId);
+
+        $sqlQuery = "SELECT `id` FROM `categories` WHERE `parent_category_id` = {$parentCategoryId}";
+
+        $queryResult = $this->dataBase->query($sqlQuery);
 
         while ($tableRow = $queryResult->fetch()) {
+
             $this->subCategoriesIdList[] = $tableRow["id"];
             $this->getSubCategoriesIdOfParentCategory($tableRow["id"]);
         }

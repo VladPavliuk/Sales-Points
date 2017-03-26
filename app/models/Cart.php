@@ -12,7 +12,8 @@ class Cart extends Model
     {
         $cartForRendering = [];
         $currencyModelObject = new Currency();
-        // Debug::viewArray($_SESSION['cart'],true);
+        $productModel = new Product();
+
         if(isset($_SESSION['cart'])) {
             foreach($_SESSION['cart'] as $itemKeyInCart => $cartItem) {
 
@@ -26,6 +27,7 @@ class Cart extends Model
                 $cartForRendering[$itemKeyInCart]["status"] = $cartItem["status"];
                 $cartForRendering[$itemKeyInCart]["products_amount"] = $cartItem["products_amount"];;
                 $cartForRendering[$itemKeyInCart]["upload_time"] = $cartItem["upload_time"];
+                $cartForRendering[$itemKeyInCart]["category"] = $productModel->getParentCategoryTitleOfSingleProduct($cartItem["id"]);
             }
 
             return $cartForRendering;

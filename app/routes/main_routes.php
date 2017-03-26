@@ -2,6 +2,8 @@
 
 return [
     'GET:' => 'main/viewHomePage',
+    'GET:load-more-products-for-main-page/([0-9]+)' => 'main/getMoreProductFromEachCategory/$1',
+
     'GET:contacts' => 'main/viewContacts',
 
     //> Languages and Currency

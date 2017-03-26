@@ -80,7 +80,7 @@ class Admin extends Model
         $subCategoriesIdListToDelete = $categoryModelObject->getSubCategoriesIdOfParentCategory($categoryId);
         $subCategoriesIdListToDelete[] = $categoryId;
 
-        $productsListToDelete = $productModelObject->getCategoryAndSubCategoriesProducts($subCategoriesIdListToDelete);
+        $productsListToDelete = $productModelObject->getSubCategoriesProducts($subCategoriesIdListToDelete);
 
         foreach ($subCategoriesIdListToDelete as $categoryIdoDelete) {
 

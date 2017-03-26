@@ -49,7 +49,7 @@
         <div class="row">
             {include file="partials/categoriesList.tpl"}
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                {block "content"}Content{/block}
+                {block "content"}No content{/block}
             </div>
         </div>
     </div>
@@ -67,10 +67,10 @@
 <script src="/src/scripts/show-menu.js"></script>
 <script src="/src/scripts/owl.carousel.min.js"></script>
 
+<script src="/src/scripts/js.js"></script>
+
 <!-- CUSTOM SCRIPTS -->
 {block "scripts"}{/block}
 
-
-<script src="/src/scripts/js.js"></script>
 </body>
 </html>
