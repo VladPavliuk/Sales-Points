@@ -2,13 +2,21 @@
 
 class CartController extends Controller
 {
+    /**
+     * Render shopping cart page.
+     *
+     */
     public function viewCartAction()
     {
         $this->smarty->assign('cart', $this->cartModel->getCartForRendering());
-        // Debug::viewArray($this->cartModel->getCartForRendering());
+
         $this->smarty->display("shop/cartPage.tpl");
     }
 
+    /**
+     * Render order form page.
+     *
+     */
     public function viewOrderFormAction()
     {
         if ($this->cartModel->getTotalAmount() > 0) {
@@ -21,6 +29,11 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * Add product to shopping cart.
+     *
+     * @param $productId
+     */
     public function addToCartAction($productId)
     {
         $this->cartModel->addToCart($productId);
@@ -28,6 +41,11 @@ class CartController extends Controller
         echo json_encode($this->cartModel->getTotalAmount());
     }
 
+    /**
+     * Delete product from shopping cart.
+     *
+     * @param $productId
+     */
     public function deleteFromCartAction($productId)
     {
         $this->cartModel->deleteFromCart($productId);

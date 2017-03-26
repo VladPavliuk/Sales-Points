@@ -10,6 +10,7 @@ class Controller
     protected $emailModel;
     protected $languageModel;
     protected $productModel;
+    protected $searchModel;
     protected $userModel;
     //<
 
@@ -43,6 +44,7 @@ class Controller
         $this->emailModel = new Email();
         $this->languageModel = new Language();
         $this->productModel = new Product();
+        $this->searchModel = new Search();
         $this->userModel = new User();
     }
 

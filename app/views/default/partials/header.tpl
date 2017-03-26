@@ -74,9 +74,11 @@
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="{#text_search#}">
+                        <input type="text" id="search-field-in-header" class="form-control" placeholder="{#text_search#}">
                     </div>
-                    <button type="submit" class="btn btn-info">
+                    <button onclick="window.location='/search-page/' + $('#search-field-in-header').val()"
+                            type="button"
+                            class="btn btn-info">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </form>
