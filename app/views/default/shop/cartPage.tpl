@@ -45,15 +45,6 @@
             </div>
 
             <br>
-            {#text_total_price#}: <span class="total-price-text">{$totalPrice}</span>
-            <br>
-            {#text_total_amount#}: <span class="total-amount-text">{$totalAmount}</span>
-            {if $totalAmount eq 1}
-                {#text_in_cart_item#}
-            {else}
-                {#text_in_cart_items#}
-            {/if}
-            <br>
             <a href="/order-form" class="btn btn-primary">{#text_to_confirm_order_page#}</a>
         </div>
     {else}

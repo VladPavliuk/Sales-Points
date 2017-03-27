@@ -147,7 +147,7 @@ class Admin extends Model
                         '$otherImages', 
                         $this->newProductPrice
                         )");
-        //Debug::viewArray($sqlQuery, true);
+
         $queryResult = $this->dataBase->query($sqlQuery);
 
         if ($queryResult) {
@@ -243,7 +243,6 @@ class Admin extends Model
 
             $i++;
         }
-
     }
 
     public function createMainImageInImagesFolder($imageNameFromClient)
@@ -264,8 +263,6 @@ class Admin extends Model
         $this->saveImageInDirectory($tmpImage, $imageSize, $imageFileType, $saveImageAsPath);
 
         $this->newProductPriceMainImage = $this->newProductProductTitle . '.' . $imageFileType;
-
-        //Debug::showErrorPage($this->newProductPriceMainImage);
     }
 
     /**
@@ -309,18 +306,17 @@ class Admin extends Model
     {
         // Check if image file is a actual image or fake image
         if (!getimagesize($tmpImage)) {
-            Debug::showErrorPage("Завентажений файл - не зображення");
+            Debug::showErrorPage("Завентажений файл - не зображення.", true);
         }
 
         // Check if file already exists
         if (file_exists($saveImageAsPath)) {
             unlink($saveImageAsPath);
-            //Debug::showErrorPage("Зображення із такою назвою вже існує");
         }
 
         // Check file size
         if ($imageSize > 5000000) {
-            Debug::showErrorPage("Зображення завеликого розміру");
+            Debug::showErrorPage("Зображення завеликого розміру.", true);
         }
 
         // Allow certain file formats
@@ -328,11 +324,11 @@ class Admin extends Model
             && $imageFileType != "gif"
         ) {
             echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-            Debug::showErrorPage("Недозволений формат зображення. Дозволені формати: jpg, jpeg, png, gif");
+            Debug::showErrorPage("Недозволений формат зображення. Дозволені формати: jpg, jpeg, png, gif.", true);
         }
 
         if (!move_uploaded_file($tmpImage, $saveImageAsPath)) {
-            Debug::showErrorPage("Сталася помилка, зображення не було завантажено.");
+            Debug::showErrorPage("Сталася помилка, зображення не було завантажено.", true);
         }
     }
 }

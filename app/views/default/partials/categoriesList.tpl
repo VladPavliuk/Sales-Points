@@ -32,7 +32,7 @@
     </div>
     <div class="shares">
         <h2>Special proposition! -50%</h2>
-        <a href="#"><img src="img/mobile.png" alt="mobile"></a>
+        <a href="#"><img src="/src/images/mobile.png" alt="mobile"></a>
         <p>HTC Google Nexus One<span>$206.99</span></p>
     </div>
 </sidebar>

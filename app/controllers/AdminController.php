@@ -145,7 +145,7 @@ class AdminController extends Controller
      */
     public function addProductAction()
     {
-        $newProductCategory = $this->categoryModel->getSingleCategoryTitleById($_POST["category_id"]);
+        $newProductCategory = $this->categoryModel->getSingleCategoryTitleOnEnglishById($_POST["category_id"]);
         $newProductProductTitle = str_replace("'", " ", $_POST["product_title"]);
         $newProductProductTitle = str_replace("\"", " ", $newProductProductTitle);
         $newProductProductTitle = trim($newProductProductTitle);

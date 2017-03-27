@@ -363,7 +363,7 @@
   display: block;
   height: 60px;
   width: 60px;
-  background: url("../img/chevron-left.png") no-repeat; }
+  background: url("../images/chevron-left.png") no-repeat; }
   .footer .owl-theme .owl-nav .owl-prev:hover {
     opacity: 0.6; }
 
@@ -375,6 +375,6 @@
   display: block;
   height: 60px;
   width: 60px;
-  background: url("../img/chevron-right.png") no-repeat; }
+  background: url("../images/chevron-right.png") no-repeat; }
   .footer .owl-theme .owl-nav .owl-next:hover {
     opacity: 0.6; }

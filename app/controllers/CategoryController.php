@@ -9,8 +9,10 @@ class CategoryController extends Controller
      */
     public function viewProductsInCategoryAction($categoryId)
     {
-        $limitOfProducts = 12;
+        $limitOfProducts = 1;
         $categoryProductsList = [];
+
+        $categoryProductsList["category_title"] = $this->categoryModel->getSingleCategoryTitleById($categoryId);
 
         if ($categoryRootProductsList = $this->productModel->getCategoryProducts($categoryId)) {
             $categoryProductsList["root_products"] = $categoryRootProductsList;

@@ -1,7 +1,8 @@
 {extends file='../layouts/main.tpl'}
 
 {block name="content"}
-    {if count($categoriesProductsList) > 0}
+    {if isset($categoriesProductsList["root_products"]) or isset($categoriesProductsList["subcategories_products"])}
+        <h3>{$categoriesProductsList["category_title"]}</h3>
         {assign var="productNumberOnPage" value=1}
         <div class="row product-wrap">
             {if isset($categoriesProductsList["root_products"])}

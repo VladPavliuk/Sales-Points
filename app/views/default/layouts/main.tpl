@@ -18,11 +18,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css"
           crossorigin="anonymous">
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          rel="stylesheet"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-          crossorigin="anonymous">
-
     <link href="/src/styles/owl.carousel.min.css" rel="stylesheet">
     <link href="/src/styles/owl.theme.default.css" rel="stylesheet">
 
@@ -59,10 +54,9 @@
 {include file="partials/footer.tpl"}
 
 <!-- CDN SCRIPTS -->
-<script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/src/scripts/bootstrap.min.js"></script>
 <script src="/src/scripts/show-menu.js"></script>
 <script src="/src/scripts/owl.carousel.min.js"></script>
