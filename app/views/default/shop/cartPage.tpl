@@ -8,7 +8,7 @@
                     <tbody>
                     <tr>
                         <th colspan="3">{#text_title#}</th>
-                        <th style="width:150px;">Количество</th>
+                        <th style="width:150px;">{#text_amount#}</th>
                         <th style="width: 149px;border-right:none;">{#text_price#}</th>
                     </tr>
                     {foreach from=$cart key=idInCart item=cartItem}

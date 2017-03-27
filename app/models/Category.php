@@ -26,10 +26,9 @@ class Category extends Model
      */
     public function getSingleCategoryTitleOnEnglishById($categoryId)
     {
-        $currentLanguage = $_SESSION["language"];
         $singleCategory = $this->getSingleCategoryById($categoryId);
 
-        return $singleCategory["category_{$currentLanguage}"];
+        return $singleCategory["category_english"];
     }
 
     /**

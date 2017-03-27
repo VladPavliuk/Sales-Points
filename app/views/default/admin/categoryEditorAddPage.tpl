@@ -1,12 +1,12 @@
 {extends file='../layouts/main.tpl'}
 
 {block name="content"}
-    <a href="/admin" class="btn btn-default btn-sm">Beck to main admin page</a>
-    <h3>Add new Category</h3>
+    <a href="/admin" class="btn btn-default btn-sm">{#text_beck_to_main_admin_page#}</a>
+    <h3>{#text_add_new_category#}</h3>
     <form action="/admin/category/add" method="POST" enctype="multipart/form-data">
 
         <div class="input-group">
-            <label for="category_english_title">Category Title on English</label>
+            <label for="category_english_title">{#text_category_title_on_english#}</label>
             <input class="form-control"
                    type="text"
                    value=""
@@ -16,7 +16,7 @@
         </div>
 
         <div class="input-group">
-            <label for="category_ukrainian_title">Category Title on Ukrainian</label>
+            <label for="category_ukrainian_title">{#text_category_title_on_ukrainian#}</label>
             <input class="form-control"
                    type="text"
                    value=""
@@ -27,7 +27,7 @@
 
 
         <div class="input-group">
-            <label for="category_russian_title">Category Title on Russian</label>
+            <label for="category_russian_title">{#text_category_title_on_russian#}</label>
             <input class="form-control"
                    type="text"
                    value=""
@@ -37,9 +37,9 @@
         </div>
 
         <div class="input-group">
-            <label for="parent_category_id">Product Category</label>
+            <label for="parent_category_id">{#text_parent_category#}</label>
             <select class="form-control" name="parent_category_id" id="parent_category_id">
-                <option value="0">Визначити, як головну категорію.</option>
+                <option value="0">{#text_define_as_on_of_the_main_categories#}</option>
                 {foreach $parentCategoriesList as $parentCategory}
                     <option value="{$parentCategory["id"]}">{$parentCategory["category_$renderLanguage"]}</option>
                     {if isset($parentCategory["children_categories"])}
@@ -59,7 +59,7 @@
         </div>
         <br>
         <div class="input-group">
-            <input type="submit" class="btn btn-primary" value="Add category">
+            <input type="submit" class="btn btn-primary" value="{#text_add_category#}">
         </div>
     </form>
 {/block}
