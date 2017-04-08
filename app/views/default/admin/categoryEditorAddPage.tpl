@@ -40,7 +40,7 @@
             <label for="parent_category_id">{#text_parent_category#}</label>
             <select class="form-control" name="parent_category_id" id="parent_category_id">
                 <option value="0">{#text_define_as_on_of_the_main_categories#}</option>
-                {foreach $parentCategoriesList as $parentCategory}
+                {foreach $categoriesList as $parentCategory}
                     <option value="{$parentCategory["id"]}">{$parentCategory["category_$renderLanguage"]}</option>
                     {if isset($parentCategory["children_categories"])}
                         {foreach $parentCategory["children_categories"] as $children_categories_1}

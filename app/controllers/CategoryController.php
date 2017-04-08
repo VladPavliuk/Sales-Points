@@ -26,4 +26,9 @@ class CategoryController extends Controller
 
         $this->smarty->display("shop/categoryPage.tpl");
     }
+
+    public function getSubCategoriesProductsAction($category)
+    {
+
+    }
 }

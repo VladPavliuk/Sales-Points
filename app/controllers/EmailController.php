@@ -12,7 +12,7 @@ class EmailController extends Controller
 
     public function confirmOrderAction()
     {
-        if ($this->cartModel->getTotalPrice() > 0) {
+        if ($this->cartModel->getTotalAmount() > 0) {
             $this->customerFirstName = $_POST["customerFirstName"];
             $this->customerSecondName = $_POST["customerSecondName"];
             $this->customerEmail = $_POST["customerEmail"];
@@ -25,7 +25,7 @@ class EmailController extends Controller
             $this->sendEmail();
 
         } else {
-            header('Location: http://www.vladdev.com/');
+            Router::redirectTo("order-form");
         }
     }
 

@@ -14,8 +14,8 @@ class Cart extends Model
         $currencyModelObject = new Currency();
         $productModel = new Product();
 
-        if(isset($_SESSION['cart'])) {
-            foreach($_SESSION['cart'] as $itemKeyInCart => $cartItem) {
+        if (isset($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $itemKeyInCart => $cartItem) {
 
                 $convertedPrice = $currencyModelObject->getPriceInCurrentCurrency($cartItem["price"]);
 
@@ -44,7 +44,7 @@ class Cart extends Model
      */
     public function addToCart($productId)
     {
-        if($this->checkIfProductExistsInCart($productId)) {
+        if ($this->checkIfProductExistsInCart($productId)) {
             return;
         }
 
@@ -54,6 +54,17 @@ class Cart extends Model
         $cartProductFromDataBase["products_amount"] = 1;
 
         $_SESSION['cart'][] = $cartProductFromDataBase;
+    }
+
+    /**
+     * Set amount of specific product.
+     *
+     * @param $productIdInCart
+     * @param $amount
+     */
+    public function setProductAmount($productIdInCart, $amount)
+    {
+        $_SESSION["cart"][$productIdInCart]["products_amount"] = $amount;
     }
 
     /**
@@ -116,8 +127,8 @@ class Cart extends Model
      */
     private function checkIfProductExistsInCart($productId)
     {
-        foreach($_SESSION['cart'] as &$cartProduct) {
-            if($cartProduct["id"] === $productId) {
+        foreach ($_SESSION['cart'] as &$cartProduct) {
+            if ($cartProduct["id"] === $productId) {
                 $cartProduct["products_amount"]++;
 
                 return true;

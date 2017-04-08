@@ -24,7 +24,7 @@
             <div class="button">
                 {if $singleProductItem["status"] eq 1}
                     <button onclick="addToCart({$singleProductItem["id"]});"
-                            class="btn btn-info pull-right">
+                            class="btn btn-info btn-confirm pull-right">
                         {#text_add_to_cart#}
                     </button>
                 {else}

@@ -4,7 +4,7 @@
             <span class="glyphicon glyphicon-menu-right"></span> {#text_categories#}
         </button>
         <ul class="categories">
-            {foreach $parentCategoriesList as $parentCategory}
+            {foreach $categoriesList as $parentCategory}
                 <li><span class="glyphicon glyphicon-menu-right"></span>
                     <a href="/category/{$parentCategory["id"]}"> {$parentCategory["category_$renderLanguage"]}</a>
                     {if isset($parentCategory["children_categories"])}

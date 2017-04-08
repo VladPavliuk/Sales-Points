@@ -41,17 +41,17 @@ function formProductItemForEditor(key, item) {
     var textBody =
         '<div id="' + productItemId + '" class="product-in-content product col-lg-3 col-md-4 col-sm-6 col-xs-6">' +
         '<div class="prod-img">' +
-        '<a href="/admin/editor/product/' + productItemId + '">' +
+        '<a href="/admin/editor/product/edit/' + productItemId + '">' +
         '<img src="/src/images/products/' + productItemCategory + '/' + productItemImage + '"' +
         'alt="' + productItemTitle + '"' +
         'title="' + productItemTitle + '">' +
         '</a>' +
         '</div>' +
         '<div class="prod-footer">' +
-        '<h5><a href="/admin/editor/product/' + productItemId + '"">' + productItemTitle + '</a></h5>' +
+        '<h5><a href="/admin/editor/product/edit/' + productItemId + '"">' + productItemTitle + '</a></h5>' +
         '</div>' +
         '<span class="price">' + productItemPrice + '</span>' +
-        '<button class="btn btn-info"><a href="/admin/editor/product/' + productItemId + '">Edit product' +
+        '<button class="btn btn-info"><a href="/admin/editor/product/edit/' + productItemId + '">Edit product' +
         '</a>' +
         '</button>' +
         '</div>';
@@ -63,6 +63,7 @@ function loadProductsFromCategory(categoryId) {
     $(".products-list").empty();
 
     var uri = '/admin/get-products-from-category/' + categoryId;
+
     $.get(uri, function (response) {
 
         var newProductsList = JSON.parse(response);

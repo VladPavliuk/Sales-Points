@@ -107,9 +107,9 @@ class Category extends Model
      *
      * @return array
      */
-    public function getParentCategories()
+    public function getParentCategories($limitOfParentCategories = 30)
     {
-        $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE `parent_category_id` = 0");
+        $queryResult = $this->dataBase->query("SELECT * FROM `categories` WHERE `parent_category_id` = 0 LIMIT {$limitOfParentCategories}");
 
         $parentCategoriesList = [];
         $i = 0;

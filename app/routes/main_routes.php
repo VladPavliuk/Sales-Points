@@ -20,6 +20,7 @@ return [
 
     //> Cart interact
     'GET:add-to-cart/([0-9]+)' => 'cart/addToCart/$1',
+    'GET:cart-set-amount/([0-9]+)/([0-9]+)' => 'cart/setProductAmount/$1/$2',
     'GET:cart-delete/([0-9]+)' => 'cart/deleteFromCart/$1',
     //<
 

@@ -2,12 +2,12 @@
 
 {block name="content"}
     <a href="/admin" class="btn btn-default btn-sm">{#text_beck_to_main_admin_page#}</a>
-    <h3>Select category to edit</h3>
-    <form action="/admin/editor/category/edit" method="GET">
+    <h3>{#text_select_category_to_edit#}</h3>
+    <form action="/admin/editor/category/edit" method="POST">
         <div class="input-group">
             <label for="category_id">{#text_categories_list#}</label>
             <select class="form-control" name="category_id" id="category_id">
-                {foreach $parentCategoriesList as $parentCategory}
+                {foreach $categoriesList as $parentCategory}
                     <option value="{$parentCategory["id"]}">{$parentCategory["category_$renderLanguage"]}</option>
                     {if isset($parentCategory["children_categories"])}
                         {foreach $parentCategory["children_categories"] as $children_categories_1}

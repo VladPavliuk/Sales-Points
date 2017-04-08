@@ -7,7 +7,7 @@
             <label for="category_id">Categories list</label>
             <select onchange="loadProductsFromCategory(this.value)" class="form-control" name="category_id" id="category_id">
                 <option value="none">Виберіть категорію</option>
-                {foreach $parentCategoriesList as $parentCategory}
+                {foreach $categoriesList as $parentCategory}
                     <option value="{$parentCategory["id"]}">{$parentCategory["category_$renderLanguage"]}</option>
                     {if isset($parentCategory["children_categories"])}
                         {foreach $parentCategory["children_categories"] as $children_categories_1}

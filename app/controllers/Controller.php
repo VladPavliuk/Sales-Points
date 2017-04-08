@@ -50,17 +50,20 @@ class Controller
 
     protected function defineDefaultSmartyVariables()
     {
-        $cartModelObject = new Cart();
-        $categoryModelObject = new Category();
-        $productModelObject = new Product();
+        $randomProductsList = $this->productModel->getRandomProductsList(9);
+        $categoriesList = $this->categoryModel->getCategoriesTree(0);
+        $totalPrice = $this->cartModel->getTotalPrice();
+        $totalAmount = $this->cartModel->getTotalAmount();
+        $parentCategoriesList = $this->categoryModel->getParentCategories(6);
 
-        $randomProductsList = $productModelObject->getRandomProductsList(9);
+        $this->smarty->assign('categoriesList', $categoriesList);
+        $this->smarty->assign('parentCategories', $parentCategoriesList);
+        $this->smarty->assign('currentLanguage', $_SESSION["language"]);
 
-        $this->smarty->assign('parentCategoriesList', $categoryModelObject->getCategoriesTree(0));
         $this->smarty->assign('randomProductsList', $randomProductsList);
 
-        $this->smarty->assign('totalPrice', $cartModelObject->getTotalPrice());
-        $this->smarty->assign('totalAmount', $cartModelObject->getTotalAmount());
+        $this->smarty->assign('totalPrice', $totalPrice);
+        $this->smarty->assign('totalAmount', $totalAmount);
     }
 
     /**

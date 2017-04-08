@@ -42,6 +42,22 @@ class CartController extends Controller
     }
 
     /**
+     * Set amount of specific product.
+     *
+     * @param $productIdInCart
+     * @param $amount
+     */
+    public function setProductAmountAction($productIdInCart, $amount)
+    {
+        $this->cartModel->setProductAmount($productIdInCart, $amount);
+
+        $cartInfoList["total_products_amount"] = $this->cartModel->getTotalAmount();
+        $cartInfoList["total_products_price"] = $this->cartModel->getTotalPrice();
+
+        echo json_encode($cartInfoList);
+    }
+
+    /**
      * Delete product from shopping cart.
      *
      * @param $productId

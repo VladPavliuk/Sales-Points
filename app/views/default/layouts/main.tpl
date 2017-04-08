@@ -62,6 +62,9 @@
 <script src="/src/scripts/owl.carousel.min.js"></script>
 
 <script src="/src/scripts/js.js"></script>
+<script src="/src/scripts/footer.js"></script>
+<script src="/src/scripts/add-cart.js"></script>
+<script src="/src/scripts/input-count.js"></script>
 
 <!-- CUSTOM SCRIPTS -->
 {block "scripts"}{/block}

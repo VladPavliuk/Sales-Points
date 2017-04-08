@@ -13,7 +13,7 @@
         <div class="input-group">
             <label for="category_id">Product Category</label>
             <select class="form-control" name="category_id" id="category_id">
-                {foreach $parentCategoriesList as $parentCategory}
+                {foreach $categoriesList as $parentCategory}
                     <option value="{$parentCategory["id"]}">{$parentCategory["category_$renderLanguage"]}</option>
                     {if isset($parentCategory["children_categories"])}
                         {foreach $parentCategory["children_categories"] as $children_categories_1}

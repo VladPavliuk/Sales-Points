@@ -26,18 +26,18 @@
                                 <a href="/product/{$cartItem["id"]}" target="_blank">{$cartItem["product_title"]}</a>
                             </td>
                             <td style="text-align: center;">
-                                <span class="glyphicon glyphicon-minus"></span>
-                                <input type="text" value="{$cartItem["products_amount"]}">
-                                <span class="glyphicon glyphicon-plus"></span>
+                                <span onclick="updateProductInCart({$idInCart})" class="glyphicon glyphicon-minus"></span>
+                                <input type="text" id="product-{$idInCart}-amount" class="amount" value="{$cartItem["products_amount"]}">
+                                <span onclick="updateProductInCart({$idInCart})" class="glyphicon glyphicon-plus"></span>
                             </td>
                             <td style="text-align: center; font-weight: 600">{$cartItem["price"]}</td>
                         </tr>
                     {/foreach}
 
                     <tr>
-                        <td class="total-price-text" colspan="5" style="font-weight: 600; font-size: 18px">
+                        <td colspan="5" style="font-weight: 600; font-size: 18px">
                             {#text_total_price#}
-                            <span>{$totalPrice}</span>
+                            <span class="total-price-text">{$totalPrice}</span>
                         </td>
                     </tr>
                     </tbody>

@@ -81,6 +81,7 @@ class Product extends Model
         $limitOfProducts = 10;
 
         $sqlQuery = "SELECT * FROM `products` WHERE `category_id` = {$categoryId} ORDER BY `upload_time` DESC LIMIT {$limitOfProducts}";
+
         $queryResult = $this->dataBase->query($sqlQuery);
 
         $categoryProductsList = $this->formProductsList($queryResult);

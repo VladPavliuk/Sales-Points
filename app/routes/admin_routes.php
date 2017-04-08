@@ -8,7 +8,7 @@ return [
 
     'GET:admin/editor/category/(select)' => 'admin/viewCategoryEditor/$1:admin',
 
-    'GET:admin/editor/category/(edit)' => 'admin/viewCategoryEditor/$1:admin',
+    'POST:admin/editor/category/(edit)' => 'admin/viewCategoryEditor/$1:admin',
 
     'POST:admin/category/add' => 'admin/addCategory:admin',
     'POST:admin/category/edit' => 'admin/editCategory:admin',
@@ -21,7 +21,7 @@ return [
     'GET:admin/editor/product/(select)' => 'admin/viewProductEditor/$1:admin',
     'GET:admin/get-products-from-category/([0-9]+)' => 'admin/getProductsFromCategory/$1:admin',
 
-    'GET:admin/editor/product/(edit)/([0-9]+)' => 'admin/viewProductEditorEditPage/$1/$2:admin',
+    'GET:admin/editor/product/(edit)/([0-9]+)' => 'admin/viewProductEditor/$1/$2:admin',
 
     'POST:admin/product/add' => 'admin/addProduct:admin',
     'POST:admin/product/edit' => 'admin/editProduct:admin',
